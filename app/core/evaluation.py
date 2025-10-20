@@ -13,7 +13,12 @@ from sklearn.metrics import (
     log_loss,
     precision_score,
     recall_score,
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
 )
+
+from math import sqrt
 
 
 def evaluate_classification(
@@ -55,4 +60,17 @@ def confusion_matrix_report(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str,
         "confusion_matrix": matrix.tolist(),
         "classification_report": report,
         "labels": labels.tolist(),
+    }
+
+
+def evaluate_regression(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
+    """Return common evaluation metrics for regression models."""
+
+    mse = mean_squared_error(y_true, y_pred)
+    rmse = sqrt(mse)
+    return {
+        "mse": float(mse),
+        "rmse": float(rmse),
+        "mae": float(mean_absolute_error(y_true, y_pred)),
+        "r2": float(r2_score(y_true, y_pred)),
     }
