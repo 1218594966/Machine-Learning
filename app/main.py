@@ -4,7 +4,6 @@ from __future__ import annotations
 import uuid
 from pathlib import Path
 
-import pandas as pd
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -24,6 +23,7 @@ from .schemas import (
     SHAPRequest,
     TrainRequest,
 )
+from .utils.json_utils import dataframe_to_records, sanitize_for_json
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR.parent / "uploads"
@@ -66,25 +66,22 @@ async def upload_dataset(file: UploadFile = File(...)) -> JSONResponse:
             temp_path.unlink()
 
     df = datasets.load_dataset(dataset_name, refresh=True)
-    preview = (
-        df.head(20)
-        .replace({pd.NA: None})
-        .where(pd.notnull, None)
-        .to_dict(orient="records")
-    )
+    preview = dataframe_to_records(df.head(20))
     return JSONResponse(
-        {
-            "message": "Dataset uploaded successfully",
-            "dataset_name": dataset_name,
-            "preview": preview,
-        }
+        sanitize_for_json(
+            {
+                "message": "Dataset uploaded successfully",
+                "dataset_name": dataset_name,
+                "preview": preview,
+            }
+        )
     )
 
 
 @app.get("/api/datasets")
 async def list_datasets() -> JSONResponse:
     info = datasets.list_datasets()
-    return JSONResponse({"datasets": info})
+    return JSONResponse(sanitize_for_json({"datasets": info}))
 
 
 @app.get("/api/datasets/{name}")
@@ -93,7 +90,7 @@ async def get_dataset_profile(name: str) -> JSONResponse:
         profile = datasets.dataset_profile(name)
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
-    return JSONResponse(DatasetProfile(**profile).dict())
+    return JSONResponse(sanitize_for_json(DatasetProfile(**profile).dict()))
 
 
 @app.delete("/api/datasets/{name}", status_code=204)
@@ -123,7 +120,7 @@ async def preview_dataset(request: PreprocessPreviewRequest) -> JSONResponse:
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    return JSONResponse(preview)
+    return JSONResponse(sanitize_for_json(preview))
 
 
 @app.post("/api/train")
@@ -160,16 +157,20 @@ async def train_model(request: TrainRequest) -> JSONResponse:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     overview = models.model_overview(artifact.name)
-    return JSONResponse({
-        "message": "Model trained successfully",
-        "metrics": artifact.metrics,
-        "model": overview,
-    })
+    return JSONResponse(
+        sanitize_for_json(
+            {
+                "message": "Model trained successfully",
+                "metrics": artifact.metrics,
+                "model": overview,
+            }
+        )
+    )
 
 
 @app.get("/api/models")
 async def list_models() -> JSONResponse:
-    return JSONResponse({"models": models.list_models()})
+    return JSONResponse(sanitize_for_json({"models": models.list_models()}))
 
 
 @app.get("/api/models/{name}")
@@ -178,7 +179,7 @@ async def get_model_details(name: str) -> JSONResponse:
         overview = models.model_overview(name)
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
-    return JSONResponse(overview)
+    return JSONResponse(sanitize_for_json(overview))
 
 
 @app.delete("/api/models/{name}", status_code=204)
@@ -207,7 +208,7 @@ async def predict(request: PredictRequest) -> JSONResponse:
         response_payload["probabilities"] = (
             probabilities.tolist() if hasattr(probabilities, "tolist") else probabilities
         )
-    return JSONResponse(response_payload)
+    return JSONResponse(sanitize_for_json(response_payload))
 
 
 @app.post("/api/shap")
@@ -219,7 +220,7 @@ async def shap_summary(request: SHAPRequest) -> JSONResponse:
     except Exception as exc:  # noqa: BLE001
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    return JSONResponse(summary)
+    return JSONResponse(sanitize_for_json(summary))
 
 
 @app.post("/api/reset", status_code=204)
