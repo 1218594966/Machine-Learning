@@ -9,6 +9,7 @@
     <header>
         <h1>机器学习模型管理平台</h1>
         <p>上传数据集、训练模型、进行预测并生成 SHAP 可视化分析。</p>
+        <p class="subtitle">按照步骤逐步操作，即使是零基础也能完成一个端到端的小型机器学习项目。</p>
     </header>
 
     <main>
@@ -23,15 +24,42 @@
 
         <section>
             <h2>2. 可用数据集</h2>
-            <button id="refresh-datasets">刷新数据集列表</button>
-            <ul id="dataset-list"></ul>
+            <p class="help">点击“查看详情”可以预览前几行数据并查看字段统计，确认目标列名称。</p>
+            <div class="toolbar">
+                <button id="refresh-datasets" type="button">刷新数据集列表</button>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>行数</th>
+                            <th>列数</th>
+                            <th>目标列建议</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataset-table-body"></tbody>
+                </table>
+            </div>
+            <div id="dataset-detail" class="detail-panel" hidden>
+                <h3>数据集详情</h3>
+                <div class="detail-content"></div>
+            </div>
         </section>
 
         <section>
             <h2>3. 训练模型</h2>
             <form id="train-form">
-                <label>数据集名称 <input type="text" id="train-dataset" required></label>
-                <label>目标列名 <input type="text" id="train-target" required></label>
+                <label>数据集名称
+                    <select id="train-dataset" required>
+                        <option value="" disabled selected>请选择数据集</option>
+                    </select>
+                </label>
+                <label>目标列名
+                    <input type="text" id="train-target" list="target-suggestions" required placeholder="例如：label" />
+                    <datalist id="target-suggestions"></datalist>
+                </label>
                 <label>模型名称 <input type="text" id="train-model-name" required></label>
                 <label>模型类型
                     <select id="train-model-type">
@@ -41,6 +69,11 @@
                 </label>
                 <label>测试集占比 <input type="number" id="train-test-size" value="0.2" step="0.05" min="0.1" max="0.5"></label>
                 <label>随机种子 <input type="number" id="train-random-state" value="42"></label>
+                <details>
+                    <summary>进阶：自定义模型参数（JSON）</summary>
+                    <textarea id="train-model-params" rows="4" placeholder='{"n_estimators": 300}'></textarea>
+                    <p class="muted">参数会直接传递给 Sklearn/XGBoost，未填写则使用默认值。</p>
+                </details>
                 <button type="submit">开始训练</button>
             </form>
             <div class="response" id="train-response"></div>
@@ -48,15 +81,39 @@
 
         <section>
             <h2>4. 模型列表</h2>
-            <button id="refresh-models">刷新模型列表</button>
-            <ul id="model-list"></ul>
+            <div class="toolbar">
+                <button id="refresh-models" type="button">刷新模型列表</button>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>准确率</th>
+                            <th>训练耗时 (s)</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="model-table-body"></tbody>
+                </table>
+            </div>
+            <div id="model-detail" class="detail-panel" hidden>
+                <h3>模型详情</h3>
+                <div class="detail-content"></div>
+            </div>
         </section>
 
         <section>
             <h2>5. 预测</h2>
             <form id="predict-form">
-                <label>模型名称 <input type="text" id="predict-model-name" required></label>
+                <label>模型名称
+                    <select id="predict-model-name" required>
+                        <option value="" disabled selected>请选择模型</option>
+                    </select>
+                </label>
                 <label>特征 JSON <textarea id="predict-features" rows="5" placeholder='{"feature1": 1, "feature2": "A"}'></textarea></label>
+                <p class="help">支持一次输入多条记录，格式为 <code>[{...}, {...}]</code>。</p>
                 <button type="submit">预测</button>
             </form>
             <div class="response" id="predict-response"></div>
@@ -65,7 +122,11 @@
         <section>
             <h2>6. SHAP 可视化</h2>
             <form id="shap-form">
-                <label>模型名称 <input type="text" id="shap-model-name" required></label>
+                <label>模型名称
+                    <select id="shap-model-name" required>
+                        <option value="" disabled selected>请选择模型</option>
+                    </select>
+                </label>
                 <label>采样数量 <input type="number" id="shap-sample-size" value="200" min="10" max="1000"></label>
                 <button type="submit">生成 SHAP 图</button>
             </form>
@@ -75,7 +136,7 @@
     </main>
 
     <footer>
-        <p>部署建议：使用 Uvicorn 或 Gunicorn 结合 FastAPI，可在宝塔面板中配置守护进程运行。</p>
+        <p>部署建议：使用 <code>uvicorn app.main:app --reload</code> 进行本地调试，生产环境可搭配 Nginx 与 Supervisor 保持服务常驻。</p>
     </footer>
 
     <script src="/static/js/app.js"></script>

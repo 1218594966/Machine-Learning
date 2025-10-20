@@ -1,33 +1,29 @@
 """Utilities for preprocessing data prior to model training."""
 from __future__ import annotations
+"""Utilities for preprocessing data prior to model training."""
 
-from typing import List, Tuple
+from dataclasses import dataclass
+from typing import List, Optional, Tuple
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
 
 
+@dataclass
 class PreprocessResult:
     """Container returned after preprocessing a dataset."""
 
-    def __init__(
-        self,
-        pipeline: Pipeline,
-        x_train,
-        x_test,
-        y_train,
-        y_test,
-        feature_names: List[str],
-    ) -> None:
-        self.pipeline = pipeline
-        self.x_train = x_train
-        self.x_test = x_test
-        self.y_train = y_train
-        self.y_test = y_test
-        self.feature_names = feature_names
+    pipeline: Pipeline
+    x_train: object
+    x_test: object
+    y_train: object
+    y_test: object
+    feature_names: List[str]
+    stratify_used: bool
 
 
 def build_preprocess_pipeline(df: pd.DataFrame, target_column: str) -> Tuple[Pipeline, List[str]]:
@@ -41,12 +37,29 @@ def build_preprocess_pipeline(df: pd.DataFrame, target_column: str) -> Tuple[Pip
         transformers.append(
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
+                Pipeline(
+                    steps=
+                    [
+                        ("imputer", SimpleImputer(strategy="most_frequent")),
+                        ("encoder", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
+                    ]
+                ),
                 list(categorical_cols),
             )
         )
     if len(numeric_cols) > 0:
-        transformers.append(("numeric", StandardScaler(), list(numeric_cols)))
+        transformers.append(
+            (
+                "numeric",
+                Pipeline(
+                    steps=[
+                        ("imputer", SimpleImputer(strategy="median")),
+                        ("scaler", StandardScaler()),
+                    ]
+                ),
+                list(numeric_cols),
+            )
+        )
 
     column_transformer = ColumnTransformer(transformers=transformers)
     pipeline = Pipeline([("preprocessor", column_transformer)])
@@ -67,9 +80,25 @@ def preprocess_dataset(
     pipeline, feature_names = build_preprocess_pipeline(df, target_column)
     features = df.drop(columns=[target_column])
     target = df[target_column]
-    x_train, x_test, y_train, y_test = train_test_split(
-        features, target, test_size=test_size, random_state=random_state, stratify=target
-    )
+    stratify_target: Optional[pd.Series] = None
+    if target.nunique(dropna=True) > 1 and target.nunique(dropna=True) <= max(50, len(target) // 2):
+        stratify_target = target
+
+    try:
+        x_train, x_test, y_train, y_test = train_test_split(
+            features,
+            target,
+            test_size=test_size,
+            random_state=random_state,
+            stratify=stratify_target,
+        )
+        stratified = stratify_target is not None
+    except ValueError:
+        x_train, x_test, y_train, y_test = train_test_split(
+            features, target, test_size=test_size, random_state=random_state
+        )
+        stratified = False
+
     pipeline.fit(x_train)
     x_train_transformed = pipeline.transform(x_train)
     x_test_transformed = pipeline.transform(x_test)
@@ -81,4 +110,5 @@ def preprocess_dataset(
         y_train=y_train,
         y_test=y_test,
         feature_names=feature_names,
+        stratify_used=stratified,
     )

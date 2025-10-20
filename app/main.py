@@ -4,14 +4,14 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from .core.data_manager import DatasetManager
 from .core.model_manager import ModelManager
 from .core.preprocess import preprocess_dataset
-from .schemas import PredictRequest, SHAPRequest, TrainRequest
+from .schemas import DatasetProfile, PredictRequest, SHAPRequest, TrainRequest
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR.parent / "uploads"
@@ -49,6 +49,24 @@ async def list_datasets() -> JSONResponse:
     return JSONResponse({"datasets": info})
 
 
+@app.get("/api/datasets/{name}")
+async def get_dataset_profile(name: str) -> JSONResponse:
+    try:
+        profile = datasets.dataset_profile(name)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return JSONResponse(DatasetProfile(**profile).dict())
+
+
+@app.delete("/api/datasets/{name}", status_code=204)
+async def delete_dataset(name: str) -> Response:
+    try:
+        datasets.remove_dataset(name)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Dataset '{name}' does not exist")
+    return Response(status_code=204)
+
+
 @app.post("/api/train")
 async def train_model(request: TrainRequest) -> JSONResponse:
     try:
@@ -73,7 +91,12 @@ async def train_model(request: TrainRequest) -> JSONResponse:
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    return JSONResponse({"message": "Model trained successfully", "metrics": artifact.metrics})
+    overview = models.model_overview(request.model_name)
+    return JSONResponse({
+        "message": "Model trained successfully",
+        "metrics": artifact.metrics,
+        "model": overview,
+    })
 
 
 @app.get("/api/models")
@@ -81,17 +104,42 @@ async def list_models() -> JSONResponse:
     return JSONResponse({"models": models.list_models()})
 
 
+@app.get("/api/models/{name}")
+async def get_model_details(name: str) -> JSONResponse:
+    try:
+        overview = models.model_overview(name)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return JSONResponse(overview)
+
+
+@app.delete("/api/models/{name}", status_code=204)
+async def delete_model(name: str) -> Response:
+    try:
+        models.model_overview(name)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    models.delete_model(name)
+    return Response(status_code=204)
+
+
 @app.post("/api/predict")
 async def predict(request: PredictRequest) -> JSONResponse:
     try:
         transformed = models.transform_inputs(request.model_name, request.features)
-        predictions = models.predict(request.model_name, transformed)
+        prediction_payload = models.predict_with_proba(request.model_name, transformed)
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except Exception as exc:  # noqa: BLE001
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    return JSONResponse({"predictions": predictions.tolist()})
+    response_payload = {"predictions": prediction_payload["predictions"].tolist()}
+    probabilities = prediction_payload.get("probabilities")
+    if probabilities is not None:
+        response_payload["probabilities"] = (
+            probabilities.tolist() if hasattr(probabilities, "tolist") else probabilities
+        )
+    return JSONResponse(response_payload)
 
 
 @app.post("/api/shap")

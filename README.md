@@ -1,67 +1,88 @@
-# 机器学习模型管理平台
+# 机器学习模型管理平台（小白友好版）
 
-该项目提供了一个基于 FastAPI 的端到端机器学习管理平台，支持在网页端上传数据集、训练模型、预测结果并生成 SHAP 可视化分析，适合部署在宝塔面板（BT Panel）环境中。
+这是一个开箱即用的机器学习演示平台：上传 CSV 数据集 → 一键训练模型 → 在线预测与可解释性分析，全流程都在浏览器中完成。界面提供中文提示，适合刚入门的数据分析同学，也方便部署到宝塔面板（BT Panel）等服务器环境。
 
-## 功能特性
+## 🚀 快速上手
 
-- 支持 CSV 数据集上传与管理。
-- 集成随机森林（Random Forest）和 XGBoost 分类模型，可扩展其他算法。
-- 完整的训练、预测、评估流程，提供常见指标与分类报告。
-- 提供 SHAP 可视化解释能力，帮助理解模型决策。
-- 前后端模块化设计，方便后续维护和扩展。
+1. **克隆代码并安装依赖**
 
-## 目录结构
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows 使用 venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. **启动本地服务**
+
+   ```bash
+   uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
+
+3. **在浏览器访问** `http://localhost:8000`
+
+   按照页面步骤操作即可：上传 CSV → 查看字段 → 训练模型 → 查看指标 → 做预测 → 生成 SHAP 图像。
+
+## 🌟 主要功能
+
+| 模块 | 能力 | 亮点 |
+| ---- | ---- | ---- |
+| 数据集管理 | 上传、查看详情、字段统计、删除 | 自动推测目标列，预览前 5 行数据 |
+| 模型训练 | Random Forest / XGBoost 分类 | 自动缺失值填充、数值标准化、分类编码，记录训练耗时 |
+| 评估分析 | 指标展示、混淆矩阵、分类报告 | 同时返回 accuracy、F1、balanced accuracy、log loss 等多项指标 |
+| 在线预测 | 支持单条或批量 JSON 输入 | 自动补齐缺失特征、返回预测概率 |
+| 可解释性 | SHAP Beeswarm 图 | 一键生成 PNG，可下载保存 |
+
+## 🧭 页面操作流程
+
+1. **上传数据集**：只需一个 CSV 文件，文件名会自动规范化保存到 `uploads/`。
+2. **查看数据详情**：点击“查看详情”即可看到字段类型、缺失值数量、唯一值计数和前几行数据。
+3. **配置训练**：从下拉框选择数据集和模型类型，目标列名称可直接选择建议项，也可以填入自己的列名。
+4. **训练与评估**：训练完成后自动展示核心指标，并在“模型列表”中记录训练耗时、是否做了分层抽样。
+5. **查看模型详情**：表格下方的详情面板会展示混淆矩阵与完整的分类报告，便于排查模型表现。
+6. **在线预测**：支持 `{ "feature": value }` 以及 `[{...}, {...}]` 两种 JSON 形式，同时返回预测结果与概率。
+7. **生成 SHAP 图**：选择模型、设定采样数量，几秒内即可得到重要性可视化，结果是 base64 图片，可另存为文件。
+
+## 🧩 目录结构速览
 
 ```
 app/
 ├── core/
-│   ├── data_manager.py      # 数据集管理
-│   ├── evaluation.py        # 模型评估指标
-│   ├── model_manager.py     # 模型训练、持久化与解释
-│   └── preprocess.py        # 数据预处理流程
+│   ├── data_manager.py      # 数据集管理、统计与建议
+│   ├── evaluation.py        # 评估指标与混淆矩阵
+│   ├── model_manager.py     # 训练、持久化、预测、SHAP
+│   └── preprocess.py        # 缺失值填充、编码、数据拆分
 ├── static/
-│   ├── css/style.css        # 页面样式
-│   └── js/app.js            # 前端交互逻辑
-├── templates/index.html     # 主页面模版
-└── main.py                  # FastAPI 应用入口
-models/                      # 已训练模型与元数据
-uploads/                     # 上传的数据集
-requirements.txt             # 项目依赖
+│   ├── css/style.css        # 页面布局与视觉样式
+│   └── js/app.js            # 前端交互逻辑（Fetch API）
+├── templates/index.html     # 单页应用模板（Jinja2）
+└── main.py                  # FastAPI 入口与路由
+models/                      # 训练好的模型与元数据
+uploads/                     # 上传的数据集（CSV）
+requirements.txt             # Python 依赖
 ```
 
-## 环境准备
+## 📦 在宝塔面板部署
 
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows 使用 venv\\Scripts\\activate
-pip install -r requirements.txt
-```
+1. **上传代码或通过 Git 拉取项目**。
+2. **安装依赖**：在项目目录执行 `pip install -r requirements.txt`。
+3. **配置守护进程**：使用 Supervisor 或宝塔“计划任务”运行 `uvicorn app.main:app --host 0.0.0.0 --port 8000`。
+4. **绑定域名/反向代理**：将外部请求转发到 8000 端口。
+5. **权限检查**：确保 `uploads/` 与 `models/` 具有读写权限，用于存放数据与模型文件。
 
-## 开发环境运行
+## ❓ 常见问题与排查
 
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
+- **CSV 必须包含目标列吗？** 必须。上传后可在“数据集详情”中确认列名。
+- **目标列只有一个类别时训练失败？** 需要至少两个不同的标签才能训练分类模型。
+- **XGBoost 安装报错？** 推荐使用 Python 3.8+，`pip install xgboost` 会自动下载预编译 wheel。
+- **SHAP 图太慢？** 可在页面上调低采样数量（例如 100），或仅对随机森林使用。
+- **想扩展回归模型？** 可在 `app/core/model_manager.py` 中新增模型类型，并在前端下拉框增加对应选项。
 
-访问 `http://localhost:8000` 即可使用网页界面。
+## 🤝 贡献建议
 
-## 宝塔面板部署建议
+欢迎提交 Issue 或 PR：
 
-1. 在宝塔面板中创建 Python 项目或使用 `Python 项目管理器`。
-2. 上传/拉取代码，并安装依赖：
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. 使用以下启动命令配置守护进程（Supervisor）：
-   ```bash
-   uvicorn app.main:app --host 0.0.0.0 --port 8000
-   ```
-4. 在宝塔面板中设置反向代理或使用 `Python 项目` 功能绑定域名，将外部请求转发到 8000 端口。
-5. 确保 `uploads/` 与 `models/` 目录具有写权限，用于保存数据集与模型。
+- 新增算法（如 LightGBM、CatBoost）。
+- 接入数据库存储、用户登录等功能。
+- 优化前端体验（表格导出、拖拽上传等）。
 
-## 常见问题
-
-- **XGBoost 安装**：若服务器缺乏编译环境，可通过 `pip install xgboost` 直接获取预编译 wheel（推荐 Python 3.8+）。
-- **SHAP 图像生成**：首次生成 SHAP 图像可能耗时较长，确保服务器具备足够的内存。
-
-欢迎根据业务需求继续拓展模型、可视化与鉴权等能力。
+祝使用愉快，玩转你的第一个机器学习项目！
