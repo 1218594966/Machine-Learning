@@ -1,8 +1,10 @@
 """Entry point for the FastAPI application."""
 from __future__ import annotations
 
+import uuid
 from pathlib import Path
 
+import pandas as pd
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -10,8 +12,18 @@ from fastapi.templating import Jinja2Templates
 
 from .core.data_manager import DatasetManager
 from .core.model_manager import ModelManager
-from .core.preprocess import preprocess_dataset
-from .schemas import DatasetProfile, PredictRequest, SHAPRequest, TrainRequest
+from .core.preprocess import (
+    FeatureEngineeringConfig,
+    preprocess_dataset,
+    preview_transformation,
+)
+from .schemas import (
+    DatasetProfile,
+    PredictRequest,
+    PreprocessPreviewRequest,
+    SHAPRequest,
+    TrainRequest,
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR.parent / "uploads"
@@ -30,17 +42,43 @@ async def index(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+SUPPORTED_EXTENSIONS = {".csv", ".txt", ".xlsx", ".xls", ".xlsm"}
+
+
 @app.post("/api/upload")
 async def upload_dataset(file: UploadFile = File(...)) -> JSONResponse:
-    if file.content_type not in {"text/csv", "application/vnd.ms-excel"}:
-        raise HTTPException(status_code=400, detail="Only CSV files are supported")
+    suffix = Path(file.filename).suffix.lower()
+    if suffix not in SUPPORTED_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="仅支持 CSV 或 Excel 格式的文件")
 
-    target_path = UPLOAD_DIR / file.filename
-    with target_path.open("wb") as buffer:
+    temp_name = f"__tmp__{uuid.uuid4().hex}{suffix}"
+    temp_path = UPLOAD_DIR / temp_name
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    with temp_path.open("wb") as buffer:
         buffer.write(await file.read())
 
-    dataset_name = datasets.save_dataset(target_path)
-    return JSONResponse({"message": "Dataset uploaded successfully", "dataset_name": dataset_name})
+    try:
+        dataset_name = datasets.save_dataset(temp_path, name=file.filename)
+    except ValueError as exc:  # unsupported format or parse error
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
+
+    df = datasets.load_dataset(dataset_name, refresh=True)
+    preview = (
+        df.head(20)
+        .replace({pd.NA: None})
+        .where(pd.notnull, None)
+        .to_dict(orient="records")
+    )
+    return JSONResponse(
+        {
+            "message": "Dataset uploaded successfully",
+            "dataset_name": dataset_name,
+            "preview": preview,
+        }
+    )
 
 
 @app.get("/api/datasets")
@@ -67,6 +105,27 @@ async def delete_dataset(name: str) -> Response:
     return Response(status_code=204)
 
 
+@app.post("/api/preview")
+async def preview_dataset(request: PreprocessPreviewRequest) -> JSONResponse:
+    try:
+        df = datasets.load_dataset(request.dataset_name)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+    options = FeatureEngineeringConfig.from_options(request.feature_engineering)
+    try:
+        preview = preview_transformation(
+            df,
+            feature_columns=request.feature_columns,
+            options=options,
+            sample_size=request.sample_size,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    return JSONResponse(preview)
+
+
 @app.post("/api/train")
 async def train_model(request: TrainRequest) -> JSONResponse:
     try:
@@ -74,24 +133,33 @@ async def train_model(request: TrainRequest) -> JSONResponse:
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
-    preprocess_result = preprocess_dataset(
-        df,
-        target_column=request.target_column,
-        test_size=request.test_size,
-        random_state=request.random_state,
-    )
+    options = FeatureEngineeringConfig.from_options(request.feature_engineering)
+
+    try:
+        preprocess_result = preprocess_dataset(
+            df,
+            target_column=request.target_column,
+            feature_columns=request.feature_columns,
+            options=options,
+            test_size=request.test_size,
+            random_state=request.random_state,
+            mode=request.mode,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     try:
         artifact = models.train_model(
-            name=request.model_name,
+            name=models.generate_model_name(request.dataset_name, request.mode),
             preprocess_result=preprocess_result,
-            model_type=request.model_type,  # type: ignore[arg-type]
+            mode=request.mode,  # type: ignore[arg-type]
+            algorithm=request.algorithm,  # type: ignore[arg-type]
             **(request.model_params or {}),
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    overview = models.model_overview(request.model_name)
+    overview = models.model_overview(artifact.name)
     return JSONResponse({
         "message": "Model trained successfully",
         "metrics": artifact.metrics,
@@ -152,3 +220,10 @@ async def shap_summary(request: SHAPRequest) -> JSONResponse:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     return JSONResponse(summary)
+
+
+@app.post("/api/reset", status_code=204)
+async def reset_state() -> Response:
+    datasets.reset_storage()
+    models.reset_storage()
+    return Response(status_code=204)

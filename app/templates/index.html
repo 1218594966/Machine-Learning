@@ -8,23 +8,30 @@
 <body>
     <header>
         <h1>机器学习模型管理平台</h1>
-        <p>上传数据集、训练模型、进行预测并生成 SHAP 可视化分析。</p>
-        <p class="subtitle">按照步骤逐步操作，即使是零基础也能完成一个端到端的小型机器学习项目。</p>
+        <p>零基础也能完成“上传数据 → 特征工程 → 训练模型 → 预测与解释”全流程。</p>
+        <p class="subtitle">按照页面的顺序一步步操作，每个环节都会给出清晰的提示与结果反馈。</p>
     </header>
 
     <main>
-        <section>
+        <section id="upload-section">
             <h2>1. 上传数据集</h2>
+            <p class="help">支持 CSV、Excel（.xlsx/.xls）文件，上传后立即展示前 20 行数据。</p>
             <form id="upload-form">
-                <input type="file" id="dataset-file" accept=".csv">
-                <button type="submit">上传</button>
+                <input type="file" id="dataset-file" accept=".csv,.txt,.xlsx,.xls,.xlsm">
+                <button type="submit">上传文件</button>
             </form>
             <div class="response" id="upload-response"></div>
+            <div class="table-wrapper" id="upload-preview" hidden>
+                <table class="data-table">
+                    <thead id="upload-preview-head"></thead>
+                    <tbody id="upload-preview-body"></tbody>
+                </table>
+            </div>
         </section>
 
-        <section>
-            <h2>2. 可用数据集</h2>
-            <p class="help">点击“查看详情”可以预览前几行数据并查看字段统计，确认目标列名称。</p>
+        <section id="datasets-section">
+            <h2>2. 数据集管理</h2>
+            <p class="help">刷新列表后可点击“查看详情”查看字段统计信息与数据示例。</p>
             <div class="toolbar">
                 <button id="refresh-datasets" type="button">刷新数据集列表</button>
             </div>
@@ -48,39 +55,116 @@
             </div>
         </section>
 
-        <section>
-            <h2>3. 训练模型</h2>
-            <form id="train-form">
-                <label>数据集名称
-                    <select id="train-dataset" required>
+        <section id="feature-section">
+            <h2>3. 列选择与特征工程</h2>
+            <p class="help">先选择数据集，再勾选目标列与特征列，可根据需要开启标准化、归一化、缺失值填充等操作。</p>
+            <form id="feature-form">
+                <label>选择数据集
+                    <select id="feature-dataset" required>
                         <option value="" disabled selected>请选择数据集</option>
                     </select>
                 </label>
-                <label>目标列名
-                    <input type="text" id="train-target" list="target-suggestions" required placeholder="例如：label" />
-                    <datalist id="target-suggestions"></datalist>
-                </label>
-                <label>模型名称 <input type="text" id="train-model-name" required></label>
-                <label>模型类型
-                    <select id="train-model-type">
-                        <option value="random_forest">Random Forest</option>
-                        <option value="xgboost">XGBoost</option>
-                    </select>
-                </label>
-                <label>测试集占比 <input type="number" id="train-test-size" value="0.2" step="0.05" min="0.1" max="0.5"></label>
-                <label>随机种子 <input type="number" id="train-random-state" value="42"></label>
+                <div class="column-picker">
+                    <div class="column-box">
+                        <h3>目标列</h3>
+                        <div id="target-column-container" class="column-list"></div>
+                    </div>
+                    <div class="column-box">
+                        <h3>特征列</h3>
+                        <div id="feature-column-container" class="column-list"></div>
+                    </div>
+                </div>
+                <fieldset class="feature-options">
+                    <legend>特征工程选项</legend>
+                    <div class="options-grid">
+                        <label>数值缺失值
+                            <select id="numeric-imputation">
+                                <option value="most_frequent">众数填充（默认）</option>
+                                <option value="mean">均值填充</option>
+                                <option value="median">中位数填充</option>
+                                <option value="constant">常量填充</option>
+                                <option value="none">不处理</option>
+                            </select>
+                        </label>
+                        <label>类别缺失值
+                            <select id="categorical-imputation">
+                                <option value="most_frequent">众数填充（默认）</option>
+                                <option value="constant">常量填充</option>
+                                <option value="none">不处理</option>
+                            </select>
+                        </label>
+                        <label id="constant-fill-wrapper" hidden>常量填充值
+                            <input type="text" id="constant-fill-value" placeholder="例如：0 或 Missing">
+                        </label>
+                        <label>数值列缩放
+                            <select id="numeric-scaling">
+                                <option value="none">不处理（默认）</option>
+                                <option value="standardize">标准化</option>
+                                <option value="normalize">归一化</option>
+                            </select>
+                        </label>
+                        <label>类别编码
+                            <select id="categorical-encoding">
+                                <option value="one_hot">独热编码（默认）</option>
+                                <option value="none">标签编码</option>
+                            </select>
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="actions-row">
+                    <button type="button" id="preview-transformation">生成预处理预览</button>
+                </div>
+            </form>
+            <div class="response" id="feature-response"></div>
+            <div class="table-wrapper" id="preview-table" hidden>
+                <table class="data-table">
+                    <thead>
+                        <tr id="preview-table-head"></tr>
+                    </thead>
+                    <tbody id="preview-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="train-section">
+            <h2>4. 模型训练</h2>
+            <p class="help">请选择任务类型（分类或回归），模型名称会自动生成。训练完成后会展示关键指标。</p>
+            <form id="train-form">
+                <div class="options-grid">
+                    <label>当前数据集
+                        <div class="readonly" id="train-dataset-label">尚未选择</div>
+                    </label>
+                    <label>任务类型
+                        <select id="train-mode">
+                            <option value="classification">分类</option>
+                            <option value="regression">回归</option>
+                        </select>
+                    </label>
+                    <label>算法
+                        <select id="train-algorithm">
+                            <option value="random_forest">随机森林</option>
+                            <option value="xgboost">XGBoost</option>
+                        </select>
+                    </label>
+                    <label>测试集占比
+                        <input type="number" id="train-test-size" value="0.2" step="0.05" min="0.1" max="0.5">
+                    </label>
+                    <label>随机种子
+                        <input type="number" id="train-random-state" value="42">
+                    </label>
+                </div>
                 <details>
-                    <summary>进阶：自定义模型参数（JSON）</summary>
+                    <summary>可选：自定义模型参数（JSON）</summary>
                     <textarea id="train-model-params" rows="4" placeholder='{"n_estimators": 300}'></textarea>
-                    <p class="muted">参数会直接传递给 Sklearn/XGBoost，未填写则使用默认值。</p>
+                    <p class="muted">参数会直接传递给 Sklearn / XGBoost，未填写则使用默认值。</p>
                 </details>
                 <button type="submit">开始训练</button>
             </form>
             <div class="response" id="train-response"></div>
         </section>
 
-        <section>
-            <h2>4. 模型列表</h2>
+        <section id="models-section">
+            <h2>5. 模型列表</h2>
             <div class="toolbar">
                 <button id="refresh-models" type="button">刷新模型列表</button>
             </div>
@@ -89,8 +173,9 @@
                     <thead>
                         <tr>
                             <th>名称</th>
-                            <th>类型</th>
-                            <th>准确率</th>
+                            <th>任务类型</th>
+                            <th>算法</th>
+                            <th>核心指标</th>
                             <th>训练耗时 (s)</th>
                             <th>操作</th>
                         </tr>
@@ -104,30 +189,34 @@
             </div>
         </section>
 
-        <section>
-            <h2>5. 预测</h2>
+        <section id="predict-section">
+            <h2>6. 预测</h2>
             <form id="predict-form">
                 <label>模型名称
                     <select id="predict-model-name" required>
                         <option value="" disabled selected>请选择模型</option>
                     </select>
                 </label>
-                <label>特征 JSON <textarea id="predict-features" rows="5" placeholder='{"feature1": 1, "feature2": "A"}'></textarea></label>
+                <label>特征 JSON
+                    <textarea id="predict-features" rows="5" placeholder='{"feature1": 1, "feature2": "A"}'></textarea>
+                </label>
                 <p class="help">支持一次输入多条记录，格式为 <code>[{...}, {...}]</code>。</p>
-                <button type="submit">预测</button>
+                <button type="submit">开始预测</button>
             </form>
             <div class="response" id="predict-response"></div>
         </section>
 
-        <section>
-            <h2>6. SHAP 可视化</h2>
+        <section id="shap-section">
+            <h2>7. SHAP 可视化</h2>
             <form id="shap-form">
                 <label>模型名称
                     <select id="shap-model-name" required>
                         <option value="" disabled selected>请选择模型</option>
                     </select>
                 </label>
-                <label>采样数量 <input type="number" id="shap-sample-size" value="200" min="10" max="1000"></label>
+                <label>采样数量
+                    <input type="number" id="shap-sample-size" value="200" min="10" max="1000">
+                </label>
                 <button type="submit">生成 SHAP 图</button>
             </form>
             <div class="response" id="shap-response"></div>
@@ -136,7 +225,7 @@
     </main>
 
     <footer>
-        <p>部署建议：使用 <code>uvicorn app.main:app --reload</code> 进行本地调试，生产环境可搭配 Nginx 与 Supervisor 保持服务常驻。</p>
+        <p>本页可使用 <code>uvicorn app.main:app --reload</code> 本地启动，生产部署推荐搭配 Nginx + Supervisor。</p>
     </footer>
 
     <script src="/static/js/app.js"></script>
