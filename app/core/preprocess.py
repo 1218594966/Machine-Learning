@@ -12,6 +12,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder, OrdinalEncoder, StandardScaler
 
+from ..utils.json_utils import dataframe_to_records, sanitize_for_json
+
 
 @dataclass
 class FeatureEngineeringConfig:
@@ -261,11 +263,7 @@ def preview_transformation(
     transformed = pipeline.transform(sample)
     feature_names = _get_feature_names(pipeline, original_feature_names)
 
-    preview_df = pd.DataFrame(transformed, columns=feature_names)
-    preview_records = (
-        preview_df.replace({np.nan: None})
-        .round(6)
-        .to_dict(orient="records")
-    )
+    preview_df = pd.DataFrame(transformed, columns=feature_names).round(6)
+    preview_records = dataframe_to_records(preview_df)
 
-    return {"feature_names": feature_names, "rows": preview_records}
+    return sanitize_for_json({"feature_names": feature_names, "rows": preview_records})

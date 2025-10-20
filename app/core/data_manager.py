@@ -6,6 +6,8 @@ from typing import Dict, Iterable, List, Optional
 
 import pandas as pd
 
+from ..utils.json_utils import dataframe_to_records, sanitize_for_json
+
 
 class DatasetManager:
     """Manager responsible for persisting uploaded datasets."""
@@ -105,9 +107,9 @@ class DatasetManager:
                 }
                 for column, dtype in df.dtypes.items()
             ],
-            "preview": df.head(preview_rows).to_dict(orient="records"),
+            "preview": dataframe_to_records(df.head(preview_rows)),
         }
-        return profile
+        return sanitize_for_json(profile)
 
     def _infer_target_columns(self, df: pd.DataFrame, max_unique: int = 20) -> List[str]:
         """Suggest potential classification targets based on cardinality."""
