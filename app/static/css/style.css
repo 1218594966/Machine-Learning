@@ -13,6 +13,12 @@ header {
     text-align: center;
 }
 
+.subtitle {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 main {
     max-width: 960px;
     margin: 2rem auto;
@@ -69,10 +75,44 @@ button:hover {
     background: #16a085;
 }
 
+button.secondary {
+    background: #2980b9;
+}
+
+button.secondary:hover {
+    background: #1f6391;
+}
+
+button.danger {
+    background: #e74c3c;
+}
+
+button.danger:hover {
+    background: #c0392b;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.75rem;
+}
+
 .response {
     margin-top: 0.5rem;
     color: #2d3436;
     font-size: 0.95rem;
+}
+
+.help {
+    margin-bottom: 0.5rem;
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+.muted {
+    margin-top: 0.25rem;
+    color: #95a5a6;
+    font-size: 0.85rem;
 }
 
 ul {
@@ -92,6 +132,89 @@ ul li {
     margin-top: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+    border-bottom: 1px solid #ecf0f1;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.table-actions button {
+    align-self: center;
+    margin: 0;
+}
+
+.data-table thead th {
+    background: #f0f5f5;
+    font-weight: 600;
+}
+
+.data-table tbody tr:hover {
+    background: #f8fbfb;
+}
+
+.detail-panel {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    background: #f9fbfc;
+}
+
+.detail-panel h3 {
+    margin-top: 0;
+}
+
+.detail-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.detail-panel th,
+.detail-panel td {
+    border: 1px solid #dfe6e9;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.detail-panel pre {
+    background: #1e272e;
+    color: #f5f6fa;
+    padding: 0.75rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+details {
+    background: #f4f9f9;
+    border-radius: 6px;
+    padding: 0.75rem;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #16a085;
+    outline: none;
 }
 
 footer {
