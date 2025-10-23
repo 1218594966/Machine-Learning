@@ -31,6 +31,7 @@ MODEL_DIR = BASE_DIR.parent / "models"
 
 app = FastAPI(title="ML Model Management Platform")
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
+app.mount("/guides", StaticFiles(directory=BASE_DIR.parent / "docs"), name="guides")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 datasets = DatasetManager(UPLOAD_DIR)

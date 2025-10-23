@@ -2,834 +2,739 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>零基础 Python + 机器学习全程自学手册</title>
+    <title>Python 修仙志 · 练气到化神</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>零基础 Python → 机器学习 → PyTorch 深度学习</h1>
-        <p class="subtitle">针对完全零基础的学习者，从环境搭建到深度学习部署的 12 周循序渐进学习计划。</p>
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>Python 修仙志 · 练气到化神</h1>
+            <p class="subtitle">把 Python、数据分析、机器学习与 PyTorch 看作修仙五境——练气、筑基、结丹、元婴、化神。循序渐进完成题库与试炼，终得飞升。</p>
+            <div class="hero-actions">
+                <a class="btn primary" href="#getting-started">立即启程</a>
+                <a class="btn ghost" href="https://github.com" target="_blank" rel="noreferrer">领取修行日志模板</a>
+                <a class="btn secondary" href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">查看题库详解</a>
+            </div>
+            <div class="difficulty-legend" aria-label="难度梯度说明">
+                <span class="legend-title">难度梯度</span>
+                <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                <span class="difficulty-badge badge-master">🛡️ 化神</span>
+            </div>
+        </div>
     </header>
 
     <main class="layout">
-        <nav class="toc" aria-label="教程目录">
-            <h2>学习目录</h2>
+        <nav class="toc" aria-label="修仙目录">
+            <h2>修行目录</h2>
             <ol>
-                <li><a href="#intro">如何使用这份手册</a></li>
-                <li><a href="#roadmap">学习路径速览</a></li>
+                <li><a href="#getting-started">道场指引</a></li>
+                <li><a href="#roadmap">修行时间轴</a></li>
+                <li><a href="#conflict-guide">冲突炼心</a></li>
                 <li>
-                    <a href="#phase-0">阶段 0 · 零基础入门</a>
+                    <a href="#realm-qi">练气境</a>
                     <ul>
-                        <li><a href="#phase-0">目标与任务</a></li>
-                        <li><a href="#phase-0-exercises">训练题</a></li>
+                        <li><a href="#realm-qi-path">修炼路径</a></li>
+                        <li><a href="#realm-qi-drills">练气题库</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#phase-1">阶段 1 · Python 基础语法</a>
+                    <a href="#realm-foundation">筑基境</a>
                     <ul>
-                        <li><a href="#phase-1-content">核心知识点</a></li>
-                        <li><a href="#phase-1-exercises">训练题</a></li>
+                        <li><a href="#realm-foundation-path">修炼路径</a></li>
+                        <li><a href="#realm-foundation-drills">练气题库</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#phase-2">阶段 2 · 数据分析与可视化</a>
-                    <ul>
-                        <li><a href="#phase-2-projects">项目练习</a></li>
-                        <li><a href="#phase-2-exercises">训练题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#phase-3">阶段 3 · 经典机器学习</a>
-                    <ul>
-                        <li><a href="#phase-3-projects">阶段项目</a></li>
-                        <li><a href="#phase-3-exercises">训练题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#phase-4">阶段 4 · 工程化与部署</a>
-                    <ul>
-                        <li><a href="#phase-4-projects">综合交付</a></li>
-                        <li><a href="#phase-4-exercises">训练题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#phase-5">阶段 5 · 深度学习与 PyTorch</a>
-                    <ul>
-                        <li><a href="#phase-5-exercises">训练题</a></li>
-                        <li><a href="#phase-5-check">能力自检</a></li>
-                    </ul>
-                </li>
-                <li><a href="#toolkit">实战工具箱</a></li>
-                <li><a href="#project-library">项目灵感库</a></li>
-                <li><a href="#study-method">学习方法与复盘</a></li>
-                <li><a href="#faq">附录 · FAQ & 资源</a></li>
+                <li><a href="#realm-core">结丹境</a></li>
+                <li><a href="#realm-spirit">元婴境</a></li>
+                <li><a href="#realm-apotheosis">化神境</a></li>
+                <li><a href="#toolkit">外功密卷</a></li>
+                <li><a href="#projects">灵感宝库</a></li>
+                <li><a href="#faq">答疑密信</a></li>
             </ol>
         </nav>
 
         <div class="content">
-            <section id="intro">
-                <h2>如何使用这份手册</h2>
-                <p>按照章节顺序学习，即可完成一条循序渐进的学习路径：<strong>Python 基础 → 数据分析 → 机器学习 → 工程部署 → PyTorch 深度学习</strong>。每一部分都包含学习目标、推荐资源、实践任务与带解析的训练题，确保你能学以致用。</p>
-                <div class="highlight">
-                    <ul>
-                        <li><strong>学习节奏：</strong>建议每周保持 10~12 小时投入，约 12 周完成全部内容。</li>
-                        <li><strong>工具准备：</strong>Python 3.10+、Anaconda 或 Miniconda、VS Code、Git、Jupyter Notebook。</li>
-                        <li><strong>成果要求：</strong>每个阶段至少完成 1 个小项目，并记录学习日志、踩坑总结与复盘。</li>
-                    </ul>
+            <section id="getting-started" class="panel">
+                <h2>道场指引：如何开启修仙之旅</h2>
+                <p>按照以下三步就能启动修仙网站与随身心法。命令以 <code>bash</code> 写成，Windows 道友可使用 PowerShell 或 Git Bash。</p>
+                <div class="step-cards">
+                    <article class="card">
+                        <h3>① 领取法器</h3>
+                        <pre><code>git clone https://github.com/&lt;your-name&gt;/Machine-Learning.git
+cd Machine-Learning
+python -m venv .venv
+source .venv/bin/activate  # Windows 使用 .venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+                        <p class="note">若下载缓慢，可设置 pip 镜像：<code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>。</p>
+                    </article>
+                    <article class="card">
+                        <h3>② 启动道场</h3>
+                        <pre><code>uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload</code></pre>
+                        <p class="note">浏览器访问 <code>http://127.0.0.1:8000</code>，左侧目录会展示五境导航。</p>
+                    </article>
+                    <article class="card">
+                        <h3>③ 修炼方式</h3>
+                        <ul>
+                            <li>将 README 当作随身心法，对照网站完成任务。</li>
+                            <li>每个知识点至少完成 5 道练气题，再阅读解析巩固。</li>
+                            <li>使用 Git 记录修炼历程，形成周志与阶段复盘。</li>
+                        </ul>
+                    </article>
                 </div>
             </section>
 
-            <section id="roadmap">
-                <h2>学习路径速览</h2>
-                <p class="section-subtitle">通过这张进度表了解 12 周学习任务与里程碑，完成后即可交付一个端到端的机器学习项目。</p>
-                <div class="callout success">
-                    <strong>目标达成标准：</strong>掌握 Python 编程、数据分析、模型训练与部署流程，能独立完成真实业务场景的机器学习项目。
-                </div>
-                <table class="timeline-table" aria-label="学习进度表">
+            <section id="roadmap" class="panel">
+                <h2>修行时间轴（12 周）</h2>
+                <p class="section-subtitle">按周划分的五境修炼节奏，可根据自身情况灵活微调。</p>
+                <table class="timeline-table" aria-label="修行时间表">
                     <thead>
                         <tr>
                             <th scope="col">周数</th>
-                            <th scope="col">阶段</th>
-                            <th scope="col">核心任务</th>
+                            <th scope="col">境界</th>
+                            <th scope="col">核心修行</th>
                             <th scope="col">推荐产出</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>第 1 周</td>
-                            <td><span class="badge">阶段 0</span></td>
-                            <td>环境搭建、命令行操作、VS Code 熟悉</td>
-                            <td>学习日志、环境搭建指南</td>
+                            <td>第 1-2 周</td>
+                            <td><span class="badge">练气境</span></td>
+                            <td>环境搭建、命令行、Python 基础语法</td>
+                            <td>环境手册、基础脚本、练气题解析</td>
                         </tr>
                         <tr>
-                            <td>第 2-3 周</td>
-                            <td><span class="badge">阶段 1</span></td>
-                            <td>Python 语法、函数、面向对象、文件操作</td>
-                            <td>猜数字游戏、通讯录脚本</td>
+                            <td>第 3-5 周</td>
+                            <td><span class="badge">筑基境</span></td>
+                            <td>控制流、数据结构、函数、OOP、模块化</td>
+                            <td>通讯录/灵宠管理器、自动化脚本</td>
                         </tr>
                         <tr>
-                            <td>第 4-5 周</td>
-                            <td><span class="badge">阶段 2</span></td>
-                            <td>NumPy/Pandas、数据清洗、可视化</td>
-                            <td>Titanic EDA 报告、数据清洗流水线</td>
+                            <td>第 6-7 周</td>
+                            <td><span class="badge">结丹境</span></td>
+                            <td>NumPy、Pandas、清洗、可视化、EDA</td>
+                            <td>数据炼丹报告、可视化仪表盘</td>
                         </tr>
                         <tr>
-                            <td>第 6-8 周</td>
-                            <td><span class="badge">阶段 3</span></td>
-                            <td>监督学习、模型调参、评估与解释</td>
-                            <td>随机森林分类器、模型评估报告</td>
-                        </tr>
-                        <tr>
-                            <td>第 9-10 周</td>
-                            <td><span class="badge">阶段 4</span></td>
-                            <td>模型服务化、部署、自动化测试</td>
-                            <td>FastAPI 推理接口、部署说明书</td>
+                            <td>第 8-10 周</td>
+                            <td><span class="badge">元婴境</span></td>
+                            <td>特征工程、监督/无监督算法、评估调参</td>
+                            <td>随机森林/梯度提升项目、模型复盘</td>
                         </tr>
                         <tr>
                             <td>第 11-12 周</td>
-                            <td><span class="badge">阶段 5</span></td>
-                            <td>PyTorch 基础、CNN/迁移学习、模型发布</td>
-                            <td>MNIST/CIFAR-10 模型、复盘博客</td>
+                            <td><span class="badge">化神境</span></td>
+                            <td>PyTorch、深度学习、迁移学习、部署</td>
+                            <td>推理服务、飞升总结博客</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-grid stage-cards">
-                    <article class="card">
-                        <h3>学习策略</h3>
-                        <p>采用“先理解再实操”的节奏，学习笔记与代码同步更新至 GitHub，形成可量化的学习档案。</p>
-                    </article>
-                    <article class="card">
-                        <h3>能力成长曲线</h3>
-                        <p>从命令行、基础语法逐步过渡到数据分析、传统机器学习，最终完成深度学习模型开发与部署。</p>
-                    </article>
-                    <article class="card">
-                        <h3>输出作品</h3>
-                        <p>每个阶段至少提交一个项目或报告，最终汇总为“学习作品集”，用于求职或展示成果。</p>
-                    </article>
+                <div class="callout success">
+                    <strong>飞升标准：</strong>独立完成数据→建模→部署→复盘的全流程，并能规划下一阶段的研究方向。
                 </div>
             </section>
 
-            <section id="phase-0">
-                <h2>阶段 0 · 零基础入门（第 1 周）</h2>
-                <p class="section-subtitle">完成环境搭建，熟悉命令行与基础工具，为后续学习打下坚实基础。</p>
-                <div class="module" id="phase-0-content">
-                    <h3>阶段目标</h3>
-                    <ul>
-                        <li>理解文件夹、路径、压缩包等计算机基础概念。</li>
-                        <li>掌握命令行常用指令并能够独立完成 Python 与开发工具的安装。</li>
-                        <li>完成 VS Code、Git 与虚拟环境的配置。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>学习内容</h3>
-                    <ol>
-                        <li>命令行基础：<code>cd</code>、<code>ls/dir</code>、<code>mkdir</code>、<code>rm</code>、<code>python --version</code>。</li>
-                        <li>Python 环境搭建：安装 Anaconda/Miniconda，创建虚拟环境并配置镜像。</li>
-                        <li>VS Code 初体验：安装 Python 插件、格式化工具（Black）、配置终端。</li>
-                        <li>Git 入门：生成 SSH key、初始化仓库、首次提交。</li>
-                    </ol>
-                </div>
-                <div class="module">
-                    <h3>实践任务</h3>
-                    <ul>
-                        <li>在终端输出第一行 Python 代码：<code>print("Hello, Machine Learning!")</code>。</li>
-                        <li>使用 <code>pip</code> 安装 <code>numpy</code>、<code>pandas</code> 并完成导入验证。</li>
-                        <li>在 GitHub 创建学习记录仓库，写下环境搭建步骤与遇到的问题。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>推荐资料</h3>
-                    <ul>
-                        <li>Python 官方安装指南、Anaconda 文档。</li>
-                        <li>VS Code 官方快速入门教程。</li>
-                        <li>Pro Git 第一章：认识版本控制。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-0-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：使用命令行创建并进入学习文件夹</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>在任意目录下新建 <code>ml-study</code> 文件夹并进入。</p>
-                            <p><strong>步骤提示：</strong>依次运行 <code>mkdir ml-study</code> 与 <code>cd ml-study</code>。若不确定当前路径，可先执行 <code>pwd</code> 查看。</p>
-                            <pre><code>$ mkdir ml-study
-$ cd ml-study
-$ pwd  # 查看是否进入成功
-</code></pre>
-                            <p><strong>常见错误解析：</strong>如果出现 “Permission denied”，说明没有权限在当前目录创建文件夹，请切换到桌面等拥有权限的位置后再操作。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：创建虚拟环境并安装第三方库</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>为后续学习创建独立的 Python 环境，并安装 <code>numpy</code> 库。</p>
-                            <p><strong>步骤提示：</strong>执行 <code>conda create -n ml-base python=3.10</code>，激活后使用 <code>pip install numpy</code>。</p>
-                            <pre><code>$ conda create -n ml-base python=3.10 -y
-$ conda activate ml-base
-$ pip install numpy
-$ python -c "import numpy; print(numpy.__version__)"
-</code></pre>
-                            <p><strong>常见错误解析：</strong>如果下载缓慢，可通过 <code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code> 将镜像源改为国内镜像。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：在 VS Code 中运行第一段 Python 代码</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 VS Code 创建 <code>hello.py</code> 并在终端运行。</p>
-                            <p><strong>步骤提示：</strong>新建文件写入 <code>print("Hello, Machine Learning!")</code> → 选择右下角 Python 解释器 → 在内置终端执行 <code>python hello.py</code>。</p>
-                            <pre><code>print("Hello, Machine Learning!")
-</code></pre>
-                            <p><strong>常见错误解析：</strong>若报 <code>ModuleNotFoundError</code>，说明当前解释器不是虚拟环境；按 <code>Ctrl+Shift+P</code> 搜索 “Python: Select Interpreter” 重新选择。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能在命令行中完成文件创建、删除与移动操作。</li>
-                        <li>清楚解释虚拟环境的作用，并能在不同环境之间切换。</li>
-                        <li>已经在 GitHub 上提交第一份学习记录或环境搭建笔记。</li>
-                    </ul>
+            <section id="conflict-guide" class="panel">
+                <h2>冲突炼心 · Git 合并口诀</h2>
+                <p class="section-subtitle">当命运之线纠缠时，按照这套心法即可破除合并冲突。</p>
+                <ol class="conflict-steps">
+                    <li><strong>察觉：</strong>运行 <code>git status</code> 查看 <em>both modified</em> 文件。</li>
+                    <li><strong>定位：</strong>用 <code>git diff</code> 或编辑器查找 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> 标记，读懂双方改动。</li>
+                    <li><strong>融合：</strong>保留最终想要的内容，删除冲突标记；题库内容可参考 <a href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">详解卷轴</a> 对照。</li>
+                    <li><strong>校验：</strong>执行 <code>python -m compileall app</code> 或启动 <code>uvicorn app.main:app --reload</code> 检查站点。</li>
+                    <li><strong>收尾：</strong> <code>git add</code> 修改文件后运行 <code>git merge --continue</code>，并记录心得以备复盘。</li>
+                </ol>
+                <div class="callout info">
+                    <strong>快速传送：</strong>题库逐题拆解位于 <code>/guides/drills/</code>，如 <a href="/guides/drills/realm-foundation.md" target="_blank" rel="noreferrer">筑基境详解</a>，随时可对照最新答案。
                 </div>
             </section>
 
-            <section id="phase-1">
-                <h2>阶段 1 · Python 基础语法（第 2-3 周）</h2>
-                <p class="section-subtitle" id="phase-1-content">掌握 Python 语法、控制流程、函数与面向对象，能够编写结构化的小型程序。</p>
-                <div class="module">
-                    <h3>核心知识点</h3>
-                    <ul>
-                        <li>数据类型：数字、字符串、布尔、列表、元组、集合、字典。</li>
-                        <li>控制语句：条件判断、循环、推导式、异常处理。</li>
-                        <li>函数与模块：参数、返回值、作用域、lambda、内置模块。</li>
-                        <li>文件读写：文本、JSON、CSV 的读写与异常捕获。</li>
-                        <li>面向对象：类与对象、封装、继承、常用特殊方法。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>推荐资源</h3>
-                    <ul>
-                        <li>Python 官方教程与廖雪峰 Python 教程。</li>
-                        <li>CS50P 或 B 站「Python 入门」系列课程。</li>
-                        <li>LeetCode / 牛客简单题（提升逻辑思维）。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>实践任务</h3>
-                    <ul>
-                        <li>实现猜数字小游戏（包含循环、条件、随机数）。</li>
-                        <li>编写通讯录管理脚本：新增、删除、搜索联系人并保存为 JSON。</li>
-                        <li>整理常用内置函数，制作个人“Python 速查表”。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-1-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：判断闰年</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>编写程序判断用户输入的年份是否为闰年。</p>
-                            <p><strong>知识回顾：</strong>闰年规则——被 4 整除但不被 100 整除，或能被 400 整除。</p>
-                            <pre><code>year = int(input("请输入年份:"))
-if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
-    print("闰年")
-else:
-    print("平年")
-</code></pre>
-                            <p><strong>常见错误解析：</strong>不要忘记使用 <code>int()</code> 将字符串转为整数，否则无法求余。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：统计句子中的单词次数</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>输入一句英文句子，统计每个单词出现的次数。</p>
-                            <pre><code>sentence = input("请输入一句话:")
-words = sentence.lower().split()
-count = {}
-for word in words:
-    count[word] = count.get(word, 0) + 1
-print(count)
-</code></pre>
-                            <p><strong>常见错误解析：</strong>记得使用 <code>lower()</code> 将单词统一为小写，避免大小写导致重复计数。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：面向对象封装学生成绩</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>设计 <code>Student</code> 类，支持添加成绩并打印“姓名-平均分”。</p>
-                            <pre><code>class Student:
-    def __init__(self, name):
-        self.name = name
-        self.scores = []
-
-    def add_score(self, score):
-        self.scores.append(score)
-
-    def average(self):
-        return sum(self.scores) / len(self.scores)
-
-    def __str__(self):
-        return f"{self.name}-{self.average():.1f}"
-</code></pre>
-                            <p><strong>常见错误解析：</strong>注意在类中使用 <code>self</code> 引用实例属性，且平均值需防止除以零，可先判断是否有成绩。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 4：文件读写制作今日待办</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>通过文件读写记录当天待办事项，并在下一次运行时自动展示。</p>
-                            <pre><code>with open("todo.txt", "a", encoding="utf-8") as f:
-    f.write(input("写下今日待办：") + "\n")
-
-with open("todo.txt", encoding="utf-8") as f:
-    print("今日清单：")
-    for line in f:
-        print("-", line.strip())
-</code></pre>
-                            <p><strong>常见错误解析：</strong>确保文件编码为 UTF-8，避免中文写入时出现乱码。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能解释可变与不可变数据类型的差异。</li>
-                        <li>会封装函数并在不同模块之间复用。</li>
-                        <li>能够用类管理数据与行为，完成简单的业务逻辑。</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="phase-2">
-                <h2>阶段 2 · 数据分析与可视化（第 4-5 周）</h2>
-                <p class="section-subtitle">掌握数据清洗、特征工程与可视化技能，用图表讲述数据故事。</p>
-                <div class="module" id="phase-2-projects">
-                    <h3>技能点拆解</h3>
-                    <ol>
-                        <li><strong>NumPy：</strong>数组创建、切片、广播、矩阵运算、随机数生成。</li>
-                        <li><strong>Pandas：</strong>DataFrame 操作、缺失值处理、分组聚合、透视表。</li>
-                        <li><strong>可视化：</strong>Matplotlib、Seaborn、Plotly 基本图表与美化技巧。</li>
-                        <li><strong>数据预处理：</strong>类型转换、标准化、异常值检测、特征构造。</li>
-                    </ol>
-                </div>
-                <div class="module">
-                    <h3>练习项目</h3>
-                    <ul>
-                        <li>Kaggle Titanic 数据探索：幸存率分析、年龄/票价分布、特征关系图。</li>
-                        <li>城市房价分析：至少 5 种可视化图表，输出数据洞察报告。</li>
-                        <li>数据清洗流水线：缺失值、重复值、异常值处理，生成可直接建模的数据集。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-2-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：生成随机数并计算统计量</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 NumPy 生成 0~1 之间 100 个随机数并输出平均值。</p>
-                            <pre><code>import numpy as np
-numbers = np.random.rand(100)
-print(f"平均值：{numbers.mean():.3f}")
-</code></pre>
-                            <p><strong>常见错误解析：</strong>确保已导入 <code>numpy</code> 并使用 <code>np.random.seed()</code> 控制随机性，便于结果复现。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：统计每个城市的平均房价</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>读取 CSV 后使用 <code>groupby</code> 统计每个城市的平均房价。</p>
-                            <pre><code>import pandas as pd
-df = pd.read_csv('house.csv')
-city_price = df.groupby('city')['price'].mean().reset_index()
-print(city_price)
-</code></pre>
-                            <p><strong>常见错误解析：</strong>分组后别忘了 <code>reset_index()</code>，便于后续与其他数据合并或导出。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：绘制直方图并标注平均年龄</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>绘制乘客年龄分布的直方图，并使用垂线标出平均年龄。</p>
-                            <pre><code>import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['SimHei']
-ages = df['Age'].dropna()
-plt.hist(ages, bins=20, color='#4C72B0')
-plt.axvline(ages.mean(), color='red', linestyle='--', label='平均年龄')
-plt.legend()
-plt.xlabel('年龄')
-plt.ylabel('人数')
-plt.show()
-</code></pre>
-                            <p><strong>常见错误解析：</strong>中文显示异常时可设置 <code>plt.rcParams['axes.unicode_minus'] = False</code> 避免负号乱码。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 4：使用 Pipeline 串联预处理与建模</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 <code>ColumnTransformer</code> + <code>Pipeline</code> 构建标准化与随机森林回归的流水线。</p>
-                            <pre><code>from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.ensemble import RandomForestRegressor
-
-numeric_features = ['age', 'fare']
-categorical_features = ['sex', 'embarked']
-
-preprocess = ColumnTransformer([
-    ('num', StandardScaler(), numeric_features),
-    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
-])
-
-pipe = Pipeline([
-    ('preprocess', preprocess),
-    ('model', RandomForestRegressor(random_state=42))
-])
-pipe.fit(train_df[numeric_features + categorical_features], train_df['survived'])
-</code></pre>
-                            <p><strong>常见错误解析：</strong>使用 <code>handle_unknown='ignore'</code> 处理测试集中未出现的类别，避免预测时报错。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能完成缺失值、重复值与异常值的清洗。</li>
-                        <li>会使用 Pandas 进行分组聚合与透视分析。</li>
-                        <li>能通过图表讲述数据洞察并撰写数据分析报告。</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="phase-3">
-                <h2>阶段 3 · 经典机器学习算法（第 6-8 周）</h2>
-                <p class="section-subtitle">熟悉从特征工程到模型评估的完整流程，能够独立完成传统机器学习项目。</p>
-                <div class="module" id="phase-3-projects">
-                    <h3>学习重点</h3>
-                    <ul>
-                        <li>监督学习流程：数据划分、训练、验证、测试、调参与部署。</li>
-                        <li>常见算法：逻辑回归、kNN、朴素贝叶斯、决策树、随机森林、梯度提升、XGBoost。</li>
-                        <li>评估指标：准确率、召回率、F1、AUC、混淆矩阵、均方误差、R²。</li>
-                        <li>模型解释：特征重要性、SHAP、Permutation Importance、PDP。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>阶段项目</h3>
-                    <ul>
-                        <li><strong>随机森林贷款违约预测：</strong>绘制 ROC/PR 曲线、混淆矩阵并撰写评估报告。</li>
-                        <li><strong>XGBoost 房价预测：</strong>比较多种模型表现，输出误差分析与特征重要性图。</li>
-                        <li><strong>自动化训练脚本：</strong>封装参数配置、日志记录、模型保存与加载。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-3-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：划分训练集与测试集</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>将数据集按 8:2 划分训练集与测试集，并保证类别比例稳定。</p>
-                            <pre><code>from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
-</code></pre>
-                            <p><strong>常见错误解析：</strong>分类问题建议使用 <code>stratify</code> 参数保持类别分布一致。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：训练随机森林分类器</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>训练随机森林模型并输出准确率。</p>
-                            <pre><code>from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=200, random_state=42)
-clf.fit(X_train, y_train)
-print(f"准确率：{clf.score(X_test, y_test):.3f}")
-</code></pre>
-                            <p><strong>常见错误解析：</strong>随机森林对特征尺度不敏感，但仍需确保无大量缺失值。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：使用 GridSearch 调参</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>通过网格搜索寻找最优超参数组合。</p>
-                            <pre><code>from sklearn.model_selection import GridSearchCV
-param_grid = {
-    'n_estimators': [100, 200, 300],
-    'max_depth': [None, 10, 20]
-}
-grid = GridSearchCV(clf, param_grid, cv=5, scoring='f1')
-grid.fit(X_train, y_train)
-print(grid.best_params_)
-</code></pre>
-                            <p><strong>常见错误解析：</strong>调参时记得设置 <code>cv</code> 与 <code>scoring</code>，确保指标与业务目标一致。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 4：绘制混淆矩阵并分析错误</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用混淆矩阵观察模型的分类错误类型。</p>
-                            <pre><code>from sklearn.metrics import ConfusionMatrixDisplay
-ConfusionMatrixDisplay.from_estimator(clf, X_test, y_test, cmap='Blues')
-plt.title('随机森林混淆矩阵')
-plt.show()
-</code></pre>
-                            <p><strong>常见错误解析：</strong>重点关注假阳性与假阴性占比，根据业务场景（如风控）选择优先优化的指标。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能解释不同评估指标的适用场景与取舍。</li>
-                        <li>掌握交叉验证、网格搜索等调参手段。</li>
-                        <li>会输出模型评估报告并提出改进方向。</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="phase-4">
-                <h2>阶段 4 · 项目化与部署实战（第 9-10 周）</h2>
-                <p class="section-subtitle">学习如何将模型产品化：封装服务、编写测试、部署上线并撰写文档。</p>
-                <div class="module" id="phase-4-projects">
-                    <h3>关键技能</h3>
-                    <ul>
-                        <li>数据与模型版本管理：DVC、Git LFS、MLflow Tracking。</li>
-                        <li>API 服务化：FastAPI、Uvicorn/Gunicorn、Docker。</li>
-                        <li>质量保障：单元测试、数据漂移监控、日志与告警。</li>
-                        <li>部署文档：接口说明、依赖清单、启动命令、健康检查。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>综合项目建议</h3>
-                    <ul>
-                        <li>选择真实业务主题，如“用户流失预测”或“二手车定价”。</li>
-                        <li>输出标准化数据处理 Pipeline 与 Notebook。</li>
-                        <li>完成多模型对比与调参记录，形成技术报告。</li>
-                        <li>基于 FastAPI 构建推理服务，提供简单前端界面（Streamlit/Gradio）。</li>
-                        <li>编写部署说明与 README，将项目上传至 GitHub 展示。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-4-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：构建最小化的 FastAPI 接口</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>创建一个返回 <code>{"status": "ok"}</code> 的心跳接口。</p>
-                            <pre><code>from fastapi import FastAPI
-app = FastAPI()
-
-@app.get("/ping")
-def ping():
-    return {"status": "ok"}
-</code></pre>
-                            <p><strong>常见错误解析：</strong>确保文件命名为 <code>main.py</code> 或在 <code>uvicorn</code> 启动时正确指定模块路径。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：为预测函数编写单元测试</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 <code>pytest</code> 对模型预测函数进行形状与范围校验。</p>
-                            <pre><code>def test_predict_shape():
-    sample = pd.DataFrame([features])
-    result = model.predict(sample)
-    assert result.shape == (1,)
-    assert 0 <= result[0] <= 1
-</code></pre>
-                            <p><strong>常见错误解析：</strong>模型加载放在 <code>setup_module</code> 或 <code>pytest.fixture</code> 中，避免重复初始化浪费时间。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：撰写部署说明模板</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>编写清晰的部署步骤与接口说明，方便他人复现。</p>
-                            <pre><code>## 部署步骤
-1. pip install -r requirements.txt
-2. uvicorn app.main:app --host 0.0.0.0 --port 8000
-3. 访问 http://localhost:8000/docs 查看接口文档
-</code></pre>
-                            <p><strong>常见错误解析：</strong>部署文档应包含环境依赖、配置项与常见故障排查，降低协作成本。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 4：使用 Docker 打包推理服务</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>编写 Dockerfile 并完成镜像构建与运行。</p>
-                            <pre><code>FROM python:3.10-slim
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-</code></pre>
-                            <p><strong>常见错误解析：</strong>运行时使用 <code>docker run -p 8000:8000</code> 映射端口，并通过 <code>/ping</code> 接口验证服务健康。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能将 Notebook 中的模型封装为 REST API。</li>
-                        <li>会编写基本的单元测试、日志与异常处理。</li>
-                        <li>能打包镜像并编写详尽的部署说明书。</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="phase-5">
-                <h2>阶段 5 · 深度学习与 PyTorch（第 11-12 周）</h2>
-                <p class="section-subtitle">系统学习 PyTorch，完成一个可上线的深度学习项目。</p>
-                <div class="module">
-                    <h3>基础铺垫</h3>
-                    <ul>
-                        <li>数学复习：线性代数（矩阵乘法、特征向量）、微积分（梯度、链式法则）、概率论（交叉熵、KL 散度）。</li>
-                        <li>PyTorch 核心：张量与自动求导、GPU 加速、<code>Dataset</code> / <code>DataLoader</code>、模型保存与加载。</li>
-                        <li>神经网络基础：激活函数、损失函数、优化器、BatchNorm、Dropout。</li>
-                    </ul>
-                </div>
-                <div class="module">
-                    <h3>进阶主题</h3>
-                    <ol>
-                        <li>多层感知机（MLP）：在 MNIST 上实现分类，绘制训练/验证曲线。</li>
-                        <li>卷积神经网络（CNN）：理解卷积、池化、Padding，对 CIFAR-10 进行图像分类。</li>
-                        <li>迁移学习：加载 ResNet/VGG 预训练模型，完成小样本分类或特征提取。</li>
-                        <li>自然语言处理（可选）：RNN/LSTM 文本分类，或使用 Transformers（BERT、GPT）。</li>
-                        <li>模型部署：TorchScript、ONNX、FastAPI/Gradio 在线推理服务。</li>
-                    </ol>
-                </div>
-                <div class="module">
-                    <h3>最终大作业</h3>
-                    <ul>
-                        <li>自主选题（图像/文本/表格），完成数据准备 → 模型设计 → 训练调参 → 结果分析 → Demo 部署。</li>
-                        <li>输出成果：技术博客或演示视频 + GitHub 仓库（README、代码、模型权重、部署指南）。</li>
-                        <li>撰写复盘总结：记录遇到的问题、解决方案、下一步计划。</li>
-                    </ul>
-                </div>
-                <div class="module exercises" id="phase-5-exercises">
-                    <h3>训练题（含详细解析）</h3>
-                    <details class="exercise" open>
-                        <summary>练习 1：创建张量并计算求和</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 PyTorch 创建一个 3×3 的随机张量并计算求和。</p>
-                            <pre><code>import torch
-x = torch.rand((3, 3))
-print(x)
-print(x.sum())
-</code></pre>
-                            <p><strong>常见错误解析：</strong>如需复现结果可设置 <code>torch.manual_seed(42)</code> 固定随机数。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 2：构建两层全连接网络</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>使用 <code>nn.Sequential</code> 构建两层网络并完成前向传播。</p>
-                            <pre><code>import torch.nn as nn
-model = nn.Sequential(
-    nn.Linear(4, 8),
-    nn.ReLU(),
-    nn.Linear(8, 1)
-)
-sample = torch.randn(2, 4)
-print(model(sample))
-</code></pre>
-                            <p><strong>常见错误解析：</strong>线性层输入尺寸需与样本特征维度一致，报错时检查 <code>Linear(in_features, out_features)</code> 的参数。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 3：编写训练循环并记录损失</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>实现基础训练循环并打印每轮损失。</p>
-                            <pre><code>for epoch in range(5):
-    optimizer.zero_grad()
-    outputs = model(inputs)
-    loss = criterion(outputs, labels)
-    loss.backward()
-    optimizer.step()
-    print(f"Epoch {epoch+1}: loss={loss.item():.4f}")
-</code></pre>
-                            <p><strong>常见错误解析：</strong>确保调用 <code>optimizer.zero_grad()</code> 清空梯度，避免梯度累积。</p>
-                        </div>
-                    </details>
-                    <details class="exercise">
-                        <summary>练习 4：评估准确率并保存模型</summary>
-                        <div class="exercise-body">
-                            <p><strong>任务说明：</strong>计算模型在验证集上的准确率，并保存权重文件。</p>
-                            <pre><code>with torch.no_grad():
-    preds = model(val_inputs).argmax(dim=1)
-    acc = (preds == val_labels).float().mean().item()
-    print(f"验证准确率：{acc:.3f}")
-
-torch.save(model.state_dict(), 'model.pt')
-</code></pre>
-                            <p><strong>常见错误解析：</strong>推理阶段需加 <code>torch.no_grad()</code> 关闭梯度；保存模型权重使用 <code>state_dict()</code> 更灵活。</p>
-                        </div>
-                    </details>
-                </div>
-                <div class="checklist" id="phase-5-check">
-                    <h3>能力自检</h3>
-                    <ul class="checklist-list">
-                        <li>能阅读并修改官方 PyTorch 教程示例。</li>
-                        <li>清楚区分训练集、验证集与测试集的作用。</li>
-                        <li>会保存/加载模型，并将其部署到推理服务中。</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="toolkit">
-                <h2>实战工具箱</h2>
-                <div class="card-grid info-cards">
-                    <article class="card">
-                        <h3>环境与效率</h3>
+            <section id="realm-qi" class="panel">
+                <h2>练气境 · 灵根初醒（第 1-2 周）</h2>
+                <p class="section-subtitle">从零启程，熟悉法器、语法与最基础的修行礼法。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
                         <ul>
-                            <li>Conda / Poetry：管理虚拟环境与依赖，确保可复现。</li>
-                            <li>VS Code 插件：Python、Pylance、Black、isort、GitLens、Jupyter。</li>
-                            <li>Git 工作流：分支管理、Pull Request、Issue 跟踪。</li>
-                            <li>调试工具：<code>logging</code>、<code>pdb</code>、VS Code Debugger。</li>
+                            <li>搭建 Python/VS Code/Git 环境并掌握命令行。</li>
+                            <li>理解变量、数据类型、输入输出、基础运算。</li>
+                            <li>编写第一个交互式脚本并形成学习日志。</li>
+                        </ul>
+                    </article>
+                    <article class="module" id="realm-qi-path">
+                        <h3>修炼路径</h3>
+                        <ol>
+                            <li>完成环境搭建与虚拟环境练习。</li>
+                            <li>在终端与 VS Code 双环境运行脚本。</li>
+                            <li>掌握基础语法，完成变量、字符串、运算练习。</li>
+                            <li>提交首个 Git commit 并撰写练气周志。</li>
+                        </ol>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>创建 <code>dao-field</code> 目录并写下修仙宣言脚本。</li>
+                            <li>安装 <code>numpy</code>、<code>pandas</code> 并打印版本。</li>
+                            <li>设计交互式脚本收集姓名、目标境界并输出祝福。</li>
+                            <li>将所有脚本提交至 GitHub 并记录步骤。</li>
+                            <li>整理《练气心得》记录遇到的问题与解法。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="knowledge-grid" id="realm-qi-drills">
+                    <div class="guide-banner" role="note">
+                        <span>需要逐题拆解？</span>
+                        <a class="drill-link" href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">打开练气境详解卷</a>
+                    </div>
+                    <details open>
+                        <summary>灵材备置 · 环境与命令行</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 命令行创建多层目录并切换到最深层。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用 <code>pwd</code>/<code>Get-Location</code> 将当前路径写入日志。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 激活虚拟环境后使用 <code>pip list</code> 检查依赖。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 配置 pip 镜像并验证下载速度差异。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 在 VS Code 设置调试配置并运行断点。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵根觉醒 · 变量与数据类型</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 声明多种变量并用 <code>type()</code> 输出类型。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 比较 <code>None</code> 与空字符串的差异。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 完成字符串到整数的安全转换并捕获异常。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 <code>id()</code> 分析对象引用是否相同。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 编写函数判断两个对象是否共享内存。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵气入体 · 运算与字符串</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 计算不同优先级表达式并解释结果。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用 <code>math.isclose</code> 检测浮点误差。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 通过 f-string 打印修士信息卡片。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 统计咒语中元音数量并输出比例。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 实现多语言问候函数支持占位与格式化。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵识初开 · 输入输出</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 <code>input</code> 收集灵材名称并生成列表。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 读取空格分隔数字求平均值并格式化输出。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 将祝福语写入 <code>blessing.txt</code> 并设置 UTF-8 编码。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 读取文件逐行输出，忽略空行。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 使用 <code>sys.stderr</code> 输出警告信息。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>气脉调息 · 调试与日志</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 在脚本中加入 <code>if __name__ == "__main__"</code> 守卫。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用 <code>dir()</code> 与 <code>help()</code> 查阅模块功能。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 使用交互式解释器变量 <code>_</code> 复用结果。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 引入 <code>logging</code> 输出调试信息。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 设计 Markdown 学习日志模板并记录心得。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <section id="realm-foundation" class="panel">
+                <h2>筑基境 · 内功淬炼（第 3-5 周）</h2>
+                <p class="section-subtitle">打磨内功，掌握控制流、容器、函数与面向对象，为后续结丹奠定坚实根基。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>熟练使用控制流、推导式与迭代器。</li>
+                            <li>理解列表、元组、集合、字典的差异与应用。</li>
+                            <li>编写模块化、可测试、可复用的函数与类。</li>
+                        </ul>
+                    </article>
+                    <article class="module" id="realm-foundation-path">
+                        <h3>修炼路径</h3>
+                        <ol>
+                            <li>复习练气境语法并延伸到控制流与推导式。</li>
+                            <li>实践容器操作、内置函数与迭代协议。</li>
+                            <li>实现面向对象项目并加入文件读写、异常处理。</li>
+                            <li>编写测试、打包模块，形成可复用工具。</li>
+                        </ol>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>开发“灵宠属性管理器”，支持增删改查与 CSV 持久化。</li>
+                            <li>构建“灵药账本”，利用字典与列表统计收益。</li>
+                            <li>设计“飞剑竞速”模拟，体现继承、多态与属性控制。</li>
+                            <li>封装常用函数为包并上传至 TestPyPI。</li>
+                            <li>为核心模块编写 5 条以上自动化测试并接入 CI。</li>
+                            <li>在分支完成功能后合并回主线，刻意制造并解决一次冲突并记录步骤。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="knowledge-grid" id="realm-foundation-drills">
+                    <div class="guide-banner" role="note">
+                        <span>筑基阶段详解</span>
+                        <a class="drill-link" href="/guides/drills/realm-foundation.md" target="_blank" rel="noreferrer">查阅筑基境题库</a>
+                    </div>
+                    <details open>
+                        <summary>阵法初成 · 控制流与推导式</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 打印九九乘法表并控制对齐格式。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 计算 1-100 中能被 3 整除但不被 5 整除的和。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 比较 <code>break</code> 与 <code>continue</code> 的作用。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用列表推导式生成平方序列并过滤奇数。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 将嵌套循环改写为生成器表达式节省内存。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵兽驯养 · 列表、元组、集合</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 用列表保存灵药并按名称排序。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 以元组存储坐标并演示解包。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 使用集合求法术交集与差集。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 借助 <code>enumerate</code>、<code>zip</code> 遍历索引与元素。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 统计列表中元素频率并输出排行榜。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>宝库开启 · 字典与映射</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 创建字典记录灵器库存并实现安全更新。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 利用字典推导式生成咒语长度映射。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 合并两份库存并解决重复键冲突。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 <code>collections.Counter</code> 统计灵石颜色。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 编写函数安全访问嵌套字典。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵术传承 · 函数与参数</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 定义函数计算灵力恢复，包含默认参数。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用关键字参数调用函数并比较顺序。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 演示 <code>*args</code>/<code>**kwargs</code> 的调用方式。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 实现递归函数计算灵兽族谱深度。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 设计闭包记录法术冷却时间。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>气海调息 · 匿名函数与迭代器</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 用 <code>map</code> 将价格打折。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 用 <code>filter</code> 筛选高修为弟子。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 编写自定义迭代器按周生成日志。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 <code>itertools.cycle</code> 构建法术轮替器。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 比较列表与生成器的内存消耗。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>真经铭刻 · 面向对象</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 实现 <code>Cultivator</code> 类并提供升级方法。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 设计继承结构 <code>Sword</code> → <code>FlyingSword</code>。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 使用 <code>@property</code> 控制灵力上下限。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 定义类方法创建预设角色。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 体验数据类 <code>@dataclass</code> 的优势。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>火候把握 · 文件与上下文</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 <code>with open</code> 写入日志并验证自动关闭。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 用 <code>csv.DictReader</code> 读取弟子名册。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 借助 <code>pathlib</code> 遍历日志目录。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 通过 <code>shutil.make_archive</code> 备份项目。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 使用 <code>tempfile</code> 创建临时文件做单元测试。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵符调和 · Git 分支与冲突</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 <code>git switch -c feature/spirit-log</code> 创建并切换分支。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 在分支提交修改后回到主线执行 <code>git merge</code>。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 分别在两分支修改同一行代码，刻意制造冲突。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 借助 <code>git status</code> 与 <code>git diff</code> 分析冲突块差异。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 手动消除 <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> 标记后运行 <code>git merge --continue</code> 完成合并。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>天罚护身 · 异常处理</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 捕获 <code>ValueError</code> 并输出友好提示。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 自定义异常 <code>InsufficientManaError</code>。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 在 <code>try/except</code> 中加入 <code>else</code> 与 <code>finally</code>。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 <code>pdb</code> 调试循环逻辑。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 通过 <code>logging.exception</code> 记录堆栈信息。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <section id="realm-core" class="panel">
+                <h2>结丹境 · 数据炼丹（第 6-7 周）</h2>
+                <p class="section-subtitle">凝聚灵丹，掌握 NumPy、Pandas、数据清洗与可视化，为机器学习炼就稳固丹田。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>熟练进行数组运算、表格处理与统计分析。</li>
+                            <li>完成缺失值填补、离群值处理与特征构建。</li>
+                            <li>绘制多种可视化图表，完成探索性分析报告。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>修炼路径</h3>
+                        <ol>
+                            <li>以 Kaggle 数据练习 NumPy 与 Pandas 基础。</li>
+                            <li>构建数据清洗 pipeline，并记录日志。</li>
+                            <li>使用 Seaborn/Matplotlib 完成趋势、分布、相关分析。</li>
+                            <li>输出 Markdown 或 PDF 数据炼丹报告。</li>
+                        </ol>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>清洗“灵草药性”数据集并生成缺失值报告。</li>
+                            <li>编写 <code>eda.py</code> 输出关键统计指标。</li>
+                            <li>绘制热力图、箱线图、双轴图展示洞见。</li>
+                            <li>搭建交互式仪表盘（Streamlit/Plotly Dash）。</li>
+                            <li>撰写《结丹日志》记录发现与建议。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>结丹境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-core.md" target="_blank" rel="noreferrer">打开数据炼丹详解</a>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>元婴境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-spirit.md" target="_blank" rel="noreferrer">打开御阵驭兽详解</a>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>化神境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-apotheosis.md" target="_blank" rel="noreferrer">打开元神出窍详解</a>
+                </div>
+                <div class="accordion">
+                    <details open>
+                        <summary>灵石阵列 · NumPy</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 创建单位矩阵并计算行列式。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 重塑数组并切片获取前两列。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 通过广播完成数组与向量相加。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用布尔索引筛选能量值。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 统计均值、方差、标准差。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>丹炉调配 · Pandas</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 从字典构造 DataFrame 并查看前几行。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 设置索引、排序并新增特征列。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 利用 <code>groupby</code> 汇总功效。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 合并多表并处理缺失值。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 导出清洗结果为 CSV/Parquet。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>杂质祛除 · 数据清洗</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 统计缺失比例并绘制柱状图。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用多种策略填补缺失数据。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 基于四分位数过滤离群值。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 统一字符串格式与大小写。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 封装日志记录每一步清洗动作。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵火绘阵 · 可视化</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 绘制灵力随时间变化折线。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 生成箱线图比较不同灵草功效。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 绘制相关性热力图并标注数值。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 创建双轴图展示成本与收益。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 导出图像为 PNG 与 SVG。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>丹方评估 · 报告与总结</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 生成描述统计并转成 Markdown 表。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 封装 <code>profile_data()</code> 返回缺失/唯一值信息。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 调用 <code>pandas-profiling</code> 生成自动报告。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 比较清洗前后数据差异并写入日志。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 总结潜在风险与后续建模建议。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <section id="realm-spirit" class="panel">
+                <h2>元婴境 · 御阵驭兽（第 8-10 周）</h2>
+                <p class="section-subtitle">炼就元婴，掌握机器学习阵法，从特征工程到模型评估一气呵成。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>熟悉数据预处理、特征工程与不平衡处理。</li>
+                            <li>掌握监督/无监督算法的实现与调参技巧。</li>
+                            <li>理解评估指标、学习曲线与模型解释方法。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>修炼路径</h3>
+                        <ol>
+                            <li>搭建预处理 pipeline，完成训练/验证/测试拆分。</li>
+                            <li>实现多种监督模型并比较表现。</li>
+                            <li>尝试无监督算法探索数据结构。</li>
+                            <li>利用交叉验证与调参工具优化结果。</li>
+                        </ol>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>训练“灵兽资质评估”模型，比较逻辑回归与随机森林。</li>
+                            <li>尝试三种特征缩放方式并观察影响。</li>
+                            <li>使用 <code>GridSearchCV</code> 或 <code>Optuna</code> 调参。</li>
+                            <li>以 SHAP/LIME 解释模型输出。</li>
+                            <li>撰写《元婴悟道》总结模型表现与改进计划。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="accordion">
+                    <details open>
+                        <summary>玄阵布局 · 数据预处理</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 <code>train_test_split</code> 划分数据集。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 组合 <code>ColumnTransformer</code> 处理不同类型特征。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 应用 SMOTE 或 class_weight 处理不平衡。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 构建自定义特征如灵石密度。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 使用 <code>joblib</code> 保存预处理器。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>御兽要诀 · 监督学习</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 训练线性回归预测灵药价格。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 实现逻辑回归预测修士是否飞升。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 构建决策树并可视化。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 训练随机森林查看特征重要性。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 尝试梯度提升或 XGBoost 对比表现。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>幻阵迷踪 · 无监督学习</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 KMeans 聚类灵石属性。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 通过 PCA 降维并绘制散点图。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 实现层次聚类绘制树状图。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 以 DBSCAN 识别异常点。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 计算轮廓系数评估聚类质量。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>阵法验收 · 模型评估</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 输出准确率、精确率、召回率、F1。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 绘制混淆矩阵并解释象限含义。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 绘制 ROC 曲线并计算 AUC。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 绘制学习曲线判断过拟合。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 使用交叉验证评估稳定性。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵阵调优 · Pipeline 与部署</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 构建包含预处理与模型的 <code>Pipeline</code>。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 用 <code>GridSearchCV</code> 调参。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 保存最佳模型并加载复现。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 FastAPI 暴露预测接口。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 编写批量推理脚本生成结果。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <section id="realm-apotheosis" class="panel">
+                <h2>化神境 · 元神出窍（第 11-12 周）</h2>
+                <p class="section-subtitle">元神离体，驾驭 PyTorch 深度学习与部署法阵，真正迈向飞升。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>理解 PyTorch 张量运算、自动求导与模型构建。</li>
+                            <li>掌握 CNN、RNN/注意力及迁移学习技巧。</li>
+                            <li>完成模型导出、推理服务与性能监控。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>修炼路径</h3>
+                        <ol>
+                            <li>跟随官方教程掌握张量、优化器、训练循环。</li>
+                            <li>完成分类项目并记录损失曲线。</li>
+                            <li>尝试预训练模型与 Grad-CAM 可视化。</li>
+                            <li>导出模型为 TorchScript/ONNX 并部署。</li>
+                        </ol>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>完成 <code>pytorch_basics.ipynb</code>，涵盖张量、自动微分。</li>
+                            <li>训练灵兽识别 CNN 并绘制训练曲线。</li>
+                            <li>进行迁移学习并比较冻结/解冻策略。</li>
+                            <li>导出模型为 ONNX 并使用 onnxruntime 推理。</li>
+                            <li>撰写《化神笔记》总结部署经验。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="accordion">
+                    <details open>
+                        <summary>元神凝练 · PyTorch 入门</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 创建张量并查看形状、类型、设备。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 将 NumPy 数组转换为张量并验证共享内存。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 设置随机种子保证可复现。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 探索 <code>requires_grad</code> 与自动求导。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 比较 <code>torch.no_grad()</code> 与 <code>detach()</code>。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>法身塑造 · 模型构建</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 自定义 <code>nn.Module</code> 并实现 <code>forward</code>。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用 <code>torchsummary</code> 查看参数量。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 编写训练/验证循环并记录指标。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 应用学习率调度器调整训练节奏。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 将指标写入 TensorBoard。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>灵识扩展 · 视觉与序列</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 使用 <code>torchvision.transforms</code> 进行数据增强。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 实现 LSTM 文本分类。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 编写自定义 <code>Dataset</code>/<code>DataLoader</code>。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 使用 Grad-CAM 可视化关注区域。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 比较不同批大小对训练影响。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>元神游历 · 迁移学习与部署</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 加载预训练 ResNet 并冻结前几层。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 替换最后全连接层适配类别。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 导出模型为 TorchScript。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 构建 FastAPI 推理接口。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 设计健康检查与监控指标。</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>道果巩固 · 持续精进</summary>
+                        <ul>
+                            <li><span class="difficulty-badge badge-beginner">🌱 入门</span> 复现论文模型并记录差异。</li>
+                            <li><span class="difficulty-badge badge-intermediate">🌿 进阶</span> 使用 Lightning/Accelerate 重构训练流程。</li>
+                            <li><span class="difficulty-badge badge-advanced">🔥 突破</span> 尝试混合精度训练提升效率。</li>
+                            <li><span class="difficulty-badge badge-expert">🌟 圆满</span> 设计部署流水线脚本包含 Docker、CI/CD。</li>
+                            <li><span class="difficulty-badge badge-master">🛡️ 化神</span> 规划下一阶段学习路线（CV/NLP/强化学习）。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <section id="toolkit" class="panel">
+                <h2>外功密卷 · 工具与资源</h2>
+                <div class="resource-grid">
+                    <article class="card">
+                        <h3>必读经典</h3>
+                        <ul>
+                            <li>《Python 编程：从入门到实践》</li>
+                            <li>《流畅的 Python》</li>
+                            <li>《Hands-On Machine Learning》</li>
+                            <li>《Deep Learning with PyTorch》</li>
                         </ul>
                     </article>
                     <article class="card">
-                        <h3>数据资源</h3>
+                        <h3>在线修行</h3>
                         <ul>
-                            <li>Kaggle、天池、Google Dataset Search：获取公开数据集。</li>
-                            <li>OpenML、UCI ML Repository：经典教学数据集。</li>
-                            <li>Hugging Face Datasets：海量 NLP/CV 数据集，支持流式加载。</li>
-                            <li>Awesome Public Datasets：按领域分类的开源数据合集。</li>
+                            <li>MIT 6.0001、CS50P、CS231n</li>
+                            <li>fast.ai Practical Deep Learning</li>
+                            <li>Kaggle、天池、Datawhale 打卡营</li>
                         </ul>
                     </article>
                     <article class="card">
-                        <h3>模型与部署</h3>
+                        <h3>效率法器</h3>
                         <ul>
-                            <li>Scikit-Learn、LightGBM、XGBoost：传统机器学习核心库。</li>
-                            <li>PyTorch Lightning、FastAI：加速深度学习实验与迭代。</li>
-                            <li>MLflow、Weights & Biases：实验追踪与指标可视化。</li>
-                            <li>Docker、Render、Railway：模型部署与在线托管方案。</li>
+                            <li>VS Code、JupyterLab、Black、isort</li>
+                            <li>Poetry、DVC、Weights &amp; Biases</li>
+                            <li>Obsidian、Notion 学习笔记模板</li>
                         </ul>
                     </article>
                 </div>
             </section>
 
-            <section id="project-library">
-                <h2>项目灵感库</h2>
-                <p class="section-subtitle">挑选与你兴趣相关的题目，构建“初级 → 进阶 → 综合”三级项目组合。</p>
-                <table class="timeline-table">
+            <section id="projects" class="panel">
+                <h2>灵感宝库 · 项目创意</h2>
+                <table class="timeline-table" aria-label="项目灵感">
                     <thead>
                         <tr>
-                            <th scope="col">主题</th>
-                            <th scope="col">项目点子</th>
-                            <th scope="col">关键能力</th>
+                            <th scope="col">项目</th>
+                            <th scope="col">适合境界</th>
+                            <th scope="col">灵感说明</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>数据分析</td>
-                            <td>城市空气质量监测、零售销售趋势分析、电影评分洞察</td>
-                            <td>数据清洗、可视化、叙事报告</td>
+                            <td>灵药交易分析仪</td>
+                            <td>结丹境</td>
+                            <td>清洗交易数据、分析供需、构建交互式仪表盘。</td>
                         </tr>
                         <tr>
-                            <td>经典机器学习</td>
-                            <td>客户流失预测、信用卡欺诈检测、二手车价格预测</td>
-                            <td>特征工程、模型对比、指标评估</td>
+                            <td>灵兽资质评定系统</td>
+                            <td>元婴境</td>
+                            <td>结合分类算法预测灵兽等级并输出解释。</td>
                         </tr>
                         <tr>
-                            <td>深度学习</td>
-                            <td>手写数字识别、花卉图像分类、商品评论情感分析</td>
-                            <td>PyTorch 建模、迁移学习、推理部署</td>
+                            <td>门派秘术推荐引擎</td>
+                            <td>元婴境</td>
+                            <td>基于用户行为推荐修炼法门，实践协同过滤。</td>
                         </tr>
                         <tr>
-                            <td>综合应用</td>
-                            <td>智能问答机器人、个性化推荐系统、语音情绪识别</td>
-                            <td>数据管道、模型服务化、系统设计</td>
+                            <td>天机占卜卷轴</td>
+                            <td>化神境</td>
+                            <td>使用时间序列或 Transformer 预测灵气波动。</td>
+                        </tr>
+                        <tr>
+                            <td>云端法阵守卫</td>
+                            <td>化神境</td>
+                            <td>将模型部署至云端并监控性能、实现回滚。</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="callout note">
-                    ✅ 建议从公开数据集开始，逐步尝试自建或爬取数据，形成可展示的项目组合。
-                </div>
             </section>
 
-            <section id="study-method">
-                <h2>学习方法与复盘</h2>
-                <ol>
-                    <li><strong>制定周计划：</strong>写下本周课程、练习和项目目标，每天坚持打卡。</li>
-                    <li><strong>费曼学习法：</strong>尝试用自己的话向他人解释所学知识，暴露盲点后及时补强。</li>
-                    <li><strong>记录错题与 Bug：</strong>将踩坑记录在 Issue 或博客中，复习时快速回顾。</li>
-                    <li><strong>定期复盘：</strong>每两周回答“我学会了什么？做成了什么？下一步是什么？”。</li>
-                    <li><strong>参与社区：</strong>在 Kaggle、知乎、GitHub 讨论区提问或解答问题，保持输入输出平衡。</li>
-                </ol>
-            </section>
-
-            <section id="faq">
-                <h2>附录 · 常见问题 & 资源</h2>
-                <div class="faq-grid">
-                    <article class="faq-item">
-                        <h3>常见问题</h3>
-                        <ul>
-                            <li><strong>数学基础薄弱怎么办？</strong> 结合 3Blue1Brown、Essence of Linear Algebra、吴恩达《机器学习》数学附录复习。</li>
-                            <li><strong>英文文档看不懂？</strong> 借助翻译工具，但核心 API 建议阅读英文原版以保持准确理解。</li>
-                            <li><strong>缺少练习数据集？</strong> 多使用 Kaggle、天池、Google Dataset Search 等开放平台。</li>
-                            <li><strong>学习动力不足？</strong> 与同伴互相监督、写博客分享、参与开源项目保持反馈。</li>
-                        </ul>
+            <section id="faq" class="panel">
+                <h2>答疑密信 · 常见问题</h2>
+                <div class="faq">
+                    <article>
+                        <h3>Q1：完全零基础可以学吗？</h3>
+                        <p>可以。按照练气境的顺序逐步完成。遇到陌生术语，可查阅 README 与附录资源。</p>
                     </article>
-                    <article class="faq-item">
-                        <h3>工具与资源清单</h3>
-                        <ul>
-                            <li>文档：Python Docs、Pandas Cookbook、Scikit-Learn User Guide、PyTorch Tutorials。</li>
-                            <li>课程：CS50P、吴恩达《机器学习》《深度学习专项课程》、FastAI Practical Deep Learning。</li>
-                            <li>社区：Kaggle Discuss、Stack Overflow、知乎「机器学习」、PyTorch Forums。</li>
-                            <li>书籍：《利用 Python 进行数据分析》《Hands-On Machine Learning》《Deep Learning with PyTorch》。 </li>
-                        </ul>
+                    <article>
+                        <h3>Q2：题目太多做不完怎么办？</h3>
+                        <p>建议全部练习；若时间有限，至少完成每个知识点前三题并记录解析，待有余力再补全。</p>
                     </article>
-                    <article class="faq-item">
-                        <h3>术语速查</h3>
-                        <ul>
-                            <li><strong>EDA：</strong> 探索性数据分析，用于理解数据分布与特征。</li>
-                            <li><strong>Overfitting / Underfitting：</strong> 过拟合与欠拟合，衡量模型泛化能力。</li>
-                            <li><strong>Batch / Epoch / Iteration：</strong> 批次、轮次与迭代次数，描述训练过程。</li>
-                            <li><strong>Inference：</strong> 推理，将训练好的模型应用于新数据。</li>
-                        </ul>
+                    <article>
+                        <h3>Q3：需要哪些数学基础？</h3>
+                        <p>至少掌握高中函数、微积分入门与概率统计；在元婴境开始前逐步补足相关知识。</p>
                     </article>
-                    <article class="faq-item">
-                        <h3>下一步发展方向</h3>
-                        <ul>
-                            <li>强化学习、推荐系统、时间序列、图神经网络。</li>
-                            <li>MLOps：CI/CD、模型监控、特征存储、自动化部署。</li>
-                            <li>AIGC：大语言模型、Stable Diffusion、LoRA 微调等前沿方向。</li>
-                        </ul>
+                    <article>
+                        <h3>Q4：没有 GPU 如何修炼化神境？</h3>
+                        <p>可使用 Kaggle Notebook、Google Colab 或租用云 GPU；亦可在 CPU 上练习小数据集与推理流程。</p>
+                    </article>
+                    <article>
+                        <h3>Q5：完成五境后做什么？</h3>
+                        <p>深入研究 NLP、CV、强化学习等专精方向，参与开源项目或比赛，持续打磨内功。</p>
                     </article>
                 </div>
             </section>

@@ -1,328 +1,65 @@
-# 零基础 Python + 机器学习 + PyTorch 自学手册
+# Python 修仙志：从练气到化神的全门派功法
 
-这份仓库是一套针对零基础学习者的完整自学路线，覆盖从 Python 基础、数据分析、经典机器学习到 PyTorch 深度学习的全部关键知识。按照顺序学习，每一步都有明确目标、推荐资源、实践项目以及配套的“训练题 + 解析”，帮助你真正掌握技能并构建个人作品集。
+欢迎来到专为 **零基础修仙者** 打造的 Python × 机器学习门派。此卷以修仙五大境界贯穿全程：
+
+1. **练气境**：点亮灵根，熟悉电脑法器、Python 语法与基础心法。
+2. **筑基境**：打磨内功，掌握控制流、数据结构、函数、面向对象等核心灵技。
+3. **结丹境**：凝聚丹道之力，学会 NumPy、Pandas、可视化与数据清洗，炼成数据炼丹术。
+4. **元婴境**：唤醒内婴，精通经典机器学习算法、特征工程与模型评估。
+5. **化神境**：元神出窍，驾驭 PyTorch 深度学习与模型部署，完成真正的飞升。
+
+每一境均提供：
+
+- 📘 **修行目标**：明确阶段要点与能力清单。
+- 🧭 **修炼路径**：按步骤修习，知道先后顺序与推荐节奏。
+- 🧪 **试炼任务**：结合实操练功巩固所学。
+- 🧩 **练气题库**：覆盖常见知识点，每项不少于 5 题，并附详细点拨与解析。
+- 🧱 **难度等级**：题库按 🌱 入门 → 🌿 进阶 → 🔥 突破 → 🌟 圆满 → 🛡️ 化神 的梯度递进设计，可依次闯关。
+- 🧰 **心法锦囊**：工具、资源、加速技巧与常见疑问解答。
+
+> 🌟 **阅读建议**：将 README 当作随身心法。同步打开网站版本（见下方“道场指引”）获得更沉浸的修仙体验。
+
+---
 
 ## 目录
 
-1. [学习总览](#学习总览)
-2. [学习路径速览](#学习路径速览)
-3. [阶段 0 · 零基础入门（第 1 周）](#阶段-0--零基础入门第-1-周)
-4. [阶段 1 · Python 基础语法（第 2-3 周）](#阶段-1--python-基础语法第-2-3-周)
-5. [阶段 2 · 数据分析与可视化（第 4-5 周）](#阶段-2--数据分析与可视化第-4-5-周)
-6. [阶段 3 · 经典机器学习算法（第 6-8 周）](#阶段-3--经典机器学习算法第-6-8-周)
-7. [阶段 4 · 项目化与部署实战（第 9-10 周）](#阶段-4--项目化与部署实战第-9-10-周)
-8. [阶段 5 · 深度学习与 PyTorch（第 11-12 周）](#阶段-5--深度学习与-pytorch第-11-12-周)
-9. [实战工具箱](#实战工具箱)
-10. [项目灵感库](#项目灵感库)
-11. [学习方法与复盘建议](#学习方法与复盘建议)
-12. [附录 · 常见问题 & 资源推荐](#附录--常见问题--资源推荐)
+1. [道场指引：如何使用本仓库](#道场指引如何使用本仓库)
+2. [修行路线速览（12 周时间表）](#修行路线速览12-周时间表)
+3. [练气境 · 灵根初醒（第 1-2 周）](#练气境--灵根初醒第-1-2-周)
+4. [筑基境 · 内功淬炼（第 3-5 周）](#筑基境--内功淬炼第-3-5-周)
+5. [结丹境 · 数据炼丹（第 6-7 周）](#结丹境--数据炼丹第-6-7-周)
+6. [元婴境 · 御阵驭兽（第 8-10 周）](#元婴境--御阵驭兽第-8-10-周)
+7. [化神境 · 元神出窍（第 11-12 周）](#化神境--元神出窍第-11-12-周)
+8. [外功密卷 · 工具与资源](#外功密卷--工具与资源)
+9. [灵感宝库 · 项目创意](#灵感宝库--项目创意)
+10. [心法总纲 · 复盘与精进](#心法总纲--复盘与精进)
+11. [答疑密信 · 常见问题](#答疑密信--常见问题)
 
 ---
 
-## 学习总览
+## 道场指引：如何使用本仓库
 
-- **学习时长**：建议每周投入 10 ~ 12 小时，约 12 周完成全部内容。
-- **准备工具**：Python 3.10+、Anaconda 或 Miniconda、VS Code、Git、Jupyter Notebook。
-- **学习原则**：先理解概念 → 立即动手实践 → 复盘整理笔记 → 分享输出。
-- **成果输出**：每一阶段完成至少 1 个小项目或报告，所有代码托管到 GitHub，构建学习档案。
+### 1. 领取法器（克隆与环境搭建）
 
-> ⭐️ 建议按照“打基础 → 做项目 → 总结复盘”的节奏学习。每个阶段的实践任务和训练题都是检验成果的依据。
+```bash
+# 克隆仓库
+git clone https://github.com/<your-name>/Machine-Learning.git
+cd Machine-Learning
 
----
+# 创建与激活虚拟环境
+python -m venv .venv
+source .venv/bin/activate  # Windows 请运行 .venv\Scripts\activate
 
-## 学习路径速览
-
-| 周数 | 阶段 | 主要目标 | 推荐产出 |
-| --- | --- | --- | --- |
-| 第 1 周 | 阶段 0 | 完成环境搭建，熟悉命令行与 VS Code | 学习日志、环境搭建笔记 |
-| 第 2-3 周 | 阶段 1 | 掌握 Python 语法与基础编程能力 | 猜数字游戏、通讯录脚本 |
-| 第 4-5 周 | 阶段 2 | 熟悉 NumPy/Pandas 与可视化 | Titanic 数据探索报告 |
-| 第 6-8 周 | 阶段 3 | 完成传统机器学习项目并调参 | 随机森林分类器、模型评估报告 |
-| 第 9-10 周 | 阶段 4 | 学会模型服务化与部署 | FastAPI 推理接口、部署说明 |
-| 第 11-12 周 | 阶段 5 | 入门 PyTorch 并完成深度学习项目 | MNIST/CIFAR-10 模型、复盘博客 |
-
-**达成标准**：能独立完成一个从数据处理、建模到部署的端到端项目，并具备继续深入深度学习的基础。
-
----
-
-## 阶段 0 · 零基础入门（第 1 周）
-
-### 学习目标
-- 熟悉操作系统基础、命令行与文件管理。
-- 完成 Python、VS Code、Git、虚拟环境等开发环境搭建。
-
-### 学习内容
-1. 电脑基础：路径概念、压缩/解压、常用快捷键。
-2. 命令行：`cd`、`ls/dir`、`mkdir`、`rm/rmdir`、`python --version` 等。
-3. Python 环境：安装 Anaconda/Miniconda、创建虚拟环境、配置镜像源。
-4. VS Code：安装 Python 插件、配置格式化工具（Black）、集成终端。
-
-### 实践任务
-- 输出第一行 Python 代码：`print("Hello, Machine Learning!")`。
-- 使用 `pip` 安装 `numpy`、`pandas` 并验证。
-- 在 GitHub 创建仓库，记录环境搭建步骤与踩坑笔记。
-
-### 训练题与解析
-
-| 训练题 | 操作步骤提示 | 参考解析 |
-| --- | --- | --- |
-| 在命令行中创建一个名为 `ml-study` 的文件夹并进入 | 打开终端 → `mkdir ml-study` → `cd ml-study` | `mkdir` 创建文件夹，`cd` 进入；若提示权限不足，先执行 `pwd` 查看当前路径再调整 |
-| 创建一个虚拟环境并在其中安装 `numpy` | `conda create -n ml-base python=3.10` → `conda activate ml-base` → `pip install numpy` | 首次安装速度慢可执行 `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple` 切换镜像 |
-| 使用 VS Code 运行 `hello.py` 并解决编码错误 | 在文件中写 `print("Hello, Machine Learning!")` → 选择右下角 Python 解释器 → 终端运行 | 若报 `ModuleNotFoundError`，说明解释器未切换到虚拟环境；按 `Ctrl+Shift+P` 搜索 “Python: Select Interpreter” 重新选择 |
-
-### 能力自检
-- 能在命令行中完成文件创建、删除与移动。
-- 清楚解释虚拟环境的作用，并能在不同环境之间切换。
-- 会在 GitHub 上创建仓库并提交第一份学习记录。
-
----
-
-## 阶段 1 · Python 基础语法（第 2-3 周）
-
-### 核心知识点
-- 数据类型：数字、字符串、布尔、列表、元组、集合、字典。
-- 运算符与表达式：算术、比较、逻辑、成员、切片。
-- 控制语句：`if/elif/else`、`for`、`while`、列表推导式、异常处理。
-- 函数与模块：参数、返回值、作用域、lambda、内置模块（`random`、`datetime`、`os`）。
-- 文件与类：读写文本、JSON、CSV；类与对象、继承与多态、特殊方法（`__str__`、`__len__`）。
-
-### 推荐资源
-- Python 官方教程，廖雪峰 Python 教程。
-- B 站“Python 入门”系列或 CS50P 课程。
-- LeetCode/牛客网简单题巩固算法思维。
-
-### 实战练习
-- 猜数字小游戏（运用循环、条件、随机数）。
-- 通讯录管理脚本：新增/删除/搜索联系人并持久化为 JSON。
-- 汇总常用内置函数，输出自己的“Python 速查表”。
-
-### 训练题与解析
-
-| 训练题 | 操作步骤提示 | 参考解析 |
-| --- | --- | --- |
-| 编写程序判断用户输入的年份是否为闰年 | 使用 `input()` 获取字符串 → 转为整数 → 套用闰年公式 | ```python
-year = int(input("请输入年份:"))
-if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
-    print("闰年")
-else:
-    print("平年")
-``` |
-| 统计一句话中每个单词出现的次数 | 调用 `split()` → 遍历列表 → 使用字典计数 | ```python
-sentence = input("请输入一句话:")
-words = sentence.lower().split()
-count = {}
-for word in words:
-    count[word] = count.get(word, 0) + 1
-print(count)
-``` |
-| 设计 `Student` 类并支持打印“姓名-平均分” | 定义 `__init__`、`add_score`、`average`、`__str__` 方法 | ```python
-class Student:
-    def __init__(self, name):
-        self.name = name
-        self.scores = []
-
-    def add_score(self, score):
-        self.scores.append(score)
-
-    def average(self):
-        return sum(self.scores) / len(self.scores)
-
-    def __str__(self):
-        return f"{self.name}-{self.average():.1f}"
-``` |
-| 使用文件读写实现“今日待办”小工具 | `open()` → 写入任务 → 读取并输出 | ```python
-with open("todo.txt", "a", encoding="utf-8") as f:
-    f.write(input("写下今日待办：") + "\n")
-
-with open("todo.txt", encoding="utf-8") as f:
-    print("今日清单：")
-    for line in f:
-        print("-", line.strip())
-``` |
-
-### 能力自检
-- 能解释可变与不可变数据类型的差异。
-- 知道如何封装函数并在其他模块中导入。
-- 能用类封装业务逻辑，并在文件间共享代码。
-
----
-
-## 阶段 2 · 数据分析与可视化（第 4-5 周）
-
-### 技能点拆解
-1. **NumPy**：数组创建、切片、广播、矩阵运算、随机数生成。
-2. **Pandas**：DataFrame 操作、缺失值处理、数据清洗、分组聚合、透视表。
-3. **可视化**：Matplotlib、Seaborn、Plotly 基本图表与美化技巧，中文显示、双坐标轴等。
-4. **数据预处理**：数据类型转换、标准化与归一化、异常值检测、特征构造。
-
-### 练习项目
-- Kaggle Titanic 数据探索：幸存率分析、年龄/票价分布、特征之间的关系图。
-- 城市房价分析报告：至少 5 种可视化图表，输出数据洞察与结论。
-- 数据清洗流水线：将原始数据清洗成训练集（缺失值、重复值、异常值处理）。
-
-### 训练题与解析
-
-| 训练题 | 操作步骤提示 | 参考解析 |
-| --- | --- | --- |
-| 使用 NumPy 生成 0~1 之间 100 个随机数并计算平均值 | `np.random.rand(100)` → `np.mean()` | ```python
-import numpy as np
-numbers = np.random.rand(100)
-print(f"平均值：{numbers.mean():.3f}")
-``` |
-| 读取 CSV 后统计每个城市的平均房价 | `pd.read_csv()` → `groupby('city')['price'].mean()` → `reset_index()` | ```python
-import pandas as pd
-df = pd.read_csv('house.csv')
-city_price = df.groupby('city')['price'].mean().reset_index()
-print(city_price)
-``` |
-| 绘制乘客年龄的直方图并标注平均年龄 | `plt.hist()` → `plt.axvline()` → 设置中文字体 | ```python
-import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['SimHei']
-ages = df['Age'].dropna()
-plt.hist(ages, bins=20, color='#4C72B0')
-plt.axvline(ages.mean(), color='red', linestyle='--', label='平均年龄')
-plt.legend()
-plt.xlabel('年龄')
-plt.ylabel('人数')
-plt.show()
-``` |
-| 使用 `Pipeline` 串联标准化与随机森林回归 | `ColumnTransformer` → `Pipeline` → `fit` | ```python
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.ensemble import RandomForestRegressor
-
-numeric_features = ['age', 'fare']
-categorical_features = ['sex', 'embarked']
-
-preprocess = ColumnTransformer([
-    ('num', StandardScaler(), numeric_features),
-    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
-])
-
-pipe = Pipeline([
-    ('preprocess', preprocess),
-    ('model', RandomForestRegressor(random_state=42))
-])
-pipe.fit(train_df[numeric_features + categorical_features], train_df['survived'])
-``` |
-
-### 能力自检
-- 知道如何清洗缺失值、重复值与异常值。
-- 能使用 Pandas 进行数据透视与聚合分析。
-- 能用可视化图表讲述数据洞察故事并撰写报告。
-
----
-
-## 阶段 3 · 经典机器学习算法（第 6-8 周）
-
-### 学习重点
-- 机器学习流程：问题定义 → 数据准备 → 特征工程 → 建模 → 评估 → 调参 → 部署。
-- 监督学习：训练/验证/测试集划分、交叉验证、过拟合与欠拟合。
-- 分类算法：逻辑回归、kNN、朴素贝叶斯、决策树、随机森林、梯度提升、XGBoost。
-- 回归算法：线性回归、岭回归、Lasso、随机森林回归、XGBoost 回归。
-- 评估指标：准确率、召回率、F1、AUC、混淆矩阵、均方误差、R²、MAE。
-- 特征工程：特征缩放、独热编码、目标编码、特征选择、`Pipeline` 与 `ColumnTransformer`。
-
-### 实操路径
-1. 使用 `train_test_split` 完成数据集划分，理解随机种子与分层抽样。
-2. 熟悉 Scikit-Learn API：`fit`、`predict`、`predict_proba`、`score`、`Pipeline`。
-3. 学习调参：`GridSearchCV`、`RandomizedSearchCV`、`cross_val_score`。
-4. 模型解释：SHAP、Permutation Importance、部分依赖图（PDP）。
-
-### 阶段项目
-- **随机森林贷款违约预测**：绘制 ROC、PR 曲线与混淆矩阵，撰写评估报告。
-- **XGBoost 房价预测**：生成特征重要性图、学习曲线与误差分析。
-- **自动化训练脚本**：封装参数配置、日志记录、模型保存/加载、指标输出。
-
-### 训练题与解析
-
-| 训练题 | 操作步骤提示 | 参考解析 |
-| --- | --- | --- |
-| 将数据集按 8:2 划分训练集和测试集 | `from sklearn.model_selection import train_test_split` → 指定 `test_size=0.2` → 使用 `stratify` | ```python
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
-``` `stratify` 能保持类别比例稳定 |
-| 训练随机森林分类器并输出准确率 | 初始化 `RandomForestClassifier` → `fit` → `score` | ```python
-from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=200, random_state=42)
-clf.fit(X_train, y_train)
-print(f"准确率：{clf.score(X_test, y_test):.3f}")
-``` |
-| 使用 `GridSearchCV` 调参并查看最优参数 | 定义 `param_grid` → 构造 `GridSearchCV` → `fit` → 打印 `best_params_` | ```python
-from sklearn.model_selection import GridSearchCV
-param_grid = {
-    'n_estimators': [100, 200, 300],
-    'max_depth': [None, 10, 20]
-}
-grid = GridSearchCV(clf, param_grid, cv=5, scoring='f1')
-grid.fit(X_train, y_train)
-print(grid.best_params_)
-``` |
-| 绘制混淆矩阵并解释分类错误 | `confusion_matrix` → `ConfusionMatrixDisplay` | ```python
-from sklearn.metrics import ConfusionMatrixDisplay
-ConfusionMatrixDisplay.from_estimator(clf, X_test, y_test, cmap='Blues')
-plt.title('随机森林混淆矩阵')
-plt.show()
+# 装备常用法术
+pip install -r requirements.txt
 ```
-重点观察假阳性/假阴性占比，分析改进方向 |
 
-### 能力自检
-- 能解释不同评估指标的适用场景。
-- 知道如何利用交叉验证和调参提升模型表现。
-- 会对模型结果进行可视化并撰写技术报告。
+> ⚙️ **镜像加速**：若下载缓慢，可执行 `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`。
 
----
+### 2. 启动修仙道场（本地教学网站）
 
-## 阶段 4 · 项目化与部署实战（第 9-10 周）
-
-### 关键技能
-- 数据版本管理：DVC、Git LFS 或 MLflow Tracking。
-- API 服务化：使用 FastAPI/Fastify 构建预测接口，了解 Uvicorn/Gunicorn、Docker 部署流程。
-- 自动化测试与监控：编写单元测试、数据漂移监控、日志与告警。
-- 报告与可视化：自动生成模型评估报告、可解释性分析图表。
-
-### 综合项目建议
-选择真实业务主题，如“用户流失预测”或“二手车定价”，完成以下交付：
-- 标准化数据处理 Pipeline 与 Notebook。
-- 多模型对比与调参记录，形成技术报告。
-- 基于 FastAPI 的推理服务，并提供简单的前端界面（Streamlit/Gradio/自定义网页）。
-- 部署说明书与 README，上传至 GitHub 展示。
-
-### 训练题与解析
-
-| 训练题 | 操作步骤提示 | 参考解析 |
-| --- | --- | --- |
-| 使用 FastAPI 构建一个 `/ping` 接口返回 `{"status": "ok"}` | 新建 `main.py` → 创建 `FastAPI()` 应用 → 定义 `@app.get` 函数 → `uvicorn main:app --reload` | ```python
-from fastapi import FastAPI
-app = FastAPI()
-
-@app.get("/ping")
-def ping():
-    return {"status": "ok"}
-``` |
-| 为模型预测函数编写单元测试 | 安装 `pytest` → 构造虚拟输入 → 断言输出形状与数值范围 | ```python
-def test_predict_shape():
-    sample = pd.DataFrame([features])
-    result = model.predict(sample)
-    assert result.shape == (1,)
-    assert 0 <= result[0] <= 1
-``` |
-| 设计部署说明模板 | 拆分“环境依赖 → 启动命令 → API 文档” | ```markdown
-## 部署步骤
-1. `pip install -r requirements.txt`
-2. `uvicorn app.main:app --host 0.0.0.0 --port 8000`
-3. 访问 `http://localhost:8000/docs` 查看接口
-``` |
-| 使用 Docker 打包推理服务 | 编写 `Dockerfile` → `docker build` → `docker run -p` | ```dockerfile
-FROM python:3.10-slim
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 通过 `docker run -p 8000:8000` 启动并验证接口 |
 
@@ -433,37 +170,559 @@ torch.save(model.state_dict(), 'model.pt')
 
 ## 学习方法与复盘建议
 
-1. **制定周计划**：写下本周要完成的课程、练习和项目。每天坚持打卡，积累“可见进度”。
-2. **费曼学习法**：尝试用自己的话向他人解释所学知识，发现盲点后及时补强。
-3. **记录错题与 Bug**：将踩坑记录在 Issue 或博客中，复习时快速回顾。
-4. **定期复盘**：每两周回答三个问题——“我学会了什么？”、“我做成了什么？”、“下一步打算是什么？”。
-5. **参与社区**：在 Kaggle、知乎、GitHub 讨论区提问或解答问题，保持输入与输出的平衡。
+- 在浏览器访问 <http://127.0.0.1:8000>。
+- 固定目录左栏呈现境界导航，可快速跳转练气题与解析。
+- 若要停止，返回终端使用 <kbd>Ctrl</kbd>+<kbd>C</kbd>。
+
+### 3. 修炼建议
+
+1. **双线修行**：先在 README 熟悉整体路线，再在网站逐章练习。
+2. **亲手过招**：每道练气题都动手完成，再比对解析体悟差距。
+3. **结丹成册**：将解题代码、心得写入 GitHub 日志，形成成长档案。
+4. **同门交流**：积极在社区或学习群讨论心得，互为道友。
 
 ---
 
-## 附录 · 常见问题 & 资源推荐
+## 修行路线速览（12 周时间表）
 
-### 常见问题
-- **数学基础薄弱怎么办？** 结合 3Blue1Brown、Essence of Linear Algebra、吴恩达《机器学习》数学附录复习。
-- **英文文档看不懂？** 借助翻译工具，但核心 API 与官方文档建议阅读英文原版以保持准确理解。
-- **缺少练习数据集？** 多使用 Kaggle、天池、Google Dataset Search 等开放数据平台。
-- **学习动力不足？** 与同伴互相监督、写博客分享、参与开源项目保持反馈。
+| 周数 | 境界 | 核心修行 | 推荐产出 |
+| --- | --- | --- | --- |
+| 第 1-2 周 | 练气境 | 环境搭建、命令行、Python 基础语法与常用工具 | 环境搭建手册、基础脚本、练气题解析日志 |
+| 第 3-5 周 | 筑基境 | 控制流、数据结构、函数、面向对象与模块化 | 猜数字/通讯录项目、OOP 实战、自动化脚本 |
+| 第 6-7 周 | 结丹境 | NumPy、Pandas、数据清洗、可视化、探索性分析 | 数据炼丹报告、可视化仪表盘、清洗脚本 |
+| 第 8-10 周 | 元婴境 | 经典机器学习、特征工程、模型评估与调参 | 随机森林/梯度提升项目、模型对比报告 |
+| 第 11-12 周 | 化神境 | PyTorch、深度学习项目、部署与持续学习 | 图像/文本模型、推理服务、飞升复盘博客 |
 
-### 工具与资源清单
-- 文档：Python Docs、Pandas Cookbook、Scikit-Learn User Guide、PyTorch Tutorials。
-- 课程：CS50P、吴恩达《机器学习》《深度学习专项课程》、FastAI Practical Deep Learning。
-- 社区：Kaggle Discuss、Stack Overflow、知乎「机器学习」、PyTorch Forums。
-- 书籍：《利用 Python 进行数据分析》《Hands-On Machine Learning》《Deep Learning with PyTorch》。
+> ✅ **飞升标准**：能独立完成从数据收集、建模、部署到复盘的完整闭环，并对后续深度修炼有清晰规划。
 
-### 术语速查
-- **EDA (Exploratory Data Analysis)**：探索性数据分析，用于理解数据特征与分布。
-- **Overfitting / Underfitting**：过拟合/欠拟合，指模型在训练集/测试集表现差异的状态。
-- **Batch、Epoch、Iteration**：批次/轮次/迭代次数，描述深度学习训练过程。
-- **Inference**：推理，将训练好的模型应用在新数据上得到预测结果。
+---
 
-### 下一步发展方向
-- 强化学习、推荐系统、时间序列、图神经网络。
-- MLOps：CI/CD、模型监控、特征存储、自动化部署。
-- AIGC：大语言模型、Stable Diffusion、LoRA 微调等前沿方向。
+## 冲突炼心 · Git 合并指南
 
-保持持续学习与项目实战，你将具备胜任初级/中级数据科学或算法工程岗位的能力。祝学习顺利！
+若在拉取远端更新或合并分支时遇到提示“存在必须解决的冲突”，请按照以下步骤炼心破阵：
+
+1. **察觉冲突**：运行 `git status`，在 `both modified` 区域确认发生冲突的文件，如 `README.md`、`app/static/css/style.css`、`app/templates/index.html`。
+2. **定位标记**：使用 `git diff` 或编辑器定位 `<<<<<<<`、`=======`、`>>>>>>>` 标记，了解双方的改动差异。
+3. **择善融合**：手动保留想要的片段，删除冲突标记，并确保语义与格式正确；可参考本仓库提供的详解手册核对最新内容。
+4. **验证法阵**：运行 `python -m compileall app` 或项目测试命令确认修复后依旧可用；网页部分可本地启动 `uvicorn app.main:app ...` 检查视觉效果。
+5. **完成合并**：`git add` 解决后的文件，执行 `git merge --continue`（或重新提交）完成合并，并在提交信息中注明冲突解决策略，方便日后复盘。
+
+> 💡 **提速妙法**：若冲突涉及题库，可对照 `docs/drills/` 中的详解文件，快速识别最新版本应保留的练习描述。
+
+---
+
+## 练气境 · 灵根初醒（第 1-2 周）
+
+### 修行目标
+
+- 认识命令行、路径与文件操作，搭建 Python/VS Code/Git 等法器。
+- 熟悉 Python 解释器、变量、基础数据类型与交互式环境。
+- 明白如何运行脚本、安装包、编写第一个程序。
+
+### 修炼路径
+
+1. 走访灵材商铺：完成 Python 官方安装或创建虚拟环境。
+2. 练习终端步法：熟悉 `cd`、`ls/dir`、`mkdir`、`rm` 等指令。
+3. 打开灵识之眼：在 VS Code 中运行 `hello_cultivator.py`。
+4. 记账练气：使用 Git 记录第一次 commit 与推送。
+
+### 试炼任务
+
+1. 在桌面创建 `dao-field` 文件夹，初始化 Git 仓库并写入 `README`。
+2. 创建虚拟环境并安装 `numpy`、`pandas`，用脚本打印版本信息。
+3. 在命令行与 VS Code 各运行一次“修仙宣言”脚本。
+4. 编写一个交互式脚本，请求用户姓名与目标境界并打印祝福。
+5. 在 GitHub 发布“练气周志”，总结环境搭建与指令体验。
+
+### 练气题库
+
+> 🧭 **完整题解传送阵**：想看每道题的逐步拆解，请移步 [《练气境题库详解》](docs/drills/realm-qi.md)。
+
+#### 灵材备置 · 环境与命令行
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用命令行创建多层目录 `sect/training/day1`<br>补充要求：切换到 `sect/training/day1` 并列出内容确认成功 | 组合 `mkdir -p`<br>同时复习 `cd`、`ls`/`dir` | Linux/macOS 可 `mkdir -p sect/training/day1`，Windows 用 `mkdir sect\training\day1`；末尾使用 `tree` 或 `ls -R` 检查结构 |
+| 2 | 🌿 进阶 | 查看当前路径并写入 `path.txt`<br>验证文件中记录的路径与 `pwd` 一致 | `pwd` 与重定向<br>Windows 使用 `Get-Location` | 运行 `pwd > path.txt`，PowerShell 可用 `Get-Location | Out-File path.txt`；最后 `cat path.txt` 校验 |
+| 3 | 🔥 突破 | 激活虚拟环境并列出已安装包<br>解释全局环境与虚拟环境列表差异 | `source` 与 `pip list`<br>体会虚拟环境隔离 | 激活 `.venv` 后运行 `which python`/`where python`，再 `pip list` 观察包数量差异；若报错检查虚拟环境路径 |
+| 4 | 🌟 圆满 | 设置 pip 镜像并验证是否生效<br>记录修改前后的配置 | `pip config set`<br>了解配置优先级 | 执行 `pip config list` 备份原配置，`pip config set global.index-url ...` 后安装 `pip install requests -i` 对比耗时，如遇 SSL 报错添加 `--trusted-host` |
+| 5 | 🛡️ 化神 | 使用 VS Code 调试 `hello.py`<br>在断点查看变量并步进执行 | 断点 + 运行<br>掌握 F5/F10 操作 | 在编辑器中设置断点，按 F5 选择“Python: Current File”，通过“变量”面板观察值；结束调试使用 `Shift+F5`，并记录流程心得 |
+
+> 📘 **题解详述**
+> - **题 1**：执行命令前确认当前目录，避免误在根目录创建多余文件夹。若 `mkdir` 报权限错误，改在用户目录操作。使用 `pwd` 或 `cd` 验证路径，帮助小白理解绝对/相对路径差别。
+> - **题 2**：重定向后建议打开 `path.txt` 观察换行符；Windows 用户可使用记事本或 `notepad path.txt`。如路径含中文，提醒切换编码或使用 `type path.txt` 查看。
+> - **题 3**：若激活命令失败，检查虚拟环境是否已创建；在 Windows PowerShell 中使用 `.venv\\Scripts\\Activate.ps1`。观察 `pip list` 输出中是否出现 `(venv)` 前缀以确认环境。
+> - **题 4**：配置镜像前备份旧设置，若需恢复可 `pip config unset global.index-url`。提示学生理解镜像站的优势与可能的缓存延迟。
+> - **题 5**：演示如何在断点处查看调用栈（Call Stack），并调整“停止调试时终止控制台”选项，确保调试体验顺畅。
+
+#### 灵根觉醒 · 变量与数据类型
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 声明 `spirit_name`、`age`、`is_novice` 并打印类型<br>补充：打印值与类型一起输出 | 使用 `type()`<br>理解基础类型 | `print(type(spirit_name), spirit_name)` 等操作帮助辨识 `str`/`int`/`bool` 的差异 |
+| 2 | 🌿 进阶 | 判断变量 `mana = None` 是否等同空字符串<br>比较布尔值与身份运算结果 | `is` 与 `==` 对比<br>掌握单例概念 | `mana is None` 为真，但 `mana == ""` 为假；可配合 `bool(mana)` 解释空字符串判定 |
+| 3 | 🔥 突破 | 将字符串 `"108"` 与整数 `12` 相加<br>展示报错并修复 | 类型转换<br>捕获异常 | 直接相加触发 `TypeError`，使用 `int("108") + 12` 或 `int(value.strip())` 解决，理解 `ValueError` 原因 |
+| 4 | 🌟 圆满 | 解释 `id()` 函数查看对象内存地址<br>比较相同值不同对象 | 引导内存概念<br>观察引用 | `id(a)` 显示引用，强调同值不同对象与缓存机制；建议比较 `id(1000)` 与 `id(1000)` 的差异 |
+| 5 | 🛡️ 化神 | 比较两个变量是否指向同一对象<br>结合 `copy` 测试浅拷贝 | `is` 运算符<br>掌握对象身份 | `a = []; b = a` → `a is b` 为真；`a = []; b = []` 为假；同时测试 `copy.copy` 与 `copy.deepcopy` 的差异 |
+
+> 📘 **题解详述**
+> - **题 1**：鼓励在交互式解释器尝试 `type(3.14)`、`type(True)`，并使用 `isinstance` 检查多个类型。若学员搞混 `str` 与 `repr`，可演示 `print(repr(spirit_name))`。
+> - **题 2**：通过打印 `id(mana)` 与 `id(None)` 强调 `None` 的唯一性；再引导学员测试 `[] == []` 与 `[] is []` 的结果，理解“身份 vs 值”。
+> - **题 3**：提醒输入来自用户时需先 `strip()` 或 `replace(',', '')`，并介绍 `try/except` 捕获异常，输出友好提示。
+> - **题 4**：让学员在不同 Python 会话比较 `id(257)` 是否相同，引入整数驻留机制；补充 `sys.getrefcount` 观察引用计数。
+> - **题 5**：制作一个示例 `spellbook = {"fire": []}`，对比 `spellbook["fire"] is spellbook["fire"]` 和 `spellbook["fire"] is list(spellbook["fire"])`，理解浅拷贝的风险。
+
+#### 灵气入体 · 数值与字符串
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 计算 `(5 ** 2) // 3` 与 `5 ** (2 // 3)`<br>记录两者差异原因 | 运算优先级<br>结合括号强化理解 | 指出指数先算，整除向下取整；建议画出运算顺序图帮助记忆 |
+| 2 | 🌿 进阶 | 判断 `0.1 + 0.2 == 0.3` 是否为真<br>探索浮点误差来源 | 浮点误差<br>了解 `decimal` | 使用 `math.isclose(0.1 + 0.2, 0.3)` 并打印差值 `0.1 + 0.2 - 0.3`，解释 IEEE 754 二进制小数限制 |
+| 3 | 🔥 突破 | 将 `"剑"*3` 与 `"仙"*2` 拼接<br>要求输出带分隔符的字符串 | 字符串乘法<br>掌握连接技巧 | 使用 `"剑" * 3 + "-" + "仙" * 2`，可延伸为 `"剑".join([...])`，体会重复构建字符串 | 
+| 4 | 🌟 圆满 | 使用 f-string 输出修士信息<br>包含对齐与千分位格式 | f-string 占位<br>掌握格式化 mini-language | `f"{name:^10} 境界 {realm:>4} 灵力 {mana:,.2f}"` 展示对齐、填充、千分位 |
+| 5 | 🛡️ 化神 | 统计咒语字符串中元音数量<br>区分大小写并给出比例 | 字符串方法<br>迭代综合应用 | `vowels = sum(1 for ch in mantra.lower() if ch in 'aeiou')`，再用 `vowels / len(mantra)` 输出占比，提醒排除空格 |
+
+> 📘 **题解详述**
+> - **题 1**：使用 Python Tutor 或手绘运算树辅助理解；修改表达式如 `(5 ** (2 // 3))` 与 `5 ** 2 // 3` 比较不同优先级。
+> - **题 2**：引导学员尝试 `Decimal('0.1') + Decimal('0.2')` 获得精确结果，并解释 `math.isclose` 默认容差参数含义。
+> - **题 3**：提醒字符串相加会产生新对象，可使用 `join` 避免多次拷贝；进一步要求输出为 `剑·剑·剑·仙·仙` 深化处理。
+> - **题 4**：让学员试验 `<`、`>`、`^` 等对齐方式，并组合 `:.1%`、`:#x` 格式，帮助建立对 f-string 功能的系统认识。
+> - **题 5**：若字符串包含标点，可先使用 `str.isalpha()` 过滤；延伸挑战是统计最常出现的音节，借助 `collections.Counter`。
+
+#### 灵识初开 · 输入输出
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 `input` 获取名字并打印欢迎语<br>提示将输入内容首字母大写 | 字符串拼接<br>强化 `strip()` | `name = input("道友名号：").strip().title()` 后输出格式化句，说明 `strip` 作用 |
+| 2 | 🌿 进阶 | 读取多个数字并求平均<br>要求处理空输入与异常 | `split` 与 `map`<br>异常处理入门 | `nums = [float(x) for x in values.split()]`，若为空列表则提示重新输入；使用 `try/except` 捕获转换异常 |
+| 3 | 🔥 突破 | 将结果写入文件 `blessing.txt`<br>追加模式并换行 | `with open`<br>掌握 `mode` | `with open("blessing.txt", "a", encoding="utf-8") as f:` 写入 `f"{name},{realm}\n"`，强调 `a` 与 `w` 差异 |
+| 4 | 🌟 圆满 | 从文件读取并输出到终端<br>过滤空行并编号 | `readlines`<br>字符串处理 | 使用 `enumerate(f, 1)` 输出行号，`line.strip()` 去除换行，若为空跳过 |
+| 5 | 🛡️ 化神 | 使用 `print(..., file=sys.stderr)`<br>将错误与日志分流 | `sys` 模块<br>理解输出流 | `print("输入格式错误", file=sys.stderr)` 并结合 `logging` 模块；在命令行重定向 `python script.py 1>out.log 2>err.log`|
+
+> 📘 **题解详述**
+> - **题 1**：强调 `.strip()` 可以去除前后空格， `.title()` 可让名称更整洁；并提示在中文环境 `.title()` 对多字词效果有限。
+> - **题 2**：鼓励使用 `while True` 循环持续询问直至获取有效输入，并通过 `len(nums)` 判断是否可计算平均值。
+> - **题 3**：对比 `w` 模式覆盖旧内容与 `a` 模式追加；提醒 Windows 用户注意换行符 `\r\n`。
+> - **题 4**：将文件内容加载到列表后排序或倒序输出，帮助理解列表与文件的关系；扩展任务是读取 CSV 并拆分列。
+> - **题 5**：展示如何使用 `python script.py > out.log` 捕获标准输出，同时保持错误在终端可见，理解日志与错误分离的重要性。
+
+#### 气脉调息 · 调试与笔记
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 在脚本加入 `if __name__ == "__main__":` 判断<br>封装为 `main()` 函数并调用 | 程序入口<br>模块化入门 | 确保脚本被导入时不执行主流程；鼓励创建 `def main():` 并在条件内调用 |
+| 2 | 🌿 进阶 | 使用 `dir()` 探索模块提供的成员<br>结合 `help()` 查看函数文档 | 交互式探索<br>学会查文档 | 在 REPL 执行 `dir(math)`、`help(math.sqrt)`，记录两个函数说明差异 |
+| 3 | 🔥 突破 | 在 REPL 中使用 `_` 变量复用上次结果<br>演示 `_` 与赋值的区别 | 交互技巧<br>理解解释器行为 | CPython 默认 `_` 保存上一次表达式值；建议在执行赋值语句后再观察 `_`，理解其不会更新 |
+| 4 | 🌟 圆满 | 使用 `logging` 输出调试信息<br>自定义格式与日志级别 | `basicConfig`<br>替换 `print` | 设置 `logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")` 并在代码中使用 `logger = logging.getLogger(__name__)` |
+| 5 | 🛡️ 化神 | 记录学习日志模板<br>拆分为“问题-尝试-成果”三段并存档 | Markdown<br>形成知识库 | 使用 `### 今日问题` 等标题整理，建议同步到 GitHub Wiki 或 Notion，方便回顾 |
+
+> 📘 **题解详述**
+> - **题 1**：展示将脚本导入到 Python 交互式环境时若无 `__main__` 判断会立即执行的区别，加深理解。
+> - **题 2**：鼓励截图或记录 `help()` 输出，学会搜关键词；提示 `pydoc` 命令行用法。
+> - **题 3**：说明 `_` 只在交互式环境有效，并提醒 IPython 将 `_`、`__`、`___` 分别保存最近三次输出。
+> - **题 4**：教会学员使用 `logging.debug`、`logging.warning` 等级别切换，并在 `.ini` 文件配置日志。
+> - **题 5**：建议每周归档日志形成“修炼手札”，可以使用模板：背景 → 操作步骤 → 遇到困难 → 解决方案 → 反思。
+
+---
+
+## 筑基境 · 内功淬炼（第 3-5 周）
+
+### 修行目标
+
+- 熟练掌握控制流、容器、推导式与函数式思想。
+- 能够设计模块化脚本、面向对象模型与异常处理流程。
+- 学会撰写单元测试、使用第三方库，迈向实战级代码。
+
+### 修炼路径
+
+1. 复习基础语法并尝试将多段脚本封装为函数。
+2. 实现命令行菜单程序（如通讯录、图书管理）。
+3. 引入 `unittest` 或 `pytest` 为核心函数编写测试。
+4. 练习使用 `venv`/`pip` 打包并分享自己的小工具。
+
+### 试炼任务
+
+1. 完成“灵宠属性管理器”：支持增删改查、模糊搜索、CSV 持久化。
+2. 编写“灵药交易账本”：使用字典与列表统计总价、折扣、税额。
+3. 用面向对象实现“飞剑竞速”模拟，支持继承与多态。
+4. 创建 `package` 目录，封装常用函数并发布至 TestPyPI。
+5. 为以上项目编写至少 5 条自动化测试并接入 CI（可用 GitHub Actions）。
+6. 模拟团队协作：在新分支实现功能、制造并解决一次合并冲突，记录完整操作流程。
+
+### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《筑基境题库详解》](docs/drills/realm-foundation.md)。
+
+#### 阵法初成 · 控制流与推导式
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 `for` 与 `range` 打印 1-9 九九乘法表 | 双层循环 | 内层 `for j in range(1, i+1)`，格式化输出 |
+| 2 | 🌿 进阶 | 使用 `while` 计算 100 内能被 3 整除但不被 5 整除的和 | 条件判断 | 逐一累加或用推导式 `sum(i for i in range(1, 101) if i % 3 == 0 and i % 5 != 0)` |
+| 3 | 🔥 突破 | 比较 `break` 与 `continue` 在循环中的效果 | 小实验 | 通过记录日志展示跳出循环与跳过本次迭代的差别 |
+| 4 | 🌟 圆满 | 利用列表推导式生成平方表并过滤偶数 | 推导式条件 | `[i**2 for i in range(10) if i % 2 == 0]` |
+| 5 | 🛡️ 化神 | 将嵌套循环转化为生成器表达式 | 节省内存 | 使用 `sum(i*j for i in range(1, 10) for j in range(1, 10))` |
+
+#### 灵兽驯养 · 列表、元组、集合
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 用列表保存灵药并删除重复 | `set` 去重 | `unique = list(dict.fromkeys(elixirs))` 保留顺序 |
+| 2 | 🌿 进阶 | 将坐标 `(x, y)` 以元组存储并解包 | 多变量赋值 | `x, y = position`，强调不可变特性 |
+| 3 | 🔥 突破 | 使用集合求两名修士掌握法术的交集与差集 | 集合运算 | `skills_a & skills_b`、`skills_a - skills_b` |
+| 4 | 🌟 圆满 | 嵌套列表表示灵宠信息并排序 | `sorted` + `key` | `sorted(pets, key=lambda p: p[1])` |
+| 5 | 🛡️ 化神 | 使用 `enumerate` 与 `zip` 同时遍历索引与元素 | 内置函数 | `for idx, (name, power) in enumerate(zip(names, powers), 1)` |
+
+#### 宝库开启 · 字典与映射
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 创建字典记录灵器库存并更新数量 | `dict` 方法 | `inventory["flying-sword"] = inventory.get("flying-sword", 0) + 1` |
+| 2 | 🌿 进阶 | 使用字典推导式从列表生成映射 | 推导式 | `{item: len(item) for item in items}` |
+| 3 | 合并两个字典并保留后者优先 | 解包 | `{**base, **override}` 或 `base | override` (3.9+) |
+| 4 | 🌟 圆满 | 使用 `collections.Counter` 统计灵石颜色频率 | 标准库 | `Counter(stones).most_common()` |
+| 5 | 🛡️ 化神 | 实现嵌套字典的安全访问 | `get` 默认值 | `spellbook.get("fire", {}).get("level", 0)` |
+
+#### 灵术传承 · 函数与参数
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 定义函数计算灵力恢复 `recover(mana, rate=0.1)` | 默认参数 | 理解默认值只计算一次的特性 |
+| 2 | 🌿 进阶 | 使用关键字参数调用函数 | 调用方式 | `recover(rate=0.2, mana=100)` |
+| 3 | 🔥 突破 | 演示可变参数 `*args`、`**kwargs` | 解包 | 在函数中打印两种参数形态 |
+| 4 | 🌟 圆满 | 编写递归函数计算灵兽族谱深度 | 递归思路 | 终止条件 + 对子节点递归取最大值 |
+| 5 | 🛡️ 化神 | 使用闭包记忆法术冷却时间 | 闭包 | 返回内部函数保存状态，演示 `nonlocal` |
+
+#### 气海调息 · 匿名函数与迭代器
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 `map`+`lambda` 将灵药价格折半 | 函数式思维 | `map(lambda price: price * 0.5, prices)` |
+| 2 | 🌿 进阶 | 使用 `filter` 筛选修为≥80的弟子 | 条件过滤 | `list(filter(lambda disciple: disciple['power'] >= 80, disciples))` |
+| 3 | 🔥 突破 | 创建自定义迭代器按周输出修炼日志 | `__iter__`/`__next__` | 类实现迭代协议并在 `StopIteration` 结束 |
+| 4 | 🌟 圆满 | 用 `itertools.cycle` 创建无限法术循环器 | 标准库 | `cycle(['fireball', 'ice'])` |
+| 5 | 🛡️ 化神 | 比较生成器函数与列表的内存占用 | `sys.getsizeof` | 显示同等元素数目的差异 |
+
+#### 真经铭刻 · 面向对象
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 实现 `Cultivator` 类，含 `level_up` 方法 | 基本类定义 | `self.realm += 1`，强调 `__init__` |
+| 2 | 🌿 进阶 | 设计继承结构 `Sword` → `FlyingSword` | 继承 | 子类调用 `super().__init__`，覆写方法 |
+| 3 | 🔥 突破 | 使用 `@property` 管理灵力值上下限 | 属性装饰器 | 在 setter 中限制范围 |
+| 4 | 🌟 圆满 | 定义类方法创建预设角色 | `@classmethod` | `@classmethod def novice(cls): return cls("新弟子")` |
+| 5 | 🛡️ 化神 | 使用数据类简化属性声明 | `dataclasses` | `@dataclass` 自动生成 `__init__` 与 `__repr__` |
+
+#### 火候把握 · 文件与上下文
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 `with open` 写入灵药日志 | 上下文 | 自动关闭文件避免资源泄露 |
+| 2 | 🌿 进阶 | 将 CSV 读取为字典列表 | `csv.DictReader` | 注意编码与换行参数 |
+| 3 | 🔥 突破 | 使用 `pathlib` 处理路径与扩展名 | 面向对象路径 | `Path('logs').glob('*.txt')` |
+| 4 | 🌟 圆满 | 压缩文件夹备份灵材 | `shutil.make_archive` | 指定根目录与格式，如 `zip` |
+| 5 | 🛡️ 化神 | 利用 `tempfile` 创建临时文件进行测试 | 临时资源 | `NamedTemporaryFile` 自动清理 |
+
+#### 灵符调和 · Git 分支与冲突
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 创建分支 `feature/spirit-log` 并切换 | `git branch`/`git switch` | `git switch -c feature/spirit-log` 一步建分支并切换 |
+| 2 | 🌿 进阶 | 在分支完成一次 commit 并回到主线合并 | `git merge` | `git switch main` 后 `git merge feature/spirit-log` |
+| 3 | 🔥 突破 | 模拟冲突：分别在两分支修改同一行 | 冲突制造 | 对同文件不同分支编辑相同位置触发冲突 |
+| 4 | 🌟 圆满 | 使用 `git status` 与 `git diff` 定位冲突块 | 冲突定位 | `git status` 查看冲突文件，`git diff` 了解上下文 |
+| 5 | 🛡️ 化神 | 编辑冲突标记并运行 `git merge --continue` | 冲突解决 | 删除 `<<<<<<<` 标记，确认结果后继续或使用 `git mergetool` |
+
+#### 天罚护身 · 异常处理与调试
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 捕获 `ValueError` 提示输入非法 | `try`/`except` | `except ValueError as exc: print(...)` |
+| 2 | 🌿 进阶 | 自定义异常 `InsufficientManaError` | 自定义类 | 继承 `Exception`，用于业务校验 |
+| 3 | 🔥 突破 | 使用 `else` 与 `finally` | 完整结构 | `else` 在无异常时执行，`finally` 保证善后 |
+| 4 | 🌟 圆满 | 利用 `pdb` 单步调试循环 | 断点调试 | `import pdb; pdb.set_trace()` |
+| 5 | 🛡️ 化神 | 在日志中记录异常堆栈 | `logging.exception` | 自动附带 stack trace，便于排查 |
+
+---
+
+## 结丹境 · 数据炼丹（第 6-7 周）
+
+### 修行目标
+
+- 熟练掌握 NumPy、Pandas 的数组与表格操作。
+- 能够进行数据清洗、缺失值处理、特征工程与统计描述。
+- 具备绘制 Matplotlib/Seaborn 可视化的能力，完成探索性数据分析。
+
+### 修炼路径
+
+1. 通过 Kaggle 或天池获取练习数据集，熟悉 CSV/JSON 读写。
+2. 使用 NumPy 完成向量化运算，理解广播与矩阵乘法。
+3. 借助 Pandas 清洗缺失值、异常值并生成统计报表。
+4. 结合 Seaborn/Matplotlib 绘制趋势图、箱线图、相关性热力图。
+
+### 试炼任务
+
+1. 对“灵草药性”数据集完成缺失值填补、异常检测与可视化。
+2. 编写 `eda.py`，输出各字段均值、中位数、标准差与分位数。
+3. 使用 `plotly` 或 `altair` 构建交互式可视化仪表盘。
+4. 设计数据清洗 pipeline，封装为函数供后续机器学习使用。
+5. 撰写《结丹日志》总结采样、清洗、探索的关键心得。
+
+### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《结丹境题库详解》](docs/drills/realm-core.md)。
+
+#### 灵石阵列 · NumPy 基础
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 创建 3×3 单位矩阵并计算行列式 | `np.eye`、`np.linalg.det` | 结果为 1，强调线性代数函数 |
+| 2 | 🌿 进阶 | 将一维数组重塑为 2×6 并切片取前两列 | `reshape`、切片 | `arr.reshape(2, 6)[:, :2]` |
+| 3 | 🔥 突破 | 解释广播规则计算 `arr + np.array([1, 2, 3])` | 维度匹配 | 行向量会扩展到每一行 |
+| 4 | 🌟 圆满 | 使用布尔索引筛选能量值 > 50 的元素 | 条件筛选 | `arr[arr > 50]` |
+| 5 | 🛡️ 化神 | 计算数组均值、方差、标准差 | 聚合函数 | `arr.mean()`、`arr.var()`、`arr.std()` |
+
+#### 丹炉调配 · Pandas 数据帧
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 从字典创建 DataFrame 并查看前几行 | `pd.DataFrame`、`head` | `df.head()` 显示前 5 行 |
+| 2 | 🌿 进阶 | 设置 `id` 为索引并排序 | `set_index`、`sort_index` | `df.set_index('id').sort_index()` |
+| 3 | 🔥 突破 | 选择多列并添加新特征列 | 列操作 | `df[['mana', 'power']]; df['ratio'] = df['power'] / df['mana']` |
+| 4 | 🌟 圆满 | 使用 `groupby` 统计各类灵草平均效力 | 分组聚合 | `df.groupby('type')['power'].mean()` |
+| 5 | 🛡️ 化神 | 合并两个 DataFrame | `merge` | `pd.merge(df1, df2, on='id', how='left')` |
+
+#### 杂质祛除 · 数据清洗
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 检查缺失值并输出比例 | `isna` 与 `mean` | `df.isna().mean()` |
+| 2 | 🌿 进阶 | 使用 `fillna` 与插值填补缺失 | 多策略 | 数值列用均值，时间序列用 `interpolate()` |
+| 3 | 🔥 突破 | 检测离群值并以 IQR 过滤 | 四分位数 | 计算 Q1、Q3 与 IQR，过滤 `(value < Q1 - 1.5*IQR)` |
+| 4 | 🌟 圆满 | 统一字符串大小写并去除首尾空格 | 清洗 | `df['name'].str.strip().str.title()` |
+| 5 | 🛡️ 化神 | 编写函数自动记录清洗步骤日志 | 函数封装 | 使用装饰器打印前后数据形状 |
+
+#### 灵火绘阵 · 可视化
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 Matplotlib 绘制修为随时间变化折线图 | 基础绘图 | `plt.plot(days, power)` + `plt.xlabel` |
+| 2 | 🌿 进阶 | 绘制多类别灵草功效箱线图 | Seaborn | `sns.boxplot(x='type', y='power', data=df)` |
+| 3 | 🔥 突破 | 创建相关性热力图并标注数值 | `sns.heatmap` | `annot=True, cmap='YlGnBu'` |
+| 4 | 🌟 圆满 | 使用双轴图展示成本与收益 | `twinx` | 左轴成本、右轴收益，注意颜色区分 |
+| 5 | 🛡️ 化神 | 输出 PNG、SVG 两种格式 | `plt.savefig` | 传入 `dpi=300`、`format='svg'` |
+
+#### 丹方评估 · 数据报告
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 计算描述统计并转为 Markdown 表格 | `describe` | `df.describe().to_markdown()` |
+| 2 | 🌿 进阶 | 编写 `profile_data(df)` 返回缺失、唯一值、类型信息 | 自定义函数 | 利用 `df.dtypes`、`nunique` |
+| 3 | 🔥 突破 | 生成 `pandas-profiling` 报告 | 第三方库 | `ProfileReport(df, minimal=True)` |
+| 4 | 🌟 圆满 | 将清洗前后数据差异写入日志 | `compare` | `df.compare(df_clean)` |
+| 5 | 🛡️ 化神 | 总结数据风险点并给出下一步建议 | 文档化 | 列出数据质量指标、潜在偏差 |
+
+---
+
+## 元婴境 · 御阵驭兽（第 8-10 周）
+
+### 修行目标
+
+- 掌握经典监督/无监督算法的原理与实现。
+- 熟悉特征工程、数据集拆分、交叉验证与模型评估。
+- 能够构建完整的机器学习 pipeline，并进行调参与模型解释。
+
+### 修炼路径
+
+1. 选择结构化数据集（如 Kaggle 泰坦尼克、信贷评分）。
+2. 编写数据预处理模块，完成标准化、编码与特征选择。
+3. 实现多种模型（线性回归、逻辑回归、决策树、随机森林、XGBoost）。
+4. 使用交叉验证、学习曲线、特征重要性评估模型表现。
+
+### 试炼任务
+
+1. 构建“灵兽资质评估”模型，比较逻辑回归与随机森林效果。
+2. 对比三种特征缩放方式（MinMax、Standard、Robust）对模型影响。
+3. 使用 `GridSearchCV` 或 `Optuna` 进行超参数调优，并记录搜索过程。
+4. 通过 SHAP/LIME 对模型结果进行可解释性分析。
+5. 撰写《元婴悟道》报告，汇总实验流程、评估指标与改进方向。
+
+### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《元婴境题库详解》](docs/drills/realm-spirit.md)。
+
+#### 玄阵布局 · 数据预处理
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 将数据划分为训练集与测试集 | `train_test_split` | `test_size=0.2`，设置 `random_state` 确保可复现 |
+| 2 | 🌿 进阶 | 使用 `ColumnTransformer` 组合数值与分类特征处理 | 预处理管道 | 数值列加 `StandardScaler`，分类列加 `OneHotEncoder` |
+| 3 | 🔥 突破 | 检测并处理类别不平衡 | 采样方法 | 尝试 `SMOTE` 或 class_weight |
+| 4 | 🌟 圆满 | 构建自定义特征如“灵石密度” | 自定义函数 | `df['density'] = df['mana'] / df['weight']` |
+| 5 | 🛡️ 化神 | 保存预处理器以便部署 | `joblib` | `joblib.dump(preprocessor, 'preprocess.pkl')` |
+
+#### 御兽要诀 · 监督学习
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 训练线性回归预测灵药价格 | `LinearRegression` | 比较训练集与测试集 R² |
+| 2 | 🌿 进阶 | 实现逻辑回归分类修士是否飞升 | `LogisticRegression` | 使用 `C` 调整正则，观察精度与召回 |
+| 3 | 🔥 突破 | 训练决策树并可视化 | `export_graphviz` | 控制 `max_depth`、`min_samples_split` |
+| 4 | 🌟 圆满 | 使用随机森林并查看特征重要性 | `feature_importances_` | 排序可视化条形图 |
+| 5 | 🛡️ 化神 | 尝试梯度提升或 XGBoost | 高级模型 | 对比训练时间与性能 |
+
+#### 幻阵迷踪 · 无监督学习
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 对灵石属性使用 KMeans 聚类 | `KMeans` | 选择 `n_clusters`，查看簇中心 |
+| 2 | 🌿 进阶 | 使用 PCA 降维并绘制散点图 | `PCA` | 解释方差比例，观察聚类分布 |
+| 3 | 🔥 突破 | 实现层次聚类并绘制树状图 | `scipy.cluster.hierarchy` | `linkage` + `dendrogram` |
+| 4 | 🌟 圆满 | 使用 DBSCAN 发现异常灵石 | 密度聚类 | 调整 `eps` 与 `min_samples` |
+| 5 | 🛡️ 化神 | 评估聚类结果的轮廓系数 | `silhouette_score` | 指导如何选择最佳簇数 |
+
+#### 阵法验收 · 模型评估
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 计算分类模型的准确率、精确率、召回率、F1 | `classification_report` | 理解各指标意义 |
+| 2 | 🌿 进阶 | 绘制混淆矩阵并解释每个象限 | `ConfusionMatrixDisplay` | 识别 FP/FN 影响 |
+| 3 | 🔥 突破 | 绘制 ROC 曲线与 AUC | `roc_curve` | 讨论阈值与曲线下面积 |
+| 4 | 🌟 圆满 | 绘制学习曲线观察是否过拟合 | `LearningCurveDisplay` | 解读训练/验证分数差距 |
+| 5 | 🛡️ 化神 | 使用交叉验证估计模型稳定性 | `cross_val_score` | 设置 `cv=5`，输出均值与方差 |
+
+#### 灵阵调优 · Pipeline 与部署
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 构建包含预处理与模型的 `Pipeline` | 一体化流程 | `Pipeline(steps=[('prep', preprocessor), ('model', clf)])` |
+| 2 | 🌿 进阶 | 使用 `GridSearchCV` 对 Pipeline 调参 | 网格搜索 | 将参数命名为 `model__max_depth` 等 |
+| 3 | 🔥 突破 | 保存最佳模型并加载复现 | `joblib.dump` | `clf = joblib.load('best_model.joblib')` |
+| 4 | 🌟 圆满 | 使用 FastAPI 暴露预测接口 | 简易部署 | `@app.post('/predict')` 接收 JSON 并返回概率 |
+| 5 | 🛡️ 化神 | 编写 `make_predictions.py` 脚本批量推理 | 脚本化 | 读取 CSV → 调用模型 → 写回结果 |
+
+---
+
+## 化神境 · 元神出窍（第 11-12 周）
+
+### 修行目标
+
+- 掌握 PyTorch 张量运算、自动求导、模型构建与训练循环。
+- 了解卷积神经网络、循环/注意力模型与迁移学习思路。
+- 能够将训练好的模型导出、部署为推理服务并持续监控。
+
+### 修炼路径
+
+1. 完成 PyTorch 官方 60 分钟教程，熟悉 `Tensor` 与 `nn.Module`。
+2. 实现手写数字或猫狗分类模型，掌握数据加载、训练、验证流程。
+3. 尝试使用预训练模型（ResNet、BERT）进行迁移学习。
+4. 将模型导出为 TorchScript 或 ONNX，并用 FastAPI 提供推理接口。
+
+### 试炼任务
+
+1. 编写 `pytorch_basics.ipynb` 演练张量运算、自动微分与优化器。
+2. 构建 CNN 模型训练灵兽识别数据集，记录损失与准确率曲线。
+3. 使用 `torchvision.models` 进行迁移学习并对比冻结/解冻策略。
+4. 将模型导出为 ONNX，并用 `onnxruntime` 编写推理脚本。
+5. 撰写《化神笔记》，总结训练技巧、部署经验与下一步方向。
+
+### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《化神境题库详解》](docs/drills/realm-apotheosis.md)。
+
+#### 元神凝练 · PyTorch 入门
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 创建张量并查看形状、类型、设备 | `tensor.shape` | 了解 CPU/GPU 切换 `to('cuda')` |
+| 2 | 🌿 进阶 | 将 NumPy 数组转换为张量并保持共享内存 | `from_numpy` | 修改其中一方另一方同步变化 |
+| 3 | 🔥 突破 | 使用随机种子保证实验可复现 | `torch.manual_seed` | 同时设置 `torch.cuda.manual_seed_all` |
+| 4 | 🌟 圆满 | 探索 `requires_grad` 的作用 | 自动求导 | 对张量调用 `backward()`，查看梯度 |
+| 5 | 🛡️ 化神 | 比较 `torch.no_grad()` 与 `detach()` | 推理模式 | 两者都会阻断梯度，但应用场景不同 |
+
+#### 法身塑造 · 模型构建
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 自定义 `Net(nn.Module)` 并实现 `forward` | 模型结构 | 在 `__init__` 定义层，`forward` 中串联 |
+| 2 | 🌿 进阶 | 使用 `torchsummary` 查看模型参数量 | 工具使用 | `summary(model, input_size=(1, 28, 28))` |
+| 3 | 🔥 突破 | 编写训练循环与验证循环 | 标准流程 | 包含梯度清零、反向传播、优化器更新 |
+| 4 | 🌟 圆满 | 使用 `torch.optim.lr_scheduler` 调整学习率 | 学习率策略 | 如 `StepLR(optimizer, step_size=5, gamma=0.1)` |
+| 5 | 🛡️ 化神 | 记录训练指标到 TensorBoard | 可视化 | `SummaryWriter` 写入 loss/accuracy |
+
+#### 灵识扩展 · 计算机视觉与序列
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 使用 `torchvision.transforms` 进行数据增强 | 数据预处理 | `RandomHorizontalFlip`、`ColorJitter` |
+| 2 | 🌿 进阶 | 实现简单的 RNN/LSTM 文本分类 | 序列模型 | 使用 `nn.Embedding` + `nn.LSTM` |
+| 3 | 🔥 突破 | 读取自定义数据集并实现 `Dataset`/`DataLoader` | 自定义类 | 重写 `__len__`、`__getitem__` |
+| 4 | 🌟 圆满 | 使用 Grad-CAM 可视化关注区域 | 模型解释 | 调用 `pytorch-grad-cam` 或手写实现 |
+| 5 | 🛡️ 化神 | 对比不同批大小对训练稳定性的影响 | 实验设计 | 记录损失曲线与 GPU 占用 |
+
+#### 元神游历 · 迁移学习与部署
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 加载预训练 ResNet 并冻结前几层 | 迁移学习 | `for param in model.parameters(): param.requires_grad = False` |
+| 2 | 🌿 进阶 | 替换最后全连接层适配自定义类别数 | 模型修改 | `model.fc = nn.Linear(model.fc.in_features, num_classes)` |
+| 3 | 🔥 突破 | 导出模型为 TorchScript | `torch.jit.trace` | 保存为 `model.ts` 供 C++/部署使用 |
+| 4 | 🌟 圆满 | 将 TorchScript 模型接入 FastAPI 推理服务 | 部署 | 加载模型 → 预处理 → 推理 → 返回结果 |
+| 5 | 🛡️ 化神 | 设计推理服务的健康检查与监控指标 | 生产思维 | 返回版本号、耗时日志、错误处理 |
+
+#### 道果巩固 · 持续精进
+
+| # | 难度 | 练习题 | 点拨 | 解析 |
+| --- | --- | --- | --- | --- |
+| 1 | 🌱 入门 | 复现论文中的模型或实验 | 研读论文 | 选择小型论文，阅读实现细节 |
+| 2 | 🌿 进阶 | 使用 `Lightning` 或 `Accelerate` 重构训练流程 | 框架封装 | 简化训练循环，提高可复用性 |
+| 3 | 🔥 突破 | 尝试混合精度训练提升速度 | `torch.cuda.amp` | `with autocast():` 包裹前向传播 |
+| 4 | 🌟 圆满 | 编写部署流水线脚本（打包、推送、上线） | DevOps | 包含 Dockerfile、CI/CD 配置 |
+| 5 | 🛡️ 化神 | 设计学习路线图（下一步深度学习专题） | 规划能力 | 列出 NLP、CV、强化学习等方向 |
+
+---
+
+## 外功密卷 · 工具与资源
+
+- **书籍**：《Python 编程：从入门到实践》《流畅的 Python》《Hands-On Machine Learning》《Deep Learning with PyTorch》。
+- **官方文档**：Python 官方文档、NumPy/Pandas/Matplotlib/PyTorch 文档。
+- **课程**：MIT 6.0001、CS231n、fast.ai Practical Deep Learning for Coders。
+- **练习平台**：LeetCode、Kaggle、天池、Datawhale 打卡营。
+- **效率法器**：VS Code、JupyterLab、Black、isort、Poetry、DVC、Weights & Biases。
+
+---
+
+## 灵感宝库 · 项目创意
+
+| 项目 | 境界 | 灵感说明 |
+| --- | --- | --- |
+| 灵药交易分析仪 | 结丹境 | 清洗交易数据、分析供需、构建交互式仪表盘 |
+| 灵兽资质评定系统 | 元婴境 | 结合分类算法预测灵兽等级并输出解释 |
+| 门派秘术推荐引擎 | 元婴境 | 基于用户喜好推荐修炼法门，应用协同过滤 |
+| 天机占卜卷轴 | 化神境 | 使用时间序列或 Transformer 预测灵气波动 |
+| 云端法阵守卫 | 化神境 | 将模型部署在云端并实现监控与自动回滚 |
+
+---
+
+## 心法总纲 · 复盘与精进
+
+1. **周度复盘**：每周回答“学到了什么 / 卡在哪 / 下一步计划”。
+2. **月度回顾**：整理阶段项目，寻找可复用模块与最佳实践。
+3. **对外分享**：在博客、公众号或社区分享心得，深化理解。
+4. **师徒互助**：主动指导新入门的道友，以教促学。
+
+---
+
+## 答疑密信 · 常见问题
+
+**Q1：我完全没基础，可以直接练气吗？** 当然可以，按照练气境步骤依次完成即可，遇到术语不懂就搜索官方文档或附录资源。
+
+**Q2：如何选择练气题？** 建议全部动手做，若时间有限，至少完成每个知识点的前三题并理解解析。
+
+**Q3：需要掌握多少数学？** 至少复习高中函数、微积分入门与概率统计基础，在元婴境前逐渐补齐。
+
+**Q4：没有 GPU 如何修炼化神境？** 可以使用 Kaggle Notebook、Google Colab 或租用云 GPU，亦可先在 CPU 上跑小型数据集。
+
+**Q5：我完成了所有境界，下一步呢？** 深入研究专攻方向（CV/NLP/强化学习）、参与开源项目，或挑战更高难度的比赛。
+
+祝你从练气启程，终有一日化神万千，纵横代码仙界！
