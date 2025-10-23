@@ -30,7 +30,9 @@
         <nav class="toc" aria-label="修仙目录">
             <h2>修行目录</h2>
             <ol>
+                <li><a href="#beginner-compass">零基础护身符</a></li>
                 <li><a href="#getting-started">道场指引</a></li>
+                <li><a href="#difficulty-ladder">全境难度阶梯</a></li>
                 <li><a href="#roadmap">修行时间轴</a></li>
                 <li><a href="#conflict-guide">冲突炼心</a></li>
                 <li>
@@ -57,6 +59,40 @@
         </nav>
 
         <div class="content">
+            <section id="beginner-compass" class="panel gentle-panel">
+                <h2>零基础护身符：安心起步</h2>
+                <p class="section-subtitle">不懂 Python 也没关系，按照以下提示逐步熟悉环境、术语与练习方式，让每一步都看得见、学得会。</p>
+                <div class="beginner-grid">
+                    <article class="card soft">
+                        <h3>🔍 看懂术语</h3>
+                        <ul>
+                            <li><strong>命令行：</strong> 就像给电脑下口令，可复制粘贴后按回车执行。</li>
+                            <li><strong>虚拟环境：</strong> 专属练功房，避免与系统 Python 冲突。</li>
+                            <li><strong>脚本：</strong> 储存指令的小文件，双击或在命令行运行。</li>
+                        </ul>
+                    </article>
+                    <article class="card soft">
+                        <h3>🧭 练习节奏</h3>
+                        <ul>
+                            <li>每个知识点先读目标，再照着范例输入一次。</li>
+                            <li>遇到报错，把报错原文复制进搜索或问答区。</li>
+                            <li>每天记录 10 分钟学习日志，便于复盘与提问。</li>
+                        </ul>
+                    </article>
+                    <article class="card soft">
+                        <h3>🤝 求助渠道</h3>
+                        <ul>
+                            <li>官方文档通常有“Getting Started”示例，可直接跟着做。</li>
+                            <li>视频教程或 B 站课程能快速建立直观印象。</li>
+                            <li>加入学习群或论坛提问时附上“做了什么 → 遇到什么 → 想达到什么”。</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="callout gentle">
+                    <strong>不会写代码怎么办？</strong> 先复制示例代码运行，再尝试修改变量名、输出内容等小变化，逐渐建立掌控感。不要害怕删错：Git 能记录每一次尝试。
+                </div>
+            </section>
+
             <section id="getting-started" class="panel">
                 <h2>道场指引：如何开启修仙之旅</h2>
                 <p>按照以下三步就能启动修仙网站与随身心法。命令以 <code>bash</code> 写成，Windows 道友可使用 PowerShell 或 Git Bash。</p>
@@ -81,6 +117,68 @@ pip install -r requirements.txt</code></pre>
                             <li>将 README 当作随身心法，对照网站完成任务。</li>
                             <li>每个知识点至少完成 5 道练气题，再阅读解析巩固。</li>
                             <li>使用 Git 记录修炼历程，形成周志与阶段复盘。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="difficulty-ladder" class="panel">
+                <h2>全境难度阶梯</h2>
+                <p class="section-subtitle">按照“入门 → 进阶 → 突破 → 圆满 → 化神”五个台阶逐级修炼，每一层都给出了必做练习与查漏补缺的清单。</p>
+                <div class="ladder-grid global-ladder" aria-label="全境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>练气 · 基础觉醒</h3>
+                        </header>
+                        <p>点亮命令行、Python 基础语法与文件操作，确保环境稳定。</p>
+                        <ul>
+                            <li>完成环境搭建、熟悉 VS Code 调试。</li>
+                            <li>编写能与用户互动的第一个脚本，记录心得。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>筑基 · 内功淬炼</h3>
+                        </header>
+                        <p>扎实掌握控制流、容器与函数式思维，开始构建小型项目。</p>
+                        <ul>
+                            <li>实现灵宠管理器，体验增删改查与异常处理。</li>
+                            <li>练习 Git 分支协作，刻意制造并解决一次冲突。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>结丹 · 数据炼丹</h3>
+                        </header>
+                        <p>以 NumPy 与 Pandas 炼制数据，完成清洗、可视化与探索分析。</p>
+                        <ul>
+                            <li>输出缺失值报告与可视化图表，总结洞见。</li>
+                            <li>撰写数据炼丹日志，说明关键假设与发现。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>元婴 · 御阵驭兽</h3>
+                        </header>
+                        <p>系统掌握特征工程、模型训练与评估，打造可解释的模型管线。</p>
+                        <ul>
+                            <li>构建包含预处理的 Pipeline，完成调参与交叉验证。</li>
+                            <li>用 SHAP/LIME 分析模型决策，形成改进建议。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>化神 · 元神出窍</h3>
+                        </header>
+                        <p>驾驭 PyTorch 与部署流程，让模型稳定上线运行并持续监控。</p>
+                        <ul>
+                            <li>完成迁移学习项目，导出 TorchScript/ONNX。</li>
+                            <li>部署推理接口并设计健康检查、日志与回滚策略。</li>
                         </ul>
                     </article>
                 </div>
@@ -154,6 +252,61 @@ pip install -r requirements.txt</code></pre>
             <section id="realm-qi" class="panel">
                 <h2>练气境 · 灵根初醒（第 1-2 周）</h2>
                 <p class="section-subtitle">从零启程，熟悉法器、语法与最基础的修行礼法。</p>
+                <div class="callout gentle">
+                    <strong>零基础提示：</strong> 每次练习都先“看目标 → 跟着敲 → 改一点点”，把报错逐字记录进学习日志。遇到陌生术语，点击题目旁的详解卷轴获取逐步截图。
+                </div>
+                <div class="ladder-grid realm-ladder" aria-label="练气境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>仪式感 · 认识命令行</h3>
+                        </header>
+                        <ul>
+                            <li>创建/切换目录，确认自己位于正确的练功房。</li>
+                            <li>运行 `python --version` 与 `code .`，确保工具安装成功。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>灵根觉醒 · 变量类型</h3>
+                        </header>
+                        <ul>
+                            <li>熟悉数字、字符串、布尔类型之间的转换与比较。</li>
+                            <li>用 `type()`、`id()` 观察对象差异，建立对内存的直觉。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>灵气入体 · 运算与字符串</h3>
+                        </header>
+                        <ul>
+                            <li>理解运算优先级与浮点误差，学会用工具验证。</li>
+                            <li>练习 f-string 对齐、格式化，制作修士信息卡片。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>灵识初开 · 输入输出</h3>
+                        </header>
+                        <ul>
+                            <li>使用 `input` 收集信息并写入文本文件。</li>
+                            <li>阅读日志并编号输出，尝试处理空行与异常。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>气脉调息 · 调试与笔记</h3>
+                        </header>
+                        <ul>
+                            <li>掌握 `if __name__ == "__main__"`、`logging`、`pdb` 等调试武器。</li>
+                            <li>搭建 Markdown 学习模板，学会用 Git 记录成长。</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="module-grid">
                     <article class="module">
                         <h3>修行目标</h3>
@@ -244,6 +397,61 @@ pip install -r requirements.txt</code></pre>
             <section id="realm-foundation" class="panel">
                 <h2>筑基境 · 内功淬炼（第 3-5 周）</h2>
                 <p class="section-subtitle">打磨内功，掌握控制流、容器、函数与面向对象，为后续结丹奠定坚实根基。</p>
+                <div class="callout gentle">
+                    <strong>练功提醒：</strong> 从熟悉的生活情景出发：做账、记名册、管理灵宠。把抽象概念映射到具体故事，能快速理解每一种数据结构的用途。
+                </div>
+                <div class="ladder-grid realm-ladder" aria-label="筑基境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>阵法初成 · 控制流</h3>
+                        </header>
+                        <ul>
+                            <li>巩固 for/while 的使用，理解 `break` 与 `continue` 的场景。</li>
+                            <li>把推导式与普通循环对照，选择最易读的写法。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>灵兽驯养 · 容器</h3>
+                        </header>
+                        <ul>
+                            <li>熟悉列表、元组、集合的特性与常见 API。</li>
+                            <li>实践排序、去重、组合等操作，完成灵宠排行榜。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>宝库开启 · 字典与映射</h3>
+                        </header>
+                        <ul>
+                            <li>使用字典推导式与 `Counter` 解决库存统计。</li>
+                            <li>练习嵌套结构访问与安全读取，避免 `KeyError`。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>真经铭刻 · 函数与对象</h3>
+                        </header>
+                        <ul>
+                            <li>编写具备文档的函数，掌握 `*args`、`**kwargs`。</li>
+                            <li>设计类与继承结构，体验 `@property`、`@dataclass`。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>火候把握 · 实战整合</h3>
+                        </header>
+                        <ul>
+                            <li>结合文件读写、异常处理与日志记录完整流程。</li>
+                            <li>用 Git 分支演练团队协作，掌握冲突定位与解决。</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="module-grid">
                     <article class="module">
                         <h3>修行目标</h3>
@@ -375,6 +583,61 @@ pip install -r requirements.txt</code></pre>
             <section id="realm-core" class="panel">
                 <h2>结丹境 · 数据炼丹（第 6-7 周）</h2>
                 <p class="section-subtitle">凝聚灵丹，掌握 NumPy、Pandas、数据清洗与可视化，为机器学习炼就稳固丹田。</p>
+                <div class="callout gentle">
+                    <strong>数据心法：</strong> 每一步清洗都写在同一个 Notebook 或脚本里，前后保留原始数据副本。多用注释和 Markdown 记录“为什么要这么做”。
+                </div>
+                <div class="ladder-grid realm-ladder" aria-label="结丹境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>灵石阵列 · NumPy</h3>
+                        </header>
+                        <ul>
+                            <li>掌握数组创建、变形、广播与统计。</li>
+                            <li>用布尔索引与聚合函数快速定位问题。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>丹炉调配 · Pandas</h3>
+                        </header>
+                        <ul>
+                            <li>学会索引、筛选、多列运算与新增特征。</li>
+                            <li>组合 `groupby`、`agg`、`merge` 输出分析结论。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>杂质祛除 · 数据清洗</h3>
+                        </header>
+                        <ul>
+                            <li>统计缺失、填补空值、处理异常点。</li>
+                            <li>封装清洗函数并输出日志，确保可复现。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>灵火绘阵 · 可视化</h3>
+                        </header>
+                        <ul>
+                            <li>通过折线图、箱线图、热力图展示故事。</li>
+                            <li>掌握配色、注释与导出格式，服务报告。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>丹方评估 · 报告输出</h3>
+                        </header>
+                        <ul>
+                            <li>撰写数据洞察总结，对比清洗前后差异。</li>
+                            <li>生成 Markdown/HTML 报告，明确下一步建议。</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="module-grid">
                     <article class="module">
                         <h3>修行目标</h3>
@@ -473,6 +736,61 @@ pip install -r requirements.txt</code></pre>
             <section id="realm-spirit" class="panel">
                 <h2>元婴境 · 御阵驭兽（第 8-10 周）</h2>
                 <p class="section-subtitle">炼就元婴，掌握机器学习阵法，从特征工程到模型评估一气呵成。</p>
+                <div class="callout gentle">
+                    <strong>模型修炼口诀：</strong> 先跑通一个“能用”的 baseline，再逐个改动特征、参数与模型。每次只调整一个变量，记录前后指标，才能看见提升来源。
+                </div>
+                <div class="ladder-grid realm-ladder" aria-label="元婴境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>玄阵布局 · 预处理</h3>
+                        </header>
+                        <ul>
+                            <li>完成训练/测试拆分，保证随机种子固定。</li>
+                            <li>学会用 `ColumnTransformer` 统一预处理流程。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>御兽要诀 · 监督学习</h3>
+                        </header>
+                        <ul>
+                            <li>比较逻辑回归、决策树、随机森林的差异。</li>
+                            <li>记录各模型优缺点与适用场景。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>幻阵迷踪 · 无监督</h3>
+                        </header>
+                        <ul>
+                            <li>实践 KMeans、PCA、层次聚类与 DBSCAN。</li>
+                            <li>学会以轮廓系数等指标评估聚类效果。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>阵法验收 · 模型评估</h3>
+                        </header>
+                        <ul>
+                            <li>输出分类报告、绘制混淆矩阵与 ROC。</li>
+                            <li>解读学习曲线，判断是否过拟合或欠拟合。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>灵阵调优 · Pipeline</h3>
+                        </header>
+                        <ul>
+                            <li>组合预处理 + 模型 + 调参 + 解释为一条流水线。</li>
+                            <li>实现模型保存、加载与批量推理脚本。</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="module-grid">
                     <article class="module">
                         <h3>修行目标</h3>
@@ -559,6 +877,61 @@ pip install -r requirements.txt</code></pre>
             <section id="realm-apotheosis" class="panel">
                 <h2>化神境 · 元神出窍（第 11-12 周）</h2>
                 <p class="section-subtitle">元神离体，驾驭 PyTorch 深度学习与部署法阵，真正迈向飞升。</p>
+                <div class="callout gentle">
+                    <strong>飞升提示：</strong> 深度学习实验往往耗时，先在小数据集或较少迭代上验证流程，再扩大规模。保持记录：损失曲线、超参数、硬件配置都是宝贵经验。
+                </div>
+                <div class="ladder-grid realm-ladder" aria-label="化神境难度阶梯">
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-beginner">🌱 入门</span>
+                            <h3>元神凝练 · 张量基础</h3>
+                        </header>
+                        <ul>
+                            <li>理解张量形状、数据类型与设备切换。</li>
+                            <li>掌握自动求导、梯度清零与优化器步骤。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-intermediate">🌿 进阶</span>
+                            <h3>法身塑造 · 模型构建</h3>
+                        </header>
+                        <ul>
+                            <li>实现自定义 <code>nn.Module</code> 与训练循环。</li>
+                            <li>通过 TensorBoard 或日志监控训练曲线。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-advanced">🔥 突破</span>
+                            <h3>灵识扩展 · 视觉与序列</h3>
+                        </header>
+                        <ul>
+                            <li>尝试 CNN、RNN/LSTM 或 Transformer 结构。</li>
+                            <li>利用数据增强与 Grad-CAM 做可解释分析。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-expert">🌟 圆满</span>
+                            <h3>元神游历 · 迁移学习</h3>
+                        </header>
+                        <ul>
+                            <li>加载预训练模型，比较冻结与微调策略。</li>
+                            <li>输出性能对比表，总结适用场景。</li>
+                        </ul>
+                    </article>
+                    <article class="ladder-card">
+                        <header>
+                            <span class="difficulty-badge badge-master">🛡️ 化神</span>
+                            <h3>道果巩固 · 部署守护</h3>
+                        </header>
+                        <ul>
+                            <li>导出 TorchScript/ONNX，部署 FastAPI 推理接口。</li>
+                            <li>设计监控指标、健康检查与回滚策略。</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="module-grid">
                     <article class="module">
                         <h3>修行目标</h3>
