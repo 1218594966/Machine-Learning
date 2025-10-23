@@ -74,6 +74,26 @@ body {
     flex-wrap: wrap;
 }
 
+.difficulty-legend {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: center;
+}
+
+.difficulty-legend .legend-title {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.22);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -273,6 +293,51 @@ code {
     font-weight: 600;
     font-size: 0.85rem;
     border: 1px solid rgba(124, 58, 237, 0.35);
+}
+
+.difficulty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+    border: 1px solid transparent;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+}
+
+.difficulty-badge.badge-beginner {
+    background: rgba(34, 211, 238, 0.18);
+    border-color: rgba(14, 165, 233, 0.4);
+    color: #036672;
+}
+
+.difficulty-badge.badge-intermediate {
+    background: rgba(129, 140, 248, 0.18);
+    border-color: rgba(99, 102, 241, 0.35);
+    color: #312e81;
+}
+
+.difficulty-badge.badge-advanced {
+    background: rgba(249, 115, 22, 0.16);
+    border-color: rgba(234, 88, 12, 0.4);
+    color: #7c2d12;
+}
+
+.difficulty-badge.badge-expert {
+    background: rgba(251, 191, 36, 0.18);
+    border-color: rgba(217, 119, 6, 0.45);
+    color: #78350f;
+}
+
+.difficulty-badge.badge-master {
+    background: rgba(165, 180, 252, 0.2);
+    border-color: rgba(79, 70, 229, 0.45);
+    color: #1e1b4b;
+    box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.25);
 }
 
 .callout {
