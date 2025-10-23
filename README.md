@@ -61,6 +61,114 @@ pip install -r requirements.txt
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+通过 `docker run -p 8000:8000` 启动并验证接口 |
+
+### 能力自检
+- 知道如何将 Notebook 中的模型封装为 API。
+- 能编写基本的单元测试与日志记录。
+- 会打包镜像并编写部署文档。
+
+---
+
+## 阶段 5 · 深度学习与 PyTorch（第 11-12 周）
+
+### 基础铺垫
+- 数学复习：线性代数（矩阵乘法、特征向量）、微积分（梯度、链式法则）、概率论（交叉熵、KL 散度）。
+- PyTorch 核心：张量与自动求导、GPU 加速、`Dataset` / `DataLoader`、模型保存与加载。
+- 神经网络基础：激活函数、损失函数、优化器、BatchNorm、Dropout。
+
+### 进阶主题
+1. 多层感知机（MLP）：在 MNIST 上实现分类，绘制训练/验证曲线。
+2. 卷积神经网络（CNN）：理解卷积、池化、Padding，对 CIFAR-10 进行图像分类。
+3. 迁移学习：加载 ResNet/VGG 预训练模型，完成小样本分类或特征提取。
+4. 自然语言处理（可选）：RNN/LSTM 文本分类，或使用 Transformers（BERT、GPT）。
+5. 模型部署：TorchScript、ONNX、FastAPI/Gradio 在线推理服务。
+
+### 最终大作业
+- 自主选题（图像/文本/表格均可），完成数据准备 → 模型设计 → 训练调参 → 结果分析 → Demo 部署。
+- 输出成果：技术博客或演示视频 + GitHub 仓库（包含 README、代码、模型权重、部署指南）。
+- 形成复盘总结：记录遇到的问题、解决方案、下一步学习计划。
+
+### 训练题与解析
+
+| 训练题 | 操作步骤提示 | 参考解析 |
+| --- | --- | --- |
+| 使用 PyTorch 创建一个 3×3 的随机张量并计算求和 | `torch.rand((3, 3))` → `tensor.sum()` | ```python
+import torch
+x = torch.rand((3, 3))
+print(x)
+print(x.sum())
+``` |
+| 构建两层全连接网络并完成前向传播 | 使用 `nn.Sequential` → 输入随机张量 | ```python
+import torch.nn as nn
+model = nn.Sequential(
+    nn.Linear(4, 8),
+    nn.ReLU(),
+    nn.Linear(8, 1)
+)
+sample = torch.randn(2, 4)
+print(model(sample))
+``` |
+| 编写训练循环并记录每轮损失 | `for epoch in range()` → `zero_grad()` → 前向 → 反向 → `step()` | ```python
+for epoch in range(5):
+    optimizer.zero_grad()
+    outputs = model(inputs)
+    loss = criterion(outputs, labels)
+    loss.backward()
+    optimizer.step()
+    print(f"Epoch {epoch+1}: loss={loss.item():.4f}")
+``` |
+| 计算模型准确率与保存权重 | `with torch.no_grad()` → `torch.save()` | ```python
+with torch.no_grad():
+    preds = model(val_inputs).argmax(dim=1)
+    acc = (preds == val_labels).float().mean().item()
+    print(f"验证准确率：{acc:.3f}")
+
+torch.save(model.state_dict(), 'model.pt')
+``` |
+
+### 能力自检
+- 能阅读并修改官方 PyTorch 教程示例。
+- 清楚区分训练集、验证集与测试集的作用。
+- 能把训练好的模型保存并在推理脚本中加载使用。
+
+---
+
+## 实战工具箱
+
+### 环境与效率工具
+- Conda/Poetry：管理虚拟环境和依赖，确保项目可复现。
+- VS Code 插件：Python、Pylance、Black、isort、GitLens、Jupyter。
+- 版本管理：Git 基本操作、GitHub Issues/Projects、`.gitignore` 规范。
+- 日志与调试：`logging`、`pdb`、VS Code Debugger。
+
+### 数据资源
+- Kaggle、天池、Google Dataset Search：获取公开数据集。
+- OpenML、UCI Machine Learning Repository：经典教学数据集。
+- Hugging Face Datasets：海量 NLP/CV 数据集，支持流式加载。
+
+### 模型与部署工具
+- Scikit-Learn、LightGBM、XGBoost：传统机器学习核心库。
+- PyTorch Lightning、FastAI：加速深度学习实验。
+- MLflow、Weights & Biases：实验追踪与可视化。
+- Docker、Docker Compose、Render、Railway：部署与在线托管方案。
+
+---
+
+## 项目灵感库
+
+| 主题 | 项目点子 | 关键能力 |
+| --- | --- | --- |
+| 数据分析 | 城市空气质量监测、零售销售趋势分析、电影评分洞察 | 数据清洗、可视化、叙事报告 |
+| 经典机器学习 | 客户流失预测、信用卡欺诈检测、二手车价格预测 | 特征工程、模型对比、指标评估 |
+| 深度学习 | 手写数字识别、花卉图像分类、商品评论情感分析 | PyTorch 建模、迁移学习、推理部署 |
+| 综合应用 | 智能问答机器人、个性化推荐系统、语音情绪识别 | 数据管道、模型服务化、系统设计 |
+
+> ✅ 建议从公开数据集开始，逐步尝试自建或爬取数据，形成可展示的项目组合。
+
+---
+
+## 学习方法与复盘建议
 
 - 在浏览器访问 <http://127.0.0.1:8000>。
 - 固定目录左栏呈现境界导航，可快速跳转练气题与解析。
