@@ -2,232 +2,838 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>机器学习模型管理平台</title>
+    <title>零基础 Python + 机器学习全程自学手册</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <header>
-        <h1>机器学习模型管理平台</h1>
-        <p>零基础也能完成“上传数据 → 特征工程 → 训练模型 → 预测与解释”全流程。</p>
-        <p class="subtitle">按照页面的顺序一步步操作，每个环节都会给出清晰的提示与结果反馈。</p>
+        <h1>零基础 Python → 机器学习 → PyTorch 深度学习</h1>
+        <p class="subtitle">针对完全零基础的学习者，从环境搭建到深度学习部署的 12 周循序渐进学习计划。</p>
     </header>
 
-    <main>
-        <section id="upload-section">
-            <h2>1. 上传数据集</h2>
-            <p class="help">支持 CSV、Excel（.xlsx/.xls）文件，上传后立即展示前 20 行数据。</p>
-            <form id="upload-form">
-                <input type="file" id="dataset-file" accept=".csv,.txt,.xlsx,.xls,.xlsm">
-                <button type="submit">上传文件</button>
-            </form>
-            <div class="response" id="upload-response"></div>
-            <div class="table-wrapper" id="upload-preview" hidden>
-                <table class="data-table">
-                    <thead id="upload-preview-head"></thead>
-                    <tbody id="upload-preview-body"></tbody>
-                </table>
-            </div>
-        </section>
+    <main class="layout">
+        <nav class="toc" aria-label="教程目录">
+            <h2>学习目录</h2>
+            <ol>
+                <li><a href="#intro">如何使用这份手册</a></li>
+                <li><a href="#roadmap">学习路径速览</a></li>
+                <li>
+                    <a href="#phase-0">阶段 0 · 零基础入门</a>
+                    <ul>
+                        <li><a href="#phase-0">目标与任务</a></li>
+                        <li><a href="#phase-0-exercises">训练题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#phase-1">阶段 1 · Python 基础语法</a>
+                    <ul>
+                        <li><a href="#phase-1-content">核心知识点</a></li>
+                        <li><a href="#phase-1-exercises">训练题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#phase-2">阶段 2 · 数据分析与可视化</a>
+                    <ul>
+                        <li><a href="#phase-2-projects">项目练习</a></li>
+                        <li><a href="#phase-2-exercises">训练题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#phase-3">阶段 3 · 经典机器学习</a>
+                    <ul>
+                        <li><a href="#phase-3-projects">阶段项目</a></li>
+                        <li><a href="#phase-3-exercises">训练题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#phase-4">阶段 4 · 工程化与部署</a>
+                    <ul>
+                        <li><a href="#phase-4-projects">综合交付</a></li>
+                        <li><a href="#phase-4-exercises">训练题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#phase-5">阶段 5 · 深度学习与 PyTorch</a>
+                    <ul>
+                        <li><a href="#phase-5-exercises">训练题</a></li>
+                        <li><a href="#phase-5-check">能力自检</a></li>
+                    </ul>
+                </li>
+                <li><a href="#toolkit">实战工具箱</a></li>
+                <li><a href="#project-library">项目灵感库</a></li>
+                <li><a href="#study-method">学习方法与复盘</a></li>
+                <li><a href="#faq">附录 · FAQ & 资源</a></li>
+            </ol>
+        </nav>
 
-        <section id="datasets-section">
-            <h2>2. 数据集管理</h2>
-            <p class="help">刷新列表后可点击“查看详情”查看字段统计信息与数据示例。</p>
-            <div class="toolbar">
-                <button id="refresh-datasets" type="button">刷新数据集列表</button>
-            </div>
-            <div class="table-wrapper">
-                <table class="data-table">
+        <div class="content">
+            <section id="intro">
+                <h2>如何使用这份手册</h2>
+                <p>按照章节顺序学习，即可完成一条循序渐进的学习路径：<strong>Python 基础 → 数据分析 → 机器学习 → 工程部署 → PyTorch 深度学习</strong>。每一部分都包含学习目标、推荐资源、实践任务与带解析的训练题，确保你能学以致用。</p>
+                <div class="highlight">
+                    <ul>
+                        <li><strong>学习节奏：</strong>建议每周保持 10~12 小时投入，约 12 周完成全部内容。</li>
+                        <li><strong>工具准备：</strong>Python 3.10+、Anaconda 或 Miniconda、VS Code、Git、Jupyter Notebook。</li>
+                        <li><strong>成果要求：</strong>每个阶段至少完成 1 个小项目，并记录学习日志、踩坑总结与复盘。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="roadmap">
+                <h2>学习路径速览</h2>
+                <p class="section-subtitle">通过这张进度表了解 12 周学习任务与里程碑，完成后即可交付一个端到端的机器学习项目。</p>
+                <div class="callout success">
+                    <strong>目标达成标准：</strong>掌握 Python 编程、数据分析、模型训练与部署流程，能独立完成真实业务场景的机器学习项目。
+                </div>
+                <table class="timeline-table" aria-label="学习进度表">
                     <thead>
                         <tr>
-                            <th>名称</th>
-                            <th>行数</th>
-                            <th>列数</th>
-                            <th>目标列建议</th>
-                            <th>操作</th>
+                            <th scope="col">周数</th>
+                            <th scope="col">阶段</th>
+                            <th scope="col">核心任务</th>
+                            <th scope="col">推荐产出</th>
                         </tr>
                     </thead>
-                    <tbody id="dataset-table-body"></tbody>
+                    <tbody>
+                        <tr>
+                            <td>第 1 周</td>
+                            <td><span class="badge">阶段 0</span></td>
+                            <td>环境搭建、命令行操作、VS Code 熟悉</td>
+                            <td>学习日志、环境搭建指南</td>
+                        </tr>
+                        <tr>
+                            <td>第 2-3 周</td>
+                            <td><span class="badge">阶段 1</span></td>
+                            <td>Python 语法、函数、面向对象、文件操作</td>
+                            <td>猜数字游戏、通讯录脚本</td>
+                        </tr>
+                        <tr>
+                            <td>第 4-5 周</td>
+                            <td><span class="badge">阶段 2</span></td>
+                            <td>NumPy/Pandas、数据清洗、可视化</td>
+                            <td>Titanic EDA 报告、数据清洗流水线</td>
+                        </tr>
+                        <tr>
+                            <td>第 6-8 周</td>
+                            <td><span class="badge">阶段 3</span></td>
+                            <td>监督学习、模型调参、评估与解释</td>
+                            <td>随机森林分类器、模型评估报告</td>
+                        </tr>
+                        <tr>
+                            <td>第 9-10 周</td>
+                            <td><span class="badge">阶段 4</span></td>
+                            <td>模型服务化、部署、自动化测试</td>
+                            <td>FastAPI 推理接口、部署说明书</td>
+                        </tr>
+                        <tr>
+                            <td>第 11-12 周</td>
+                            <td><span class="badge">阶段 5</span></td>
+                            <td>PyTorch 基础、CNN/迁移学习、模型发布</td>
+                            <td>MNIST/CIFAR-10 模型、复盘博客</td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-            <div id="dataset-detail" class="detail-panel" hidden>
-                <h3>数据集详情</h3>
-                <div class="detail-content"></div>
-            </div>
-        </section>
-
-        <section id="feature-section">
-            <h2>3. 列选择与特征工程</h2>
-            <p class="help">先选择数据集，再勾选目标列与特征列，可根据需要开启标准化、归一化、缺失值填充等操作。</p>
-            <form id="feature-form">
-                <label>选择数据集
-                    <select id="feature-dataset" required>
-                        <option value="" disabled selected>请选择数据集</option>
-                    </select>
-                </label>
-                <div class="column-picker">
-                    <div class="column-box">
-                        <h3>目标列</h3>
-                        <div id="target-column-container" class="column-list"></div>
-                    </div>
-                    <div class="column-box">
-                        <h3>特征列</h3>
-                        <div id="feature-column-container" class="column-list"></div>
-                    </div>
+                <div class="card-grid stage-cards">
+                    <article class="card">
+                        <h3>学习策略</h3>
+                        <p>采用“先理解再实操”的节奏，学习笔记与代码同步更新至 GitHub，形成可量化的学习档案。</p>
+                    </article>
+                    <article class="card">
+                        <h3>能力成长曲线</h3>
+                        <p>从命令行、基础语法逐步过渡到数据分析、传统机器学习，最终完成深度学习模型开发与部署。</p>
+                    </article>
+                    <article class="card">
+                        <h3>输出作品</h3>
+                        <p>每个阶段至少提交一个项目或报告，最终汇总为“学习作品集”，用于求职或展示成果。</p>
+                    </article>
                 </div>
-                <fieldset class="feature-options">
-                    <legend>特征工程选项</legend>
-                    <div class="options-grid">
-                        <label>数值缺失值
-                            <select id="numeric-imputation">
-                                <option value="most_frequent">众数填充（默认）</option>
-                                <option value="mean">均值填充</option>
-                                <option value="median">中位数填充</option>
-                                <option value="constant">常量填充</option>
-                                <option value="none">不处理</option>
-                            </select>
-                        </label>
-                        <label>类别缺失值
-                            <select id="categorical-imputation">
-                                <option value="most_frequent">众数填充（默认）</option>
-                                <option value="constant">常量填充</option>
-                                <option value="none">不处理</option>
-                            </select>
-                        </label>
-                        <label id="constant-fill-wrapper" hidden>常量填充值
-                            <input type="text" id="constant-fill-value" placeholder="例如：0 或 Missing">
-                        </label>
-                        <label>数值列缩放
-                            <select id="numeric-scaling">
-                                <option value="none">不处理（默认）</option>
-                                <option value="standardize">标准化</option>
-                                <option value="normalize">归一化</option>
-                            </select>
-                        </label>
-                        <label>类别编码
-                            <select id="categorical-encoding">
-                                <option value="one_hot">独热编码（默认）</option>
-                                <option value="none">标签编码</option>
-                            </select>
-                        </label>
-                    </div>
-                </fieldset>
-                <div class="actions-row">
-                    <button type="button" id="preview-transformation">生成预处理预览</button>
-                </div>
-            </form>
-            <div class="response" id="feature-response"></div>
-            <div class="table-wrapper" id="preview-table" hidden>
-                <table class="data-table">
-                    <thead>
-                        <tr id="preview-table-head"></tr>
-                    </thead>
-                    <tbody id="preview-table-body"></tbody>
-                </table>
-            </div>
-        </section>
+            </section>
 
-        <section id="train-section">
-            <h2>4. 模型训练</h2>
-            <p class="help">请选择任务类型（分类或回归），模型名称会自动生成。训练完成后会展示关键指标。</p>
-            <form id="train-form">
-                <div class="options-grid">
-                    <label>当前数据集
-                        <div class="readonly" id="train-dataset-label">尚未选择</div>
-                    </label>
-                    <label>任务类型
-                        <select id="train-mode">
-                            <option value="classification">分类</option>
-                            <option value="regression">回归</option>
-                        </select>
-                    </label>
-                    <label>算法
-                        <select id="train-algorithm">
-                            <option value="random_forest">随机森林</option>
-                            <option value="xgboost">XGBoost</option>
-                        </select>
-                    </label>
-                    <label>测试集占比
-                        <input type="number" id="train-test-size" value="0.2" step="0.05" min="0.1" max="0.5">
-                    </label>
-                    <label>随机种子
-                        <input type="number" id="train-random-state" value="42">
-                    </label>
+            <section id="phase-0">
+                <h2>阶段 0 · 零基础入门（第 1 周）</h2>
+                <p class="section-subtitle">完成环境搭建，熟悉命令行与基础工具，为后续学习打下坚实基础。</p>
+                <div class="module" id="phase-0-content">
+                    <h3>阶段目标</h3>
+                    <ul>
+                        <li>理解文件夹、路径、压缩包等计算机基础概念。</li>
+                        <li>掌握命令行常用指令并能够独立完成 Python 与开发工具的安装。</li>
+                        <li>完成 VS Code、Git 与虚拟环境的配置。</li>
+                    </ul>
                 </div>
-                <details>
-                    <summary>可选：自定义模型参数（JSON）</summary>
-                    <textarea id="train-model-params" rows="4" placeholder='{"n_estimators": 300}'></textarea>
-                    <p class="muted">参数会直接传递给 Sklearn / XGBoost，未填写则使用默认值。</p>
-                </details>
-                <button type="submit">开始训练</button>
-            </form>
-            <div class="response" id="train-response"></div>
-        </section>
+                <div class="module">
+                    <h3>学习内容</h3>
+                    <ol>
+                        <li>命令行基础：<code>cd</code>、<code>ls/dir</code>、<code>mkdir</code>、<code>rm</code>、<code>python --version</code>。</li>
+                        <li>Python 环境搭建：安装 Anaconda/Miniconda，创建虚拟环境并配置镜像。</li>
+                        <li>VS Code 初体验：安装 Python 插件、格式化工具（Black）、配置终端。</li>
+                        <li>Git 入门：生成 SSH key、初始化仓库、首次提交。</li>
+                    </ol>
+                </div>
+                <div class="module">
+                    <h3>实践任务</h3>
+                    <ul>
+                        <li>在终端输出第一行 Python 代码：<code>print("Hello, Machine Learning!")</code>。</li>
+                        <li>使用 <code>pip</code> 安装 <code>numpy</code>、<code>pandas</code> 并完成导入验证。</li>
+                        <li>在 GitHub 创建学习记录仓库，写下环境搭建步骤与遇到的问题。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>推荐资料</h3>
+                    <ul>
+                        <li>Python 官方安装指南、Anaconda 文档。</li>
+                        <li>VS Code 官方快速入门教程。</li>
+                        <li>Pro Git 第一章：认识版本控制。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-0-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：使用命令行创建并进入学习文件夹</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>在任意目录下新建 <code>ml-study</code> 文件夹并进入。</p>
+                            <p><strong>步骤提示：</strong>依次运行 <code>mkdir ml-study</code> 与 <code>cd ml-study</code>。若不确定当前路径，可先执行 <code>pwd</code> 查看。</p>
+                            <pre><code>$ mkdir ml-study
+$ cd ml-study
+$ pwd  # 查看是否进入成功
+</code></pre>
+                            <p><strong>常见错误解析：</strong>如果出现 “Permission denied”，说明没有权限在当前目录创建文件夹，请切换到桌面等拥有权限的位置后再操作。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：创建虚拟环境并安装第三方库</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>为后续学习创建独立的 Python 环境，并安装 <code>numpy</code> 库。</p>
+                            <p><strong>步骤提示：</strong>执行 <code>conda create -n ml-base python=3.10</code>，激活后使用 <code>pip install numpy</code>。</p>
+                            <pre><code>$ conda create -n ml-base python=3.10 -y
+$ conda activate ml-base
+$ pip install numpy
+$ python -c "import numpy; print(numpy.__version__)"
+</code></pre>
+                            <p><strong>常见错误解析：</strong>如果下载缓慢，可通过 <code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code> 将镜像源改为国内镜像。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：在 VS Code 中运行第一段 Python 代码</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 VS Code 创建 <code>hello.py</code> 并在终端运行。</p>
+                            <p><strong>步骤提示：</strong>新建文件写入 <code>print("Hello, Machine Learning!")</code> → 选择右下角 Python 解释器 → 在内置终端执行 <code>python hello.py</code>。</p>
+                            <pre><code>print("Hello, Machine Learning!")
+</code></pre>
+                            <p><strong>常见错误解析：</strong>若报 <code>ModuleNotFoundError</code>，说明当前解释器不是虚拟环境；按 <code>Ctrl+Shift+P</code> 搜索 “Python: Select Interpreter” 重新选择。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能在命令行中完成文件创建、删除与移动操作。</li>
+                        <li>清楚解释虚拟环境的作用，并能在不同环境之间切换。</li>
+                        <li>已经在 GitHub 上提交第一份学习记录或环境搭建笔记。</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section id="models-section">
-            <h2>5. 模型列表</h2>
-            <div class="toolbar">
-                <button id="refresh-models" type="button">刷新模型列表</button>
-            </div>
-            <div class="table-wrapper">
-                <table class="data-table">
+            <section id="phase-1">
+                <h2>阶段 1 · Python 基础语法（第 2-3 周）</h2>
+                <p class="section-subtitle" id="phase-1-content">掌握 Python 语法、控制流程、函数与面向对象，能够编写结构化的小型程序。</p>
+                <div class="module">
+                    <h3>核心知识点</h3>
+                    <ul>
+                        <li>数据类型：数字、字符串、布尔、列表、元组、集合、字典。</li>
+                        <li>控制语句：条件判断、循环、推导式、异常处理。</li>
+                        <li>函数与模块：参数、返回值、作用域、lambda、内置模块。</li>
+                        <li>文件读写：文本、JSON、CSV 的读写与异常捕获。</li>
+                        <li>面向对象：类与对象、封装、继承、常用特殊方法。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>推荐资源</h3>
+                    <ul>
+                        <li>Python 官方教程与廖雪峰 Python 教程。</li>
+                        <li>CS50P 或 B 站「Python 入门」系列课程。</li>
+                        <li>LeetCode / 牛客简单题（提升逻辑思维）。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>实践任务</h3>
+                    <ul>
+                        <li>实现猜数字小游戏（包含循环、条件、随机数）。</li>
+                        <li>编写通讯录管理脚本：新增、删除、搜索联系人并保存为 JSON。</li>
+                        <li>整理常用内置函数，制作个人“Python 速查表”。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-1-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：判断闰年</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>编写程序判断用户输入的年份是否为闰年。</p>
+                            <p><strong>知识回顾：</strong>闰年规则——被 4 整除但不被 100 整除，或能被 400 整除。</p>
+                            <pre><code>year = int(input("请输入年份:"))
+if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
+    print("闰年")
+else:
+    print("平年")
+</code></pre>
+                            <p><strong>常见错误解析：</strong>不要忘记使用 <code>int()</code> 将字符串转为整数，否则无法求余。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：统计句子中的单词次数</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>输入一句英文句子，统计每个单词出现的次数。</p>
+                            <pre><code>sentence = input("请输入一句话:")
+words = sentence.lower().split()
+count = {}
+for word in words:
+    count[word] = count.get(word, 0) + 1
+print(count)
+</code></pre>
+                            <p><strong>常见错误解析：</strong>记得使用 <code>lower()</code> 将单词统一为小写，避免大小写导致重复计数。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：面向对象封装学生成绩</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>设计 <code>Student</code> 类，支持添加成绩并打印“姓名-平均分”。</p>
+                            <pre><code>class Student:
+    def __init__(self, name):
+        self.name = name
+        self.scores = []
+
+    def add_score(self, score):
+        self.scores.append(score)
+
+    def average(self):
+        return sum(self.scores) / len(self.scores)
+
+    def __str__(self):
+        return f"{self.name}-{self.average():.1f}"
+</code></pre>
+                            <p><strong>常见错误解析：</strong>注意在类中使用 <code>self</code> 引用实例属性，且平均值需防止除以零，可先判断是否有成绩。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 4：文件读写制作今日待办</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>通过文件读写记录当天待办事项，并在下一次运行时自动展示。</p>
+                            <pre><code>with open("todo.txt", "a", encoding="utf-8") as f:
+    f.write(input("写下今日待办：") + "\n")
+
+with open("todo.txt", encoding="utf-8") as f:
+    print("今日清单：")
+    for line in f:
+        print("-", line.strip())
+</code></pre>
+                            <p><strong>常见错误解析：</strong>确保文件编码为 UTF-8，避免中文写入时出现乱码。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能解释可变与不可变数据类型的差异。</li>
+                        <li>会封装函数并在不同模块之间复用。</li>
+                        <li>能够用类管理数据与行为，完成简单的业务逻辑。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phase-2">
+                <h2>阶段 2 · 数据分析与可视化（第 4-5 周）</h2>
+                <p class="section-subtitle">掌握数据清洗、特征工程与可视化技能，用图表讲述数据故事。</p>
+                <div class="module" id="phase-2-projects">
+                    <h3>技能点拆解</h3>
+                    <ol>
+                        <li><strong>NumPy：</strong>数组创建、切片、广播、矩阵运算、随机数生成。</li>
+                        <li><strong>Pandas：</strong>DataFrame 操作、缺失值处理、分组聚合、透视表。</li>
+                        <li><strong>可视化：</strong>Matplotlib、Seaborn、Plotly 基本图表与美化技巧。</li>
+                        <li><strong>数据预处理：</strong>类型转换、标准化、异常值检测、特征构造。</li>
+                    </ol>
+                </div>
+                <div class="module">
+                    <h3>练习项目</h3>
+                    <ul>
+                        <li>Kaggle Titanic 数据探索：幸存率分析、年龄/票价分布、特征关系图。</li>
+                        <li>城市房价分析：至少 5 种可视化图表，输出数据洞察报告。</li>
+                        <li>数据清洗流水线：缺失值、重复值、异常值处理，生成可直接建模的数据集。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-2-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：生成随机数并计算统计量</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 NumPy 生成 0~1 之间 100 个随机数并输出平均值。</p>
+                            <pre><code>import numpy as np
+numbers = np.random.rand(100)
+print(f"平均值：{numbers.mean():.3f}")
+</code></pre>
+                            <p><strong>常见错误解析：</strong>确保已导入 <code>numpy</code> 并使用 <code>np.random.seed()</code> 控制随机性，便于结果复现。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：统计每个城市的平均房价</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>读取 CSV 后使用 <code>groupby</code> 统计每个城市的平均房价。</p>
+                            <pre><code>import pandas as pd
+df = pd.read_csv('house.csv')
+city_price = df.groupby('city')['price'].mean().reset_index()
+print(city_price)
+</code></pre>
+                            <p><strong>常见错误解析：</strong>分组后别忘了 <code>reset_index()</code>，便于后续与其他数据合并或导出。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：绘制直方图并标注平均年龄</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>绘制乘客年龄分布的直方图，并使用垂线标出平均年龄。</p>
+                            <pre><code>import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']
+ages = df['Age'].dropna()
+plt.hist(ages, bins=20, color='#4C72B0')
+plt.axvline(ages.mean(), color='red', linestyle='--', label='平均年龄')
+plt.legend()
+plt.xlabel('年龄')
+plt.ylabel('人数')
+plt.show()
+</code></pre>
+                            <p><strong>常见错误解析：</strong>中文显示异常时可设置 <code>plt.rcParams['axes.unicode_minus'] = False</code> 避免负号乱码。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 4：使用 Pipeline 串联预处理与建模</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 <code>ColumnTransformer</code> + <code>Pipeline</code> 构建标准化与随机森林回归的流水线。</p>
+                            <pre><code>from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.ensemble import RandomForestRegressor
+
+numeric_features = ['age', 'fare']
+categorical_features = ['sex', 'embarked']
+
+preprocess = ColumnTransformer([
+    ('num', StandardScaler(), numeric_features),
+    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+])
+
+pipe = Pipeline([
+    ('preprocess', preprocess),
+    ('model', RandomForestRegressor(random_state=42))
+])
+pipe.fit(train_df[numeric_features + categorical_features], train_df['survived'])
+</code></pre>
+                            <p><strong>常见错误解析：</strong>使用 <code>handle_unknown='ignore'</code> 处理测试集中未出现的类别，避免预测时报错。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能完成缺失值、重复值与异常值的清洗。</li>
+                        <li>会使用 Pandas 进行分组聚合与透视分析。</li>
+                        <li>能通过图表讲述数据洞察并撰写数据分析报告。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phase-3">
+                <h2>阶段 3 · 经典机器学习算法（第 6-8 周）</h2>
+                <p class="section-subtitle">熟悉从特征工程到模型评估的完整流程，能够独立完成传统机器学习项目。</p>
+                <div class="module" id="phase-3-projects">
+                    <h3>学习重点</h3>
+                    <ul>
+                        <li>监督学习流程：数据划分、训练、验证、测试、调参与部署。</li>
+                        <li>常见算法：逻辑回归、kNN、朴素贝叶斯、决策树、随机森林、梯度提升、XGBoost。</li>
+                        <li>评估指标：准确率、召回率、F1、AUC、混淆矩阵、均方误差、R²。</li>
+                        <li>模型解释：特征重要性、SHAP、Permutation Importance、PDP。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>阶段项目</h3>
+                    <ul>
+                        <li><strong>随机森林贷款违约预测：</strong>绘制 ROC/PR 曲线、混淆矩阵并撰写评估报告。</li>
+                        <li><strong>XGBoost 房价预测：</strong>比较多种模型表现，输出误差分析与特征重要性图。</li>
+                        <li><strong>自动化训练脚本：</strong>封装参数配置、日志记录、模型保存与加载。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-3-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：划分训练集与测试集</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>将数据集按 8:2 划分训练集与测试集，并保证类别比例稳定。</p>
+                            <pre><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+</code></pre>
+                            <p><strong>常见错误解析：</strong>分类问题建议使用 <code>stratify</code> 参数保持类别分布一致。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：训练随机森林分类器</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>训练随机森林模型并输出准确率。</p>
+                            <pre><code>from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=200, random_state=42)
+clf.fit(X_train, y_train)
+print(f"准确率：{clf.score(X_test, y_test):.3f}")
+</code></pre>
+                            <p><strong>常见错误解析：</strong>随机森林对特征尺度不敏感，但仍需确保无大量缺失值。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：使用 GridSearch 调参</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>通过网格搜索寻找最优超参数组合。</p>
+                            <pre><code>from sklearn.model_selection import GridSearchCV
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20]
+}
+grid = GridSearchCV(clf, param_grid, cv=5, scoring='f1')
+grid.fit(X_train, y_train)
+print(grid.best_params_)
+</code></pre>
+                            <p><strong>常见错误解析：</strong>调参时记得设置 <code>cv</code> 与 <code>scoring</code>，确保指标与业务目标一致。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 4：绘制混淆矩阵并分析错误</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用混淆矩阵观察模型的分类错误类型。</p>
+                            <pre><code>from sklearn.metrics import ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_estimator(clf, X_test, y_test, cmap='Blues')
+plt.title('随机森林混淆矩阵')
+plt.show()
+</code></pre>
+                            <p><strong>常见错误解析：</strong>重点关注假阳性与假阴性占比，根据业务场景（如风控）选择优先优化的指标。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能解释不同评估指标的适用场景与取舍。</li>
+                        <li>掌握交叉验证、网格搜索等调参手段。</li>
+                        <li>会输出模型评估报告并提出改进方向。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phase-4">
+                <h2>阶段 4 · 项目化与部署实战（第 9-10 周）</h2>
+                <p class="section-subtitle">学习如何将模型产品化：封装服务、编写测试、部署上线并撰写文档。</p>
+                <div class="module" id="phase-4-projects">
+                    <h3>关键技能</h3>
+                    <ul>
+                        <li>数据与模型版本管理：DVC、Git LFS、MLflow Tracking。</li>
+                        <li>API 服务化：FastAPI、Uvicorn/Gunicorn、Docker。</li>
+                        <li>质量保障：单元测试、数据漂移监控、日志与告警。</li>
+                        <li>部署文档：接口说明、依赖清单、启动命令、健康检查。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>综合项目建议</h3>
+                    <ul>
+                        <li>选择真实业务主题，如“用户流失预测”或“二手车定价”。</li>
+                        <li>输出标准化数据处理 Pipeline 与 Notebook。</li>
+                        <li>完成多模型对比与调参记录，形成技术报告。</li>
+                        <li>基于 FastAPI 构建推理服务，提供简单前端界面（Streamlit/Gradio）。</li>
+                        <li>编写部署说明与 README，将项目上传至 GitHub 展示。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-4-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：构建最小化的 FastAPI 接口</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>创建一个返回 <code>{"status": "ok"}</code> 的心跳接口。</p>
+                            <pre><code>from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/ping")
+def ping():
+    return {"status": "ok"}
+</code></pre>
+                            <p><strong>常见错误解析：</strong>确保文件命名为 <code>main.py</code> 或在 <code>uvicorn</code> 启动时正确指定模块路径。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：为预测函数编写单元测试</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 <code>pytest</code> 对模型预测函数进行形状与范围校验。</p>
+                            <pre><code>def test_predict_shape():
+    sample = pd.DataFrame([features])
+    result = model.predict(sample)
+    assert result.shape == (1,)
+    assert 0 <= result[0] <= 1
+</code></pre>
+                            <p><strong>常见错误解析：</strong>模型加载放在 <code>setup_module</code> 或 <code>pytest.fixture</code> 中，避免重复初始化浪费时间。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：撰写部署说明模板</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>编写清晰的部署步骤与接口说明，方便他人复现。</p>
+                            <pre><code>## 部署步骤
+1. pip install -r requirements.txt
+2. uvicorn app.main:app --host 0.0.0.0 --port 8000
+3. 访问 http://localhost:8000/docs 查看接口文档
+</code></pre>
+                            <p><strong>常见错误解析：</strong>部署文档应包含环境依赖、配置项与常见故障排查，降低协作成本。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 4：使用 Docker 打包推理服务</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>编写 Dockerfile 并完成镜像构建与运行。</p>
+                            <pre><code>FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+</code></pre>
+                            <p><strong>常见错误解析：</strong>运行时使用 <code>docker run -p 8000:8000</code> 映射端口，并通过 <code>/ping</code> 接口验证服务健康。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能将 Notebook 中的模型封装为 REST API。</li>
+                        <li>会编写基本的单元测试、日志与异常处理。</li>
+                        <li>能打包镜像并编写详尽的部署说明书。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phase-5">
+                <h2>阶段 5 · 深度学习与 PyTorch（第 11-12 周）</h2>
+                <p class="section-subtitle">系统学习 PyTorch，完成一个可上线的深度学习项目。</p>
+                <div class="module">
+                    <h3>基础铺垫</h3>
+                    <ul>
+                        <li>数学复习：线性代数（矩阵乘法、特征向量）、微积分（梯度、链式法则）、概率论（交叉熵、KL 散度）。</li>
+                        <li>PyTorch 核心：张量与自动求导、GPU 加速、<code>Dataset</code> / <code>DataLoader</code>、模型保存与加载。</li>
+                        <li>神经网络基础：激活函数、损失函数、优化器、BatchNorm、Dropout。</li>
+                    </ul>
+                </div>
+                <div class="module">
+                    <h3>进阶主题</h3>
+                    <ol>
+                        <li>多层感知机（MLP）：在 MNIST 上实现分类，绘制训练/验证曲线。</li>
+                        <li>卷积神经网络（CNN）：理解卷积、池化、Padding，对 CIFAR-10 进行图像分类。</li>
+                        <li>迁移学习：加载 ResNet/VGG 预训练模型，完成小样本分类或特征提取。</li>
+                        <li>自然语言处理（可选）：RNN/LSTM 文本分类，或使用 Transformers（BERT、GPT）。</li>
+                        <li>模型部署：TorchScript、ONNX、FastAPI/Gradio 在线推理服务。</li>
+                    </ol>
+                </div>
+                <div class="module">
+                    <h3>最终大作业</h3>
+                    <ul>
+                        <li>自主选题（图像/文本/表格），完成数据准备 → 模型设计 → 训练调参 → 结果分析 → Demo 部署。</li>
+                        <li>输出成果：技术博客或演示视频 + GitHub 仓库（README、代码、模型权重、部署指南）。</li>
+                        <li>撰写复盘总结：记录遇到的问题、解决方案、下一步计划。</li>
+                    </ul>
+                </div>
+                <div class="module exercises" id="phase-5-exercises">
+                    <h3>训练题（含详细解析）</h3>
+                    <details class="exercise" open>
+                        <summary>练习 1：创建张量并计算求和</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 PyTorch 创建一个 3×3 的随机张量并计算求和。</p>
+                            <pre><code>import torch
+x = torch.rand((3, 3))
+print(x)
+print(x.sum())
+</code></pre>
+                            <p><strong>常见错误解析：</strong>如需复现结果可设置 <code>torch.manual_seed(42)</code> 固定随机数。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 2：构建两层全连接网络</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>使用 <code>nn.Sequential</code> 构建两层网络并完成前向传播。</p>
+                            <pre><code>import torch.nn as nn
+model = nn.Sequential(
+    nn.Linear(4, 8),
+    nn.ReLU(),
+    nn.Linear(8, 1)
+)
+sample = torch.randn(2, 4)
+print(model(sample))
+</code></pre>
+                            <p><strong>常见错误解析：</strong>线性层输入尺寸需与样本特征维度一致，报错时检查 <code>Linear(in_features, out_features)</code> 的参数。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 3：编写训练循环并记录损失</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>实现基础训练循环并打印每轮损失。</p>
+                            <pre><code>for epoch in range(5):
+    optimizer.zero_grad()
+    outputs = model(inputs)
+    loss = criterion(outputs, labels)
+    loss.backward()
+    optimizer.step()
+    print(f"Epoch {epoch+1}: loss={loss.item():.4f}")
+</code></pre>
+                            <p><strong>常见错误解析：</strong>确保调用 <code>optimizer.zero_grad()</code> 清空梯度，避免梯度累积。</p>
+                        </div>
+                    </details>
+                    <details class="exercise">
+                        <summary>练习 4：评估准确率并保存模型</summary>
+                        <div class="exercise-body">
+                            <p><strong>任务说明：</strong>计算模型在验证集上的准确率，并保存权重文件。</p>
+                            <pre><code>with torch.no_grad():
+    preds = model(val_inputs).argmax(dim=1)
+    acc = (preds == val_labels).float().mean().item()
+    print(f"验证准确率：{acc:.3f}")
+
+torch.save(model.state_dict(), 'model.pt')
+</code></pre>
+                            <p><strong>常见错误解析：</strong>推理阶段需加 <code>torch.no_grad()</code> 关闭梯度；保存模型权重使用 <code>state_dict()</code> 更灵活。</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="checklist" id="phase-5-check">
+                    <h3>能力自检</h3>
+                    <ul class="checklist-list">
+                        <li>能阅读并修改官方 PyTorch 教程示例。</li>
+                        <li>清楚区分训练集、验证集与测试集的作用。</li>
+                        <li>会保存/加载模型，并将其部署到推理服务中。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="toolkit">
+                <h2>实战工具箱</h2>
+                <div class="card-grid info-cards">
+                    <article class="card">
+                        <h3>环境与效率</h3>
+                        <ul>
+                            <li>Conda / Poetry：管理虚拟环境与依赖，确保可复现。</li>
+                            <li>VS Code 插件：Python、Pylance、Black、isort、GitLens、Jupyter。</li>
+                            <li>Git 工作流：分支管理、Pull Request、Issue 跟踪。</li>
+                            <li>调试工具：<code>logging</code>、<code>pdb</code>、VS Code Debugger。</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>数据资源</h3>
+                        <ul>
+                            <li>Kaggle、天池、Google Dataset Search：获取公开数据集。</li>
+                            <li>OpenML、UCI ML Repository：经典教学数据集。</li>
+                            <li>Hugging Face Datasets：海量 NLP/CV 数据集，支持流式加载。</li>
+                            <li>Awesome Public Datasets：按领域分类的开源数据合集。</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>模型与部署</h3>
+                        <ul>
+                            <li>Scikit-Learn、LightGBM、XGBoost：传统机器学习核心库。</li>
+                            <li>PyTorch Lightning、FastAI：加速深度学习实验与迭代。</li>
+                            <li>MLflow、Weights & Biases：实验追踪与指标可视化。</li>
+                            <li>Docker、Render、Railway：模型部署与在线托管方案。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="project-library">
+                <h2>项目灵感库</h2>
+                <p class="section-subtitle">挑选与你兴趣相关的题目，构建“初级 → 进阶 → 综合”三级项目组合。</p>
+                <table class="timeline-table">
                     <thead>
                         <tr>
-                            <th>名称</th>
-                            <th>任务类型</th>
-                            <th>算法</th>
-                            <th>核心指标</th>
-                            <th>训练耗时 (s)</th>
-                            <th>操作</th>
+                            <th scope="col">主题</th>
+                            <th scope="col">项目点子</th>
+                            <th scope="col">关键能力</th>
                         </tr>
                     </thead>
-                    <tbody id="model-table-body"></tbody>
+                    <tbody>
+                        <tr>
+                            <td>数据分析</td>
+                            <td>城市空气质量监测、零售销售趋势分析、电影评分洞察</td>
+                            <td>数据清洗、可视化、叙事报告</td>
+                        </tr>
+                        <tr>
+                            <td>经典机器学习</td>
+                            <td>客户流失预测、信用卡欺诈检测、二手车价格预测</td>
+                            <td>特征工程、模型对比、指标评估</td>
+                        </tr>
+                        <tr>
+                            <td>深度学习</td>
+                            <td>手写数字识别、花卉图像分类、商品评论情感分析</td>
+                            <td>PyTorch 建模、迁移学习、推理部署</td>
+                        </tr>
+                        <tr>
+                            <td>综合应用</td>
+                            <td>智能问答机器人、个性化推荐系统、语音情绪识别</td>
+                            <td>数据管道、模型服务化、系统设计</td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-            <div id="model-detail" class="detail-panel" hidden>
-                <h3>模型详情</h3>
-                <div class="detail-content"></div>
-            </div>
-        </section>
+                <div class="callout note">
+                    ✅ 建议从公开数据集开始，逐步尝试自建或爬取数据，形成可展示的项目组合。
+                </div>
+            </section>
 
-        <section id="predict-section">
-            <h2>6. 预测</h2>
-            <form id="predict-form">
-                <label>模型名称
-                    <select id="predict-model-name" required>
-                        <option value="" disabled selected>请选择模型</option>
-                    </select>
-                </label>
-                <label>特征 JSON
-                    <textarea id="predict-features" rows="5" placeholder='{"feature1": 1, "feature2": "A"}'></textarea>
-                </label>
-                <p class="help">支持一次输入多条记录，格式为 <code>[{...}, {...}]</code>。</p>
-                <button type="submit">开始预测</button>
-            </form>
-            <div class="response" id="predict-response"></div>
-        </section>
+            <section id="study-method">
+                <h2>学习方法与复盘</h2>
+                <ol>
+                    <li><strong>制定周计划：</strong>写下本周课程、练习和项目目标，每天坚持打卡。</li>
+                    <li><strong>费曼学习法：</strong>尝试用自己的话向他人解释所学知识，暴露盲点后及时补强。</li>
+                    <li><strong>记录错题与 Bug：</strong>将踩坑记录在 Issue 或博客中，复习时快速回顾。</li>
+                    <li><strong>定期复盘：</strong>每两周回答“我学会了什么？做成了什么？下一步是什么？”。</li>
+                    <li><strong>参与社区：</strong>在 Kaggle、知乎、GitHub 讨论区提问或解答问题，保持输入输出平衡。</li>
+                </ol>
+            </section>
 
-        <section id="shap-section">
-            <h2>7. SHAP 可视化</h2>
-            <form id="shap-form">
-                <label>模型名称
-                    <select id="shap-model-name" required>
-                        <option value="" disabled selected>请选择模型</option>
-                    </select>
-                </label>
-                <label>采样数量
-                    <input type="number" id="shap-sample-size" value="200" min="10" max="1000">
-                </label>
-                <button type="submit">生成 SHAP 图</button>
-            </form>
-            <div class="response" id="shap-response"></div>
-            <img id="shap-image" alt="SHAP summary" style="display:none;" />
-        </section>
+            <section id="faq">
+                <h2>附录 · 常见问题 & 资源</h2>
+                <div class="faq-grid">
+                    <article class="faq-item">
+                        <h3>常见问题</h3>
+                        <ul>
+                            <li><strong>数学基础薄弱怎么办？</strong> 结合 3Blue1Brown、Essence of Linear Algebra、吴恩达《机器学习》数学附录复习。</li>
+                            <li><strong>英文文档看不懂？</strong> 借助翻译工具，但核心 API 建议阅读英文原版以保持准确理解。</li>
+                            <li><strong>缺少练习数据集？</strong> 多使用 Kaggle、天池、Google Dataset Search 等开放平台。</li>
+                            <li><strong>学习动力不足？</strong> 与同伴互相监督、写博客分享、参与开源项目保持反馈。</li>
+                        </ul>
+                    </article>
+                    <article class="faq-item">
+                        <h3>工具与资源清单</h3>
+                        <ul>
+                            <li>文档：Python Docs、Pandas Cookbook、Scikit-Learn User Guide、PyTorch Tutorials。</li>
+                            <li>课程：CS50P、吴恩达《机器学习》《深度学习专项课程》、FastAI Practical Deep Learning。</li>
+                            <li>社区：Kaggle Discuss、Stack Overflow、知乎「机器学习」、PyTorch Forums。</li>
+                            <li>书籍：《利用 Python 进行数据分析》《Hands-On Machine Learning》《Deep Learning with PyTorch》。 </li>
+                        </ul>
+                    </article>
+                    <article class="faq-item">
+                        <h3>术语速查</h3>
+                        <ul>
+                            <li><strong>EDA：</strong> 探索性数据分析，用于理解数据分布与特征。</li>
+                            <li><strong>Overfitting / Underfitting：</strong> 过拟合与欠拟合，衡量模型泛化能力。</li>
+                            <li><strong>Batch / Epoch / Iteration：</strong> 批次、轮次与迭代次数，描述训练过程。</li>
+                            <li><strong>Inference：</strong> 推理，将训练好的模型应用于新数据。</li>
+                        </ul>
+                    </article>
+                    <article class="faq-item">
+                        <h3>下一步发展方向</h3>
+                        <ul>
+                            <li>强化学习、推荐系统、时间序列、图神经网络。</li>
+                            <li>MLOps：CI/CD、模型监控、特征存储、自动化部署。</li>
+                            <li>AIGC：大语言模型、Stable Diffusion、LoRA 微调等前沿方向。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+        </div>
     </main>
-
-    <footer>
-        <p>本页可使用 <code>uvicorn app.main:app --reload</code> 本地启动，生产部署推荐搭配 Nginx + Supervisor。</p>
-    </footer>
-
-    <script src="/static/js/app.js"></script>
 </body>
 </html>
