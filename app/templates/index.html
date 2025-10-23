@@ -2,232 +2,525 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>机器学习模型管理平台</title>
+    <title>Python 修仙手札</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>机器学习模型管理平台</h1>
-        <p>零基础也能完成“上传数据 → 特征工程 → 训练模型 → 预测与解释”全流程。</p>
-        <p class="subtitle">按照页面的顺序一步步操作，每个环节都会给出清晰的提示与结果反馈。</p>
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>Python 修仙手札 · 从凡人到飞升</h1>
+            <p class="subtitle">将 Python 学习比作修仙旅程，带你从零开始完成筑基、炼丹、御阵直至 PyTorch 飞升。</p>
+            <div class="hero-actions">
+                <a class="btn primary" href="#getting-started">开启修仙</a>
+                <a class="btn ghost" href="https://github.com" target="_blank" rel="noreferrer">修行日志模板</a>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section id="upload-section">
-            <h2>1. 上传数据集</h2>
-            <p class="help">支持 CSV、Excel（.xlsx/.xls）文件，上传后立即展示前 20 行数据。</p>
-            <form id="upload-form">
-                <input type="file" id="dataset-file" accept=".csv,.txt,.xlsx,.xls,.xlsm">
-                <button type="submit">上传文件</button>
-            </form>
-            <div class="response" id="upload-response"></div>
-            <div class="table-wrapper" id="upload-preview" hidden>
-                <table class="data-table">
-                    <thead id="upload-preview-head"></thead>
-                    <tbody id="upload-preview-body"></tbody>
-                </table>
-            </div>
-        </section>
+    <main class="layout">
+        <nav class="toc" aria-label="修仙目录">
+            <h2>修行目录</h2>
+            <ol>
+                <li><a href="#getting-started">道场指引</a></li>
+                <li><a href="#roadmap">修行路线速览</a></li>
+                <li><a href="#realm-0">凡尘初醒 · 第 0 境</a></li>
+                <li>
+                    <a href="#realm-1">筑基养气 · 第 1 境</a>
+                    <ul>
+                        <li><a href="#realm-1-knowledge">灵技法门</a></li>
+                        <li><a href="#realm-1-exercises">练气题库</a></li>
+                    </ul>
+                </li>
+                <li><a href="#realm-2">聚灵炼丹 · 第 2 境</a></li>
+                <li><a href="#realm-3">御兽驭阵 · 第 3 境</a></li>
+                <li><a href="#realm-4">通灵炼器 · 第 4 境</a></li>
+                <li><a href="#realm-5">破界飞升 · 第 5 境</a></li>
+                <li><a href="#toolkit">外功密卷</a></li>
+                <li><a href="#projects">灵感宝库</a></li>
+                <li><a href="#faq">答疑密信</a></li>
+            </ol>
+        </nav>
 
-        <section id="datasets-section">
-            <h2>2. 数据集管理</h2>
-            <p class="help">刷新列表后可点击“查看详情”查看字段统计信息与数据示例。</p>
-            <div class="toolbar">
-                <button id="refresh-datasets" type="button">刷新数据集列表</button>
-            </div>
-            <div class="table-wrapper">
-                <table class="data-table">
+        <div class="content">
+            <section id="getting-started" class="panel">
+                <h2>道场指引：如何开启修仙旅程</h2>
+                <p>按照下方步骤配置环境、启动站点，即可进入沉浸式修仙教程。所有命令均以 <code>bash</code> 形式展示，Windows 用户可在 PowerShell 或 Git Bash 中执行。</p>
+                <div class="step-cards">
+                    <article class="card">
+                        <h3>① 获取法器</h3>
+                        <pre><code>git clone https://github.com/&lt;your-name&gt;/Machine-Learning.git
+cd Machine-Learning
+python -m venv .venv
+source .venv/bin/activate  # Windows 使用 .venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+                        <p class="note">若下载缓慢，可将 pip 镜像切换到清华或阿里云源。</p>
+                    </article>
+                    <article class="card">
+                        <h3>② 启动修仙道场</h3>
+                        <pre><code>uvicorn app.main:app --host 0.0.0.0 --port 8000</code></pre>
+                        <p class="note">浏览器访问 <code>http://127.0.0.1:8000</code> 查看教程；若需热更新可添加 <code>--reload</code>。</p>
+                    </article>
+                    <article class="card">
+                        <h3>③ 修炼方式</h3>
+                        <ul>
+                            <li>阅读 README 作为随身心法，了解全局路线。</li>
+                            <li>在网站中按章节修炼，完成练气题库与阶段试炼。</li>
+                            <li>使用 Git 记录修行历程，并撰写每周复盘。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="roadmap" class="panel">
+                <h2>修行路线速览（12 周）</h2>
+                <p class="section-subtitle">从凡尘初醒到破界飞升的 12 周修炼规划，每境都配有目标、试炼与产出。</p>
+                <table class="timeline-table" aria-label="修行时间表">
                     <thead>
                         <tr>
-                            <th>名称</th>
-                            <th>行数</th>
-                            <th>列数</th>
-                            <th>目标列建议</th>
-                            <th>操作</th>
+                            <th scope="col">周数</th>
+                            <th scope="col">境界</th>
+                            <th scope="col">核心修行</th>
+                            <th scope="col">推荐产出</th>
                         </tr>
                     </thead>
-                    <tbody id="dataset-table-body"></tbody>
+                    <tbody>
+                        <tr>
+                            <td>第 1 周</td>
+                            <td><span class="badge">凡尘初醒</span></td>
+                            <td>环境搭建、命令行、Git 入门</td>
+                            <td>环境搭建笔记、第一篇修炼日志</td>
+                        </tr>
+                        <tr>
+                            <td>第 2-3 周</td>
+                            <td><span class="badge">筑基养气</span></td>
+                            <td>Python 语法、数据结构、函数与类</td>
+                            <td>猜数字游戏、通讯录脚本、题库解析</td>
+                        </tr>
+                        <tr>
+                            <td>第 4-5 周</td>
+                            <td><span class="badge">聚灵炼丹</span></td>
+                            <td>NumPy、Pandas、可视化与数据清洗</td>
+                            <td>数据探索报告、可视化仪表盘</td>
+                        </tr>
+                        <tr>
+                            <td>第 6-8 周</td>
+                            <td><span class="badge">御兽驭阵</span></td>
+                            <td>经典机器学习、特征工程、评估调参</td>
+                            <td>随机森林项目、模型报告</td>
+                        </tr>
+                        <tr>
+                            <td>第 9-10 周</td>
+                            <td><span class="badge">通灵炼器</span></td>
+                            <td>模型服务化、部署、自动化测试</td>
+                            <td>FastAPI 接口、部署手册</td>
+                        </tr>
+                        <tr>
+                            <td>第 11-12 周</td>
+                            <td><span class="badge">破界飞升</span></td>
+                            <td>PyTorch、CNN、迁移学习与发布</td>
+                            <td>深度学习项目、复盘博客</td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-            <div id="dataset-detail" class="detail-panel" hidden>
-                <h3>数据集详情</h3>
-                <div class="detail-content"></div>
-            </div>
-        </section>
-
-        <section id="feature-section">
-            <h2>3. 列选择与特征工程</h2>
-            <p class="help">先选择数据集，再勾选目标列与特征列，可根据需要开启标准化、归一化、缺失值填充等操作。</p>
-            <form id="feature-form">
-                <label>选择数据集
-                    <select id="feature-dataset" required>
-                        <option value="" disabled selected>请选择数据集</option>
-                    </select>
-                </label>
-                <div class="column-picker">
-                    <div class="column-box">
-                        <h3>目标列</h3>
-                        <div id="target-column-container" class="column-list"></div>
-                    </div>
-                    <div class="column-box">
-                        <h3>特征列</h3>
-                        <div id="feature-column-container" class="column-list"></div>
-                    </div>
+                <div class="callout success">
+                    <strong>飞升标准：</strong>独立完成从数据处理、建模、上线到复盘的完整闭环，并具备继续深入深度学习的能力。
                 </div>
-                <fieldset class="feature-options">
-                    <legend>特征工程选项</legend>
-                    <div class="options-grid">
-                        <label>数值缺失值
-                            <select id="numeric-imputation">
-                                <option value="most_frequent">众数填充（默认）</option>
-                                <option value="mean">均值填充</option>
-                                <option value="median">中位数填充</option>
-                                <option value="constant">常量填充</option>
-                                <option value="none">不处理</option>
-                            </select>
-                        </label>
-                        <label>类别缺失值
-                            <select id="categorical-imputation">
-                                <option value="most_frequent">众数填充（默认）</option>
-                                <option value="constant">常量填充</option>
-                                <option value="none">不处理</option>
-                            </select>
-                        </label>
-                        <label id="constant-fill-wrapper" hidden>常量填充值
-                            <input type="text" id="constant-fill-value" placeholder="例如：0 或 Missing">
-                        </label>
-                        <label>数值列缩放
-                            <select id="numeric-scaling">
-                                <option value="none">不处理（默认）</option>
-                                <option value="standardize">标准化</option>
-                                <option value="normalize">归一化</option>
-                            </select>
-                        </label>
-                        <label>类别编码
-                            <select id="categorical-encoding">
-                                <option value="one_hot">独热编码（默认）</option>
-                                <option value="none">标签编码</option>
-                            </select>
-                        </label>
-                    </div>
-                </fieldset>
-                <div class="actions-row">
-                    <button type="button" id="preview-transformation">生成预处理预览</button>
-                </div>
-            </form>
-            <div class="response" id="feature-response"></div>
-            <div class="table-wrapper" id="preview-table" hidden>
-                <table class="data-table">
-                    <thead>
-                        <tr id="preview-table-head"></tr>
-                    </thead>
-                    <tbody id="preview-table-body"></tbody>
-                </table>
-            </div>
-        </section>
+            </section>
 
-        <section id="train-section">
-            <h2>4. 模型训练</h2>
-            <p class="help">请选择任务类型（分类或回归），模型名称会自动生成。训练完成后会展示关键指标。</p>
-            <form id="train-form">
-                <div class="options-grid">
-                    <label>当前数据集
-                        <div class="readonly" id="train-dataset-label">尚未选择</div>
-                    </label>
-                    <label>任务类型
-                        <select id="train-mode">
-                            <option value="classification">分类</option>
-                            <option value="regression">回归</option>
-                        </select>
-                    </label>
-                    <label>算法
-                        <select id="train-algorithm">
-                            <option value="random_forest">随机森林</option>
-                            <option value="xgboost">XGBoost</option>
-                        </select>
-                    </label>
-                    <label>测试集占比
-                        <input type="number" id="train-test-size" value="0.2" step="0.05" min="0.1" max="0.5">
-                    </label>
-                    <label>随机种子
-                        <input type="number" id="train-random-state" value="42">
-                    </label>
+            <section id="realm-0" class="panel">
+                <h2>凡尘初醒 · 第 0 境（第 1 周）</h2>
+                <p class="section-subtitle">先立根基，熟悉终端、版本控制与常用开发法器。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>掌握路径、文件、压缩包等计算机基础概念。</li>
+                            <li>熟悉命令行常用指令与 Python 环境搭建。</li>
+                            <li>完成 VS Code、Git、虚拟环境的配置。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>灵技法门</h3>
+                        <ul>
+                            <li>命令行：<code>cd</code>、<code>ls</code>、<code>mkdir</code>、<code>rm</code>、<code>python --version</code>。</li>
+                            <li>环境搭建：Anaconda 或 <code>venv</code>、镜像配置、虚拟环境激活。</li>
+                            <li>工具配置：VS Code 扩展、Black、isort、Jupyter Notebook。</li>
+                            <li>版本控制：<code>git init</code>、<code>git add</code>、<code>git commit</code>、远程仓库推送。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>建立 <code>ml-cultivation</code> 目录，创建虚拟环境并编写第一行 Python 代码。</li>
+                            <li>使用 <code>pip</code> 安装 <code>numpy</code> 与 <code>pandas</code>，打印版本验证。</li>
+                            <li>在 VS Code 中运行 <code>hello_cultivator.py</code>，输出自我介绍。</li>
+                            <li>初始化 Git 仓库并推送至 GitHub，记录环境搭建笔记。</li>
+                            <li>撰写《凡尘初醒》心得，列出遇到的问题与解决方案。</li>
+                        </ol>
+                    </article>
                 </div>
-                <details>
-                    <summary>可选：自定义模型参数（JSON）</summary>
-                    <textarea id="train-model-params" rows="4" placeholder='{"n_estimators": 300}'></textarea>
-                    <p class="muted">参数会直接传递给 Sklearn / XGBoost，未填写则使用默认值。</p>
-                </details>
-                <button type="submit">开始训练</button>
-            </form>
-            <div class="response" id="train-response"></div>
-        </section>
+                <div class="accordion" id="realm-0-exercises">
+                    <h3>练气题库</h3>
+                    <details open>
+                        <summary>常见疑问与解析</summary>
+                        <ul>
+                            <li><strong>创建文件夹并进入：</strong>在终端执行 <code>mkdir dao-field</code> 后 <code>cd dao-field</code>，若报错可先运行 <code>pwd</code> 查看当前路径。</li>
+                            <li><strong>升级 pip：</strong>激活虚拟环境后运行 <code>python -m pip install --upgrade pip</code>，如遇 SSL 错误，可设置镜像。</li>
+                            <li><strong>VS Code 解释器：</strong>使用 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → “Python: Select Interpreter” 选择 <code>.venv</code>。</li>
+                            <li><strong>Git 提交：</strong><code>git commit -m "feat: first step"</code> 前确保配置了 user.name 与 user.email。</li>
+                            <li><strong>推送远程：</strong>添加远程后执行 <code>git push -u origin main</code>，如需 Token，可在 GitHub Developer Settings 生成。</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
 
-        <section id="models-section">
-            <h2>5. 模型列表</h2>
-            <div class="toolbar">
-                <button id="refresh-models" type="button">刷新模型列表</button>
-            </div>
-            <div class="table-wrapper">
-                <table class="data-table">
+            <section id="realm-1" class="panel">
+                <h2>筑基养气 · 第 1 境（第 2-3 周）</h2>
+                <p class="section-subtitle">此境专注打牢 Python 内功。每个常见知识点均配 5 道以上练习题与解析，确保稳固筑基。</p>
+                <div class="module-grid" id="realm-1-knowledge">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>掌握变量、数据结构、控制流、函数与面向对象。</li>
+                            <li>能编写脚本解决日常问题，处理文件与异常。</li>
+                            <li>理解模块化与包管理，为后续项目打下基础。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>阶段项目</h3>
+                        <ul>
+                            <li><strong>灵宠属性管理器：</strong>增删改查、持久化与报表导出。</li>
+                            <li><strong>修仙者通讯录：</strong>命令行菜单、排序、模糊搜索、CSV 导出。</li>
+                            <li><strong>灵药商铺结算器：</strong>函数拆分、异常处理与日志记录。</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="knowledge-grid" id="realm-1-exercises">
+                    <details open>
+                        <summary>灵根觉醒 · 基础数据类型与变量</summary>
+                        <ol>
+                            <li><strong>题目：</strong>声明 <code>spirit_name</code>、<code>age</code>、<code>is_novice</code> 并打印类型。<br><span class="tip">点拨：</span> 使用 <code>type()</code>。<br><span class="answer">解析：</span> 了解字符串、整数与布尔的基本差异。</li>
+                            <li><strong>题目：</strong>将字符串 <code>"42"</code> 与整数 <code>10</code> 相加。<br><span class="tip">点拨：</span> 先做类型转换。<br><span class="answer">解析：</span> 使用 <code>int("42") + 10</code>，避免 <code>TypeError</code>。</li>
+                            <li><strong>题目：</strong>验证 <code>0.1 + 0.2 == 0.3</code> 是否为真。<br><span class="tip">点拨：</span> 尝试 <code>math.isclose</code>。<br><span class="answer">解析：</span> 解释浮点误差并使用 <code>math.isclose(0.1 + 0.2, 0.3)</code>。</li>
+                            <li><strong>题目：</strong>编写脚本交换两个变量的值。<br><span class="tip">点拨：</span> 多重赋值。<br><span class="answer">解析：</span> <code>a, b = b, a</code> 展示 Python 的优雅语法。</li>
+                            <li><strong>题目：</strong>比较 <code>None</code> 与空字符串在布尔上下文中的差异。<br><span class="tip">点拨：</span> 使用 <code>bool()</code>。<br><span class="answer">解析：</span> <code>None</code> 表示无值，空字符串虽为 False 但有类型与长度，掌握真假值判断。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>灵气流转 · 运算符与表达式</summary>
+                        <ol>
+                            <li><strong>题目：</strong>比较 <code>(5 ** 2) // 3</code> 与 <code>5 ** (2 // 3)</code>。<span class="tip">点拨：</span> 注意运算顺序。<span class="answer">解析：</span> 指出指数运算优先级并列出结果。</li>
+                            <li><strong>题目：</strong>修为每日增长 10%，7 天后是多少？<span class="tip">点拨：</span> 幂运算。<span class="answer">解析：</span> <code>100 * (1.1 ** 7)</code>。</li>
+                            <li><strong>题目：</strong>判断修士等级是否在 10-50 且非 30。<span class="tip">点拨：</span> 链式比较。<span class="answer">解析：</span> <code>10 &lt;= level &lt;= 50 and level != 30</code>。</li>
+                            <li><strong>题目：</strong>解释 <code>not a == b</code> 与 <code>a != b</code> 差异。<span class="tip">点拨：</span> 运算符优先级。<span class="answer">解析：</span> 前者等价于 <code>not (a == b)</code>。</li>
+                            <li><strong>题目：</strong>使用海象运算符统计输入长度。<span class="tip">点拨：</span> <code>while (text := input())</code>。<span class="answer">解析：</span> 介绍 Python 3.8+ 新语法，减少重复计算。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>阵法初成 · 控制流与推导式</summary>
+                        <ol>
+                            <li><strong>题目：</strong>打印 1-100 中能被 7 整除的数字。<br><span class="tip">点拨：</span> 使用 <code>for</code> + <code>range</code>。<br><span class="answer">解析：</span> <code>for num in range(1, 101):
+    if num % 7 == 0:
+        print(num)</code>，熟悉基础循环。</li>
+                            <li><strong>题目：</strong>设计 5 次机会的猜数字小游戏。<br><span class="tip">点拨：</span> 结合 <code>random.randint</code> 与 <code>while</code> 的 <code>else</code>。<br><span class="answer">解析：</span> 借助计数器与 <code>break</code> 控制回合，失败时在 <code>else</code> 中提示答案。</li>
+                            <li><strong>题目：</strong>用列表推导式生成奇数平方列表。<br><span class="tip">点拨：</span> 条件表达式过滤偶数。<br><span class="answer">解析：</span> <code>[x**2 for x in range(1, 21) if x % 2]</code>，演示推导式精简写法。</li>
+                            <li><strong>题目：</strong>拍平嵌套列表成为一维序列。<br><span class="tip">点拨：</span> 双层推导式或 <code>itertools.chain</code>。<br><span class="answer">解析：</span> <code>[item for sub in nested for item in sub]</code>，理解遍历顺序。</li>
+                            <li><strong>题目：</strong>借助 <code>enumerate</code> 和 <code>continue</code> 跳过空白输入。<br><span class="tip">点拨：</span> 对列表遍历同时输出序号。<br><span class="answer">解析：</span> 当元素为空字符串时 <code>continue</code>，否则打印序号与姓名。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>丹田扩展 · 序列与集合</summary>
+                        <ol>
+                            <li><strong>题目：</strong>管理修仙任务列表，完成插入、删除、排序。<br><span class="tip">点拨：</span> 掌握 <code>append</code>、<code>insert</code>、<code>remove</code>、<code>sorted</code>。<br><span class="answer">解析：</span> 展示列表方法的返回值差异，并解释就地修改与返回新列表的区别。</li>
+                            <li><strong>题目：</strong>统计灵药库存的最高、最低与平均值。<br><span class="tip">点拨：</span> 结合 <code>max</code>、<code>min</code>、<code>sum/len</code>。<br><span class="answer">解析：</span> 通过 <code>max(stock)</code> 等函数练习聚合操作，并提醒空列表需提前判断。</li>
+                            <li><strong>题目：</strong>将元素元组转换为列表后追加新元素。<br><span class="tip">点拨：</span> 使用内置 <code>list()</code>。<br><span class="answer">解析：</span> <code>elements = list(elements_tuple)</code>，强调元组不可变但可通过新列表扩展。</li>
+                            <li><strong>题目：</strong>比较两名弟子的法术集合，输出交集、并集与差集。<br><span class="tip">点拨：</span> 使用集合运算。<br><span class="answer">解析：</span> <code>a &amp; b</code>、<code>a | b</code>、<code>a - b</code> 对应三种操作，说明集合去重优势。</li>
+                            <li><strong>题目：</strong>演示函数接收列表后修改是否影响外部。<br><span class="tip">点拨：</span> 对比列表与元组。<br><span class="answer">解析：</span> 可变对象在函数内修改会反映到外部，给出深拷贝或切片复制的规避方式。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>宝库开启 · 字典与映射</summary>
+                        <ol>
+                            <li><strong>题目：</strong>创建弟子信息字典并新增等级、灵根。<br><span class="tip">点拨：</span> 熟悉字典增删查改。<br><span class="answer">解析：</span> 使用 <code>info["level"] = "筑基"</code> 等语句，并提及 <code>dict.get</code> 的默认值。</li>
+                            <li><strong>题目：</strong>合并两个字典并保留最新值。<br><span class="tip">点拨：</span> 解包或 <code>update</code>。<br><span class="answer">解析：</span> <code>{**base, **extra}</code> 或 <code>base.update(extra)</code>，后者会修改原对象。</li>
+                            <li><strong>题目：</strong>使用字典推导式筛选修为 ≥100 的弟子。<br><span class="tip">点拨：</span> 遍历 <code>items()</code>。<br><span class="answer">解析：</span> <code>{name: power for name, power in data.items() if power &gt;= 100}</code>。</li>
+                            <li><strong>题目：</strong>统计文本字符频率并输出前 3 名。<br><span class="tip">点拨：</span> 借助 <code>collections.Counter</code>。<br><span class="answer">解析：</span> <code>Counter(text).most_common(3)</code>，顺便提醒大小写处理。</li>
+                            <li><strong>题目：</strong>实现带默认列表的灵药背包。<br><span class="tip">点拨：</span> 使用 <code>defaultdict(list)</code>。<br><span class="answer">解析：</span> 自动初始化键对应空列表，避免手动判断。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>灵术传承 · 函数与参数</summary>
+                        <ol>
+                            <li><strong>题目：</strong>实现可变参数的灵力求和函数。<br><span class="tip">点拨：</span> 使用 <code>*args</code>。<br><span class="answer">解析：</span> <code>def total_power(*values): return sum(values)</code>，演示可变长度参数。</li>
+                            <li><strong>题目：</strong>编写弟子描述函数，支持默认等级。<br><span class="tip">点拨：</span> 结合位置与关键字参数。<br><span class="answer">解析：</span> <code>def describe(name, level="炼气")</code>，介绍默认参数的覆盖方式。</li>
+                            <li><strong>题目：</strong>构建递归函数计算斐波那契并添加缓存。<br><span class="tip">点拨：</span> 导入 <code>functools.lru_cache</code>。<br><span class="answer">解析：</span> 使用装饰器缓存结果，比较优化前后的性能。</li>
+                            <li><strong>题目：</strong>解释可变默认参数陷阱并给示例。<br><span class="tip">点拨：</span> 展示错误与正确写法。<br><span class="answer">解析：</span> 错误示例 <code>def add_item(item, bag=[])</code>，正确做法是默认 <code>None</code> 并在函数内新建列表。</li>
+                            <li><strong>题目：</strong>创建闭包函数实现灵力倍增器。<br><span class="tip">点拨：</span> 函数返回函数。<br><span class="answer">解析：</span> <code>def boost(rate):
+    def inner(power):
+        return power * rate
+    return inner</code>，说明闭包保存外层变量。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>气海调息 · 匿名函数与迭代器</summary>
+                        <ol>
+                            <li><strong>题目：</strong>利用 <code>map</code> + <code>lambda</code> 计算灵药含税价格。<br><span class="tip">点拨：</span> 列表传入 <code>map</code>。<br><span class="answer">解析：</span> <code>list(map(lambda p: round(p * 1.13, 2), prices))</code>。</li>
+                            <li><strong>题目：</strong>使用 <code>filter</code> 挑选修为超过 500 的弟子。<br><span class="tip">点拨：</span> 传入元组列表。<br><span class="answer">解析：</span> <code>list(filter(lambda x: x[1] &gt; 500, disciples))</code>，演示匿名函数。</li>
+                            <li><strong>题目：</strong>使用 <code>sorted</code> 的 <code>key</code> 参数实现“修为降序、年龄升序”排序。<br><span class="tip">点拨：</span> <code>lambda</code> 返回元组。<br><span class="answer">解析：</span> <code>sorted(data, key=lambda d: (-d["power"], d["age"]))</code>。</li>
+                            <li><strong>题目：</strong>定义生成器按境界产出任务。<br><span class="tip">点拨：</span> 使用 <code>yield from</code>。<br><span class="answer">解析：</span> <code>def quest(levels):
+    for lv in levels:
+        yield from lv</code>，说明生成器优势。</li>
+                            <li><strong>题目：</strong>结合 <code>itertools.cycle</code> 与 <code>islice</code> 构造有限轮询。<br><span class="tip">点拨：</span> 先导入 <code>itertools</code>。<br><span class="answer">解析：</span> <code>list(islice(cycle(["炼气", "筑基", "结丹"]), 7))</code>。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>灵兽驯养 · 类与对象</summary>
+                        <ol>
+                            <li><strong>题目：</strong>定义 <code>Cultivator</code> 类并实现 <code>level_up</code>。<br><span class="tip">点拨：</span> 初始化属性并返回新等级。<br><span class="answer">解析：</span> 在 <code>__init__</code> 中记录姓名、等级，<code>level_up</code> 增加修为。</li>
+                            <li><strong>题目：</strong>创建灵兽子类继承基础生物类。<br><span class="tip">点拨：</span> 使用 <code>super().__init__</code>。<br><span class="answer">解析：</span> 子类扩展技能列表并覆盖方法，演示多态。</li>
+                            <li><strong>题目：</strong>实现 <code>__str__</code> 与 <code>__repr__</code>。<br><span class="tip">点拨：</span> 返回可读字符串。<br><span class="answer">解析：</span> 说明两个魔法方法分别用于调试与用户显示。</li>
+                            <li><strong>题目：</strong>统计实例数量。<br><span class="tip">点拨：</span> 使用类属性与 <code>type(self)</code>。<br><span class="answer">解析：</span> 在 <code>__init__</code> 中 <code>type(self).count += 1</code>，展示类变量共享特性。</li>
+                            <li><strong>题目：</strong>通过抽象基类约束技能接口。<br><span class="tip">点拨：</span> 继承 <code>abc.ABC</code>。<br><span class="answer">解析：</span> 定义抽象方法 <code>cast()</code>，子类必须实现。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>真经铭刻 · 模块与包</summary>
+                        <ol>
+                            <li><strong>题目：</strong>构建 <code>spells</code> 包并导入技能。<br><span class="tip">点拨：</span> 创建文件夹与 <code>__init__.py</code>。<br><span class="answer">解析：</span> 展示 <code>from spells.fire import cast</code> 的用法。</li>
+                            <li><strong>题目：</strong>演示 <code>if __name__ == "__main__"</code>。<br><span class="tip">点拨：</span> 同一文件既能当脚本也能被导入。<br><span class="answer">解析：</span> 在条件中放置测试代码，强调模块入口思想。</li>
+                            <li><strong>题目：</strong>集中配置常量到 <code>config.py</code> 并共享。<br><span class="tip">点拨：</span> 在多模块导入。<br><span class="answer">解析：</span> 通过 <code>import config</code> 统一维护魔法数字。</li>
+                            <li><strong>题目：</strong>编写 <code>__all__</code> 控制导出符号。<br><span class="tip">点拨：</span> 在 <code>__init__.py</code> 中设置。<br><span class="answer">解析：</span> 限定 <code>from package import *</code> 时的暴露内容。</li>
+                            <li><strong>题目：</strong>使用 <code>pip freeze</code> 记录依赖。<br><span class="tip">点拨：</span> 命令行操作。<br><span class="answer">解析：</span> <code>pip freeze &gt; requirements.txt</code>，并说明版本锁定的重要性。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>火候把握 · 文件与上下文</summary>
+                        <ol>
+                            <li><strong>题目：</strong>读取 <code>manual.txt</code> 并统计行数。<br><span class="tip">点拨：</span> 使用 <code>with open</code>。<br><span class="answer">解析：</span> <code>sum(1 for _ in open("manual.txt", encoding="utf-8"))</code>，强调及时关闭文件。</li>
+                            <li><strong>题目：</strong>将修炼记录保存为 JSON。<br><span class="tip">点拨：</span> 使用 <code>json.dump</code>。<br><span class="answer">解析：</span> 记得设置 <code>ensure_ascii=False</code> 保留中文。</li>
+                            <li><strong>题目：</strong>编写上下文管理器自动备份文件。<br><span class="tip">点拨：</span> 定义 <code>__enter__</code>/<code>__exit__</code>。<br><span class="answer">解析：</span> 在进入时复制文件，退出时根据是否异常恢复。</li>
+                            <li><strong>题目：</strong>使用 <code>csv.DictReader</code> 读取灵药清单并计算平均价格。<br><span class="tip">点拨：</span> 注意类型转换。<br><span class="answer">解析：</span> 将字符串转换为 <code>float</code> 后再求平均。</li>
+                            <li><strong>题目：</strong>写入日志并追加时间戳。<br><span class="tip">点拨：</span> 使用 <code>datetime.now</code> 与追加模式。<br><span class="answer">解析：</span> <code>with open("log.txt", "a", encoding="utf-8") as f:</code>，每条日志附上时间。</li>
+                        </ol>
+                    </details>
+
+                    <details>
+                        <summary>天罚护身 · 异常处理与调试</summary>
+                        <ol>
+                            <li><strong>题目：</strong>捕获输入转换错误并提示重试。<br><span class="tip">点拨：</span> 使用 <code>try/except ValueError</code>。<br><span class="answer">解析：</span> 在异常分支中打印提示并继续循环。</li>
+                            <li><strong>题目：</strong>自定义 <code>LowManaError</code> 并在灵力不足时抛出。<br><span class="tip">点拨：</span> 继承 <code>Exception</code>。<br><span class="answer">解析：</span> <code>class LowManaError(Exception): ...</code>，在函数中 <code>raise</code> 使用。</li>
+                            <li><strong>题目：</strong>利用 <code>finally</code> 确保资源释放。<br><span class="tip">点拨：</span> 在 <code>try</code> 块后加 <code>finally</code>。<br><span class="answer">解析：</span> 无论是否异常都会执行，适用于关闭文件或数据库连接。</li>
+                            <li><strong>题目：</strong>使用 <code>assert</code> 验证函数输入。<br><span class="tip">点拨：</span> 合理设置断言消息。<br><span class="answer">解析：</span> <code>assert power &gt; 0, "灵力需为正"</code>，说明断言在生产环境可关闭。</li>
+                            <li><strong>题目：</strong>借助调试器单步追踪问题。<br><span class="tip">点拨：</span> 使用 <code>python -m pdb</code> 或 VS Code 断点。<br><span class="answer">解析：</span> 展示查看变量、堆栈、继续执行等常用命令。</li>
+                        </ol>
+                    </details>
+                </div>
+            </section>
+
+            <section id="realm-2" class="panel">
+                <h2>聚灵炼丹 · 第 2 境（第 4-5 周）</h2>
+                <p class="section-subtitle">专注数据炼丹术：NumPy、Pandas 与可视化三件套，帮助你从原始数据中萃取灵丹妙药。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>熟悉数组与数据框的创建、索引与运算。</li>
+                            <li>掌握数据清洗、缺失值处理与特征构造。</li>
+                            <li>会用 Matplotlib/Seaborn/Plotly 绘制故事化图表。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>处理 Titanic 数据集，完成缺失值填充与特征工程。</li>
+                            <li>绘制生存率、票价、舱位的多维可视化图表。</li>
+                            <li>封装数据清洗函数，形成可复用流水线。</li>
+                            <li>输出 Markdown 报告，总结洞察与改进建议。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="callout info">
+                    <strong>练气题库：</strong>网站中提供 NumPy、Pandas、可视化各 5+ 道练习题与解析，例如 <code>softmax</code> 实现、<code>pivot_table</code> 操作、Plotly 交互图等。
+                </div>
+            </section>
+
+            <section id="realm-3" class="panel">
+                <h2>御兽驭阵 · 第 3 境（第 6-8 周）</h2>
+                <p class="section-subtitle">以模型为灵兽，掌握 scikit-learn、特征工程与调参阵法，完成传统机器学习实战。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>理解监督/无监督学习、过拟合与正则化。</li>
+                            <li>熟悉数据拆分、特征工程、Pipeline 架构。</li>
+                            <li>能够评估模型、绘制指标曲线并撰写报告。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>选择一个 UCI 数据集，比较逻辑回归与随机森林表现。</li>
+                            <li>使用 <code>Pipeline</code> 串联预处理与模型，规避数据泄露。</li>
+                            <li>进行 <code>GridSearchCV</code> 调参，并绘制超参数-分数曲线。</li>
+                            <li>撰写模型评估报告，包含指标、混淆矩阵与改进方向。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="callout info">
+                    <strong>练气题库：</strong>包含标准化实现、交叉验证对比、ROC 曲线绘制、不平衡处理、特征解释等练习。
+                </div>
+            </section>
+
+            <section id="realm-4" class="panel">
+                <h2>通灵炼器 · 第 4 境（第 9-10 周）</h2>
+                <p class="section-subtitle">将模型注入灵器，学习 FastAPI、部署与自动化测试，实现模型服务化。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>掌握 FastAPI 路由、Pydantic 数据校验与依赖注入。</li>
+                            <li>理解模型序列化、版本控制与日志监控。</li>
+                            <li>会写自动化测试，并了解 Docker 部署流程。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>封装随机森林模型为 <code>/predict</code> 接口，验证输入输出格式。</li>
+                            <li>编写 pytest 用例，覆盖正常流程与异常场景。</li>
+                            <li>使用 Docker 构建镜像，撰写部署说明文档。</li>
+                            <li>扩展一个简单的前端或 CLI，演示调用方式。</li>
+                        </ol>
+                    </article>
+                </div>
+            </section>
+
+            <section id="realm-5" class="panel">
+                <h2>破界飞升 · 第 5 境（第 11-12 周）</h2>
+                <p class="section-subtitle">驾驭 PyTorch 神兵，完成深度学习项目并学会记录、发布与复盘。</p>
+                <div class="module-grid">
+                    <article class="module">
+                        <h3>修行目标</h3>
+                        <ul>
+                            <li>熟悉张量运算、自动求导与模型构建流程。</li>
+                            <li>掌握 CNN、迁移学习与常见训练技巧。</li>
+                            <li>能将模型保存、部署并撰写实验复盘。</li>
+                        </ul>
+                    </article>
+                    <article class="module">
+                        <h3>试炼任务</h3>
+                        <ol>
+                            <li>训练 MNIST 分类模型，记录训练曲线。</li>
+                            <li>在 CIFAR-10 上应用迁移学习并比较策略。</li>
+                            <li>自定义数据集与数据增强流水线。</li>
+                            <li>封装推理接口或 Streamlit 演示应用。</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="callout success">
+                    <strong>飞升仪式：</strong>撰写总结文章，阐述项目背景、模型设计、训练细节、评估结果与改进方向，巩固所学。
+                </div>
+            </section>
+
+            <section id="toolkit" class="panel">
+                <h2>外功密卷 · 工具与资源</h2>
+                <div class="resource-grid">
+                    <article class="card">
+                        <h3>灵典文库</h3>
+                        <ul>
+                            <li>Python 官方文档、Real Python、廖雪峰教程。</li>
+                            <li>《流畅的 Python》《Effective Python》。</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>修行道场</h3>
+                        <ul>
+                            <li>LeetCode、Codewars、Kaggle、天池大赛。</li>
+                            <li>CS50P、DataCamp、fast.ai 免费课程。</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>同道众生</h3>
+                        <ul>
+                            <li>Stack Overflow、Reddit r/learnpython。</li>
+                            <li>掘金社区、机器之心、AI 研习社。</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="projects" class="panel">
+                <h2>灵感宝库 · 项目创意</h2>
+                <table class="project-table">
                     <thead>
                         <tr>
-                            <th>名称</th>
-                            <th>任务类型</th>
-                            <th>算法</th>
-                            <th>核心指标</th>
-                            <th>训练耗时 (s)</th>
-                            <th>操作</th>
+                            <th scope="col">类型</th>
+                            <th scope="col">灵感</th>
+                            <th scope="col">说明</th>
                         </tr>
                     </thead>
-                    <tbody id="model-table-body"></tbody>
+                    <tbody>
+                        <tr>
+                            <td>数据分析</td>
+                            <td>修仙宗门弟子流失分析</td>
+                            <td>结合留存指标、可视化仪表盘，寻找流失原因。</td>
+                        </tr>
+                        <tr>
+                            <td>机器学习</td>
+                            <td>灵药成分预测模型</td>
+                            <td>构建随机森林或 LightGBM，预测药效评分并调参。</td>
+                        </tr>
+                        <tr>
+                            <td>深度学习</td>
+                            <td>灵兽图鉴识别</td>
+                            <td>使用 PyTorch 训练 CNN，识别不同灵兽类别。</td>
+                        </tr>
+                        <tr>
+                            <td>部署项目</td>
+                            <td>修仙任务推荐系统</td>
+                            <td>FastAPI + 前端界面，根据修为推送练习任务。</td>
+                        </tr>
+                        <tr>
+                            <td>综合项目</td>
+                            <td>修真世界数据中台</td>
+                            <td>融合数据清洗、建模、可视化与 API 服务。</td>
+                        </tr>
+                    </tbody>
                 </table>
-            </div>
-            <div id="model-detail" class="detail-panel" hidden>
-                <h3>模型详情</h3>
-                <div class="detail-content"></div>
-            </div>
-        </section>
+            </section>
 
-        <section id="predict-section">
-            <h2>6. 预测</h2>
-            <form id="predict-form">
-                <label>模型名称
-                    <select id="predict-model-name" required>
-                        <option value="" disabled selected>请选择模型</option>
-                    </select>
-                </label>
-                <label>特征 JSON
-                    <textarea id="predict-features" rows="5" placeholder='{"feature1": 1, "feature2": "A"}'></textarea>
-                </label>
-                <p class="help">支持一次输入多条记录，格式为 <code>[{...}, {...}]</code>。</p>
-                <button type="submit">开始预测</button>
-            </form>
-            <div class="response" id="predict-response"></div>
-        </section>
-
-        <section id="shap-section">
-            <h2>7. SHAP 可视化</h2>
-            <form id="shap-form">
-                <label>模型名称
-                    <select id="shap-model-name" required>
-                        <option value="" disabled selected>请选择模型</option>
-                    </select>
-                </label>
-                <label>采样数量
-                    <input type="number" id="shap-sample-size" value="200" min="10" max="1000">
-                </label>
-                <button type="submit">生成 SHAP 图</button>
-            </form>
-            <div class="response" id="shap-response"></div>
-            <img id="shap-image" alt="SHAP summary" style="display:none;" />
-        </section>
+            <section id="faq" class="panel">
+                <h2>答疑密信 · 常见问题</h2>
+                <div class="faq-list">
+                    <details open>
+                        <summary>完全零基础也能修炼吗？</summary>
+                        <p>可以！教程以修仙故事线讲解，每个概念都配操作指引与练气题库，确保小白也能入门。</p>
+                    </details>
+                    <details>
+                        <summary>如何安排时间？</summary>
+                        <p>建议每周投入 10-12 小时，按路线从凡尘初醒到破界飞升。每周结束写复盘，巩固内功。</p>
+                    </details>
+                    <details>
+                        <summary>练气题答案在哪里？</summary>
+                        <p>README 给出核心解析，网站中可展开查看完整代码与讲解，亦可记录在个人仓库中。</p>
+                    </details>
+                    <details>
+                        <summary>修炼完还想进阶？</summary>
+                        <p>可参与开源项目、Kaggle 比赛，阅读论文或学习强化学习、NLP、CV 等更高深的法门。</p>
+                    </details>
+                </div>
+            </section>
+        </div>
     </main>
-
-    <footer>
-        <p>本页可使用 <code>uvicorn app.main:app --reload</code> 本地启动，生产部署推荐搭配 Nginx + Supervisor。</p>
-    </footer>
-
-    <script src="/static/js/app.js"></script>
 </body>
 </html>
