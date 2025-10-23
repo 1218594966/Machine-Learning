@@ -111,6 +111,18 @@ body {
     box-shadow: 0 14px 24px rgba(255, 255, 255, 0.25);
 }
 
+.btn.secondary {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #fff;
+}
+
+.btn.secondary:hover,
+.btn.secondary:focus {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.26);
+}
+
 .btn.primary:hover,
 .btn.primary:focus {
     transform: translateY(-2px);
@@ -364,6 +376,80 @@ code {
     padding: 1rem 1.25rem;
     margin-bottom: 0.9rem;
     box-shadow: 0 6px 14px rgba(45, 27, 78, 0.08);
+}
+
+.guide-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(120deg, rgba(244, 114, 182, 0.16), rgba(59, 130, 246, 0.18));
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    margin-bottom: 1.25rem;
+    color: var(--color-base-800);
+    font-weight: 600;
+}
+
+.guide-banner span {
+    letter-spacing: 0.03em;
+}
+
+.guide-banner .drill-link {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.18);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #1d4ed8;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.guide-banner .drill-link:hover,
+.guide-banner .drill-link:focus {
+    background: rgba(59, 130, 246, 0.28);
+    transform: translateY(-1px);
+}
+
+.drill-link {
+    color: #1d4ed8;
+}
+
+.conflict-steps {
+    counter-reset: step;
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.2rem 0;
+    padding-left: 1.2rem;
+}
+
+.conflict-steps li {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.05rem;
+    list-style: none;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(33, 23, 66, 0.08);
+}
+
+.conflict-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: -0.7rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent-primary);
+    color: #fff;
+    font-weight: 700;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
 }
 
 .accordion summary,

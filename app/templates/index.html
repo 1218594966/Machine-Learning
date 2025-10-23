@@ -13,6 +13,7 @@
             <div class="hero-actions">
                 <a class="btn primary" href="#getting-started">立即启程</a>
                 <a class="btn ghost" href="https://github.com" target="_blank" rel="noreferrer">领取修行日志模板</a>
+                <a class="btn secondary" href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">查看题库详解</a>
             </div>
             <div class="difficulty-legend" aria-label="难度梯度说明">
                 <span class="legend-title">难度梯度</span>
@@ -31,6 +32,7 @@
             <ol>
                 <li><a href="#getting-started">道场指引</a></li>
                 <li><a href="#roadmap">修行时间轴</a></li>
+                <li><a href="#conflict-guide">冲突炼心</a></li>
                 <li>
                     <a href="#realm-qi">练气境</a>
                     <ul>
@@ -134,6 +136,21 @@ pip install -r requirements.txt</code></pre>
                 </div>
             </section>
 
+            <section id="conflict-guide" class="panel">
+                <h2>冲突炼心 · Git 合并口诀</h2>
+                <p class="section-subtitle">当命运之线纠缠时，按照这套心法即可破除合并冲突。</p>
+                <ol class="conflict-steps">
+                    <li><strong>察觉：</strong>运行 <code>git status</code> 查看 <em>both modified</em> 文件。</li>
+                    <li><strong>定位：</strong>用 <code>git diff</code> 或编辑器查找 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> 标记，读懂双方改动。</li>
+                    <li><strong>融合：</strong>保留最终想要的内容，删除冲突标记；题库内容可参考 <a href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">详解卷轴</a> 对照。</li>
+                    <li><strong>校验：</strong>执行 <code>python -m compileall app</code> 或启动 <code>uvicorn app.main:app --reload</code> 检查站点。</li>
+                    <li><strong>收尾：</strong> <code>git add</code> 修改文件后运行 <code>git merge --continue</code>，并记录心得以备复盘。</li>
+                </ol>
+                <div class="callout info">
+                    <strong>快速传送：</strong>题库逐题拆解位于 <code>/guides/drills/</code>，如 <a href="/guides/drills/realm-foundation.md" target="_blank" rel="noreferrer">筑基境详解</a>，随时可对照最新答案。
+                </div>
+            </section>
+
             <section id="realm-qi" class="panel">
                 <h2>练气境 · 灵根初醒（第 1-2 周）</h2>
                 <p class="section-subtitle">从零启程，熟悉法器、语法与最基础的修行礼法。</p>
@@ -167,6 +184,10 @@ pip install -r requirements.txt</code></pre>
                     </article>
                 </div>
                 <div class="knowledge-grid" id="realm-qi-drills">
+                    <div class="guide-banner" role="note">
+                        <span>需要逐题拆解？</span>
+                        <a class="drill-link" href="/guides/drills/realm-qi.md" target="_blank" rel="noreferrer">打开练气境详解卷</a>
+                    </div>
                     <details open>
                         <summary>灵材备置 · 环境与命令行</summary>
                         <ul>
@@ -254,6 +275,10 @@ pip install -r requirements.txt</code></pre>
                     </article>
                 </div>
                 <div class="knowledge-grid" id="realm-foundation-drills">
+                    <div class="guide-banner" role="note">
+                        <span>筑基阶段详解</span>
+                        <a class="drill-link" href="/guides/drills/realm-foundation.md" target="_blank" rel="noreferrer">查阅筑基境题库</a>
+                    </div>
                     <details open>
                         <summary>阵法初成 · 控制流与推导式</summary>
                         <ul>
@@ -378,6 +403,18 @@ pip install -r requirements.txt</code></pre>
                             <li>撰写《结丹日志》记录发现与建议。</li>
                         </ol>
                     </article>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>结丹境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-core.md" target="_blank" rel="noreferrer">打开数据炼丹详解</a>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>元婴境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-spirit.md" target="_blank" rel="noreferrer">打开御阵驭兽详解</a>
+                </div>
+                <div class="guide-banner" role="note">
+                    <span>化神境逐题拆解</span>
+                    <a class="drill-link" href="/guides/drills/realm-apotheosis.md" target="_blank" rel="noreferrer">打开元神出窍详解</a>
                 </div>
                 <div class="accordion">
                     <details open>

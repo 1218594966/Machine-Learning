@@ -89,6 +89,20 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 ---
 
+## 冲突炼心 · Git 合并指南
+
+若在拉取远端更新或合并分支时遇到提示“存在必须解决的冲突”，请按照以下步骤炼心破阵：
+
+1. **察觉冲突**：运行 `git status`，在 `both modified` 区域确认发生冲突的文件，如 `README.md`、`app/static/css/style.css`、`app/templates/index.html`。
+2. **定位标记**：使用 `git diff` 或编辑器定位 `<<<<<<<`、`=======`、`>>>>>>>` 标记，了解双方的改动差异。
+3. **择善融合**：手动保留想要的片段，删除冲突标记，并确保语义与格式正确；可参考本仓库提供的详解手册核对最新内容。
+4. **验证法阵**：运行 `python -m compileall app` 或项目测试命令确认修复后依旧可用；网页部分可本地启动 `uvicorn app.main:app ...` 检查视觉效果。
+5. **完成合并**：`git add` 解决后的文件，执行 `git merge --continue`（或重新提交）完成合并，并在提交信息中注明冲突解决策略，方便日后复盘。
+
+> 💡 **提速妙法**：若冲突涉及题库，可对照 `docs/drills/` 中的详解文件，快速识别最新版本应保留的练习描述。
+
+---
+
 ## 练气境 · 灵根初醒（第 1-2 周）
 
 ### 修行目标
@@ -114,55 +128,92 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 ### 练气题库
 
+> 🧭 **完整题解传送阵**：想看每道题的逐步拆解，请移步 [《练气境题库详解》](docs/drills/realm-qi.md)。
+
 #### 灵材备置 · 环境与命令行
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
 | --- | --- | --- | --- | --- |
-| 1 | 🌱 入门 | 使用命令行创建多层目录 `sect/training/day1` | 组合 `mkdir -p` | Linux/macOS 可 `mkdir -p sect/training/day1`，Windows 用 `mkdir sect\training\day1` |
-| 2 | 🌿 进阶 | 查看当前路径并写入 `path.txt` | `pwd` 与重定向 | 运行 `pwd > path.txt`，若在 PowerShell 使用 `Get-Location` |
-| 3 | 🔥 突破 | 激活虚拟环境并列出已安装包 | `source` 与 `pip list` | 激活 `.venv` 后 `pip list`；若失败检查路径是否正确 |
-| 4 | 🌟 圆满 | 设置 pip 镜像并验证是否生效 | `pip config set` | 配置镜像后执行 `pip install requests -i` 查看下载速度变化 |
-| 5 | 🛡️ 化神 | 使用 VS Code 调试 `hello.py` | 断点 + 运行 | 在编辑器中设置断点，按 F5 选择 Python 调试配置，观察变量面板 |
+| 1 | 🌱 入门 | 使用命令行创建多层目录 `sect/training/day1`<br>补充要求：切换到 `sect/training/day1` 并列出内容确认成功 | 组合 `mkdir -p`<br>同时复习 `cd`、`ls`/`dir` | Linux/macOS 可 `mkdir -p sect/training/day1`，Windows 用 `mkdir sect\training\day1`；末尾使用 `tree` 或 `ls -R` 检查结构 |
+| 2 | 🌿 进阶 | 查看当前路径并写入 `path.txt`<br>验证文件中记录的路径与 `pwd` 一致 | `pwd` 与重定向<br>Windows 使用 `Get-Location` | 运行 `pwd > path.txt`，PowerShell 可用 `Get-Location | Out-File path.txt`；最后 `cat path.txt` 校验 |
+| 3 | 🔥 突破 | 激活虚拟环境并列出已安装包<br>解释全局环境与虚拟环境列表差异 | `source` 与 `pip list`<br>体会虚拟环境隔离 | 激活 `.venv` 后运行 `which python`/`where python`，再 `pip list` 观察包数量差异；若报错检查虚拟环境路径 |
+| 4 | 🌟 圆满 | 设置 pip 镜像并验证是否生效<br>记录修改前后的配置 | `pip config set`<br>了解配置优先级 | 执行 `pip config list` 备份原配置，`pip config set global.index-url ...` 后安装 `pip install requests -i` 对比耗时，如遇 SSL 报错添加 `--trusted-host` |
+| 5 | 🛡️ 化神 | 使用 VS Code 调试 `hello.py`<br>在断点查看变量并步进执行 | 断点 + 运行<br>掌握 F5/F10 操作 | 在编辑器中设置断点，按 F5 选择“Python: Current File”，通过“变量”面板观察值；结束调试使用 `Shift+F5`，并记录流程心得 |
+
+> 📘 **题解详述**
+> - **题 1**：执行命令前确认当前目录，避免误在根目录创建多余文件夹。若 `mkdir` 报权限错误，改在用户目录操作。使用 `pwd` 或 `cd` 验证路径，帮助小白理解绝对/相对路径差别。
+> - **题 2**：重定向后建议打开 `path.txt` 观察换行符；Windows 用户可使用记事本或 `notepad path.txt`。如路径含中文，提醒切换编码或使用 `type path.txt` 查看。
+> - **题 3**：若激活命令失败，检查虚拟环境是否已创建；在 Windows PowerShell 中使用 `.venv\\Scripts\\Activate.ps1`。观察 `pip list` 输出中是否出现 `(venv)` 前缀以确认环境。
+> - **题 4**：配置镜像前备份旧设置，若需恢复可 `pip config unset global.index-url`。提示学生理解镜像站的优势与可能的缓存延迟。
+> - **题 5**：演示如何在断点处查看调用栈（Call Stack），并调整“停止调试时终止控制台”选项，确保调试体验顺畅。
 
 #### 灵根觉醒 · 变量与数据类型
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
 | --- | --- | --- | --- | --- |
-| 1 | 🌱 入门 | 声明 `spirit_name`、`age`、`is_novice` 并打印类型 | 使用 `type()` | `print(type(spirit_name))` 等，辨识 `str`/`int`/`bool` |
-| 2 | 🌿 进阶 | 判断变量 `mana = None` 是否等同空字符串 | `is` 与 `==` 对比 | `mana is None` 为真，但 `mana == ""` 为假，说明含义不同 |
-| 3 | 🔥 突破 | 将字符串 `"108"` 与整数 `12` 相加 | 类型转换 | `int("108") + 12`，理解 `ValueError` 的产生原因 |
-| 4 | 🌟 圆满 | 解释 `id()` 函数查看对象内存地址 | 引导内存概念 | `id(a)` 显示引用，强调同值不同对象与缓存机制 |
-| 5 | 🛡️ 化神 | 比较两个变量是否指向同一对象 | `is` 运算符 | `a = []; b = a` → `a is b` 为真；`a = []; b = []` 则为假 |
+| 1 | 🌱 入门 | 声明 `spirit_name`、`age`、`is_novice` 并打印类型<br>补充：打印值与类型一起输出 | 使用 `type()`<br>理解基础类型 | `print(type(spirit_name), spirit_name)` 等操作帮助辨识 `str`/`int`/`bool` 的差异 |
+| 2 | 🌿 进阶 | 判断变量 `mana = None` 是否等同空字符串<br>比较布尔值与身份运算结果 | `is` 与 `==` 对比<br>掌握单例概念 | `mana is None` 为真，但 `mana == ""` 为假；可配合 `bool(mana)` 解释空字符串判定 |
+| 3 | 🔥 突破 | 将字符串 `"108"` 与整数 `12` 相加<br>展示报错并修复 | 类型转换<br>捕获异常 | 直接相加触发 `TypeError`，使用 `int("108") + 12` 或 `int(value.strip())` 解决，理解 `ValueError` 原因 |
+| 4 | 🌟 圆满 | 解释 `id()` 函数查看对象内存地址<br>比较相同值不同对象 | 引导内存概念<br>观察引用 | `id(a)` 显示引用，强调同值不同对象与缓存机制；建议比较 `id(1000)` 与 `id(1000)` 的差异 |
+| 5 | 🛡️ 化神 | 比较两个变量是否指向同一对象<br>结合 `copy` 测试浅拷贝 | `is` 运算符<br>掌握对象身份 | `a = []; b = a` → `a is b` 为真；`a = []; b = []` 为假；同时测试 `copy.copy` 与 `copy.deepcopy` 的差异 |
+
+> 📘 **题解详述**
+> - **题 1**：鼓励在交互式解释器尝试 `type(3.14)`、`type(True)`，并使用 `isinstance` 检查多个类型。若学员搞混 `str` 与 `repr`，可演示 `print(repr(spirit_name))`。
+> - **题 2**：通过打印 `id(mana)` 与 `id(None)` 强调 `None` 的唯一性；再引导学员测试 `[] == []` 与 `[] is []` 的结果，理解“身份 vs 值”。
+> - **题 3**：提醒输入来自用户时需先 `strip()` 或 `replace(',', '')`，并介绍 `try/except` 捕获异常，输出友好提示。
+> - **题 4**：让学员在不同 Python 会话比较 `id(257)` 是否相同，引入整数驻留机制；补充 `sys.getrefcount` 观察引用计数。
+> - **题 5**：制作一个示例 `spellbook = {"fire": []}`，对比 `spellbook["fire"] is spellbook["fire"]` 和 `spellbook["fire"] is list(spellbook["fire"])`，理解浅拷贝的风险。
 
 #### 灵气入体 · 数值与字符串
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
 | --- | --- | --- | --- | --- |
-| 1 | 🌱 入门 | 计算 `(5 ** 2) // 3` 与 `5 ** (2 // 3)` | 运算优先级 | 指出指数先算，整除影响结果，演示两者差异 |
-| 2 | 🌿 进阶 | 判断 `0.1 + 0.2 == 0.3` | 浮点误差 | 使用 `math.isclose(0.1 + 0.2, 0.3)`，解释 IEEE 754 |
-| 3 | 🔥 突破 | 将 `"剑"*3` 与 `"仙"*2` 拼接 | 字符串乘法 | 结果为 `"剑剑剑仙仙"`，演示重复拼接技巧 |
-| 4 | 🌟 圆满 | 使用 f-string 输出修士信息 | f-string 占位 | `f"{name} 当前境界 {realm}"`，可加格式化 `:.2f` |
-| 5 | 🛡️ 化神 | 统计咒语字符串中元音数量 | 字符串方法 | `sum(1 for ch in mantra.lower() if ch in 'aeiou')` |
+| 1 | 🌱 入门 | 计算 `(5 ** 2) // 3` 与 `5 ** (2 // 3)`<br>记录两者差异原因 | 运算优先级<br>结合括号强化理解 | 指出指数先算，整除向下取整；建议画出运算顺序图帮助记忆 |
+| 2 | 🌿 进阶 | 判断 `0.1 + 0.2 == 0.3` 是否为真<br>探索浮点误差来源 | 浮点误差<br>了解 `decimal` | 使用 `math.isclose(0.1 + 0.2, 0.3)` 并打印差值 `0.1 + 0.2 - 0.3`，解释 IEEE 754 二进制小数限制 |
+| 3 | 🔥 突破 | 将 `"剑"*3` 与 `"仙"*2` 拼接<br>要求输出带分隔符的字符串 | 字符串乘法<br>掌握连接技巧 | 使用 `"剑" * 3 + "-" + "仙" * 2`，可延伸为 `"剑".join([...])`，体会重复构建字符串 | 
+| 4 | 🌟 圆满 | 使用 f-string 输出修士信息<br>包含对齐与千分位格式 | f-string 占位<br>掌握格式化 mini-language | `f"{name:^10} 境界 {realm:>4} 灵力 {mana:,.2f}"` 展示对齐、填充、千分位 |
+| 5 | 🛡️ 化神 | 统计咒语字符串中元音数量<br>区分大小写并给出比例 | 字符串方法<br>迭代综合应用 | `vowels = sum(1 for ch in mantra.lower() if ch in 'aeiou')`，再用 `vowels / len(mantra)` 输出占比，提醒排除空格 |
+
+> 📘 **题解详述**
+> - **题 1**：使用 Python Tutor 或手绘运算树辅助理解；修改表达式如 `(5 ** (2 // 3))` 与 `5 ** 2 // 3` 比较不同优先级。
+> - **题 2**：引导学员尝试 `Decimal('0.1') + Decimal('0.2')` 获得精确结果，并解释 `math.isclose` 默认容差参数含义。
+> - **题 3**：提醒字符串相加会产生新对象，可使用 `join` 避免多次拷贝；进一步要求输出为 `剑·剑·剑·仙·仙` 深化处理。
+> - **题 4**：让学员试验 `<`、`>`、`^` 等对齐方式，并组合 `:.1%`、`:#x` 格式，帮助建立对 f-string 功能的系统认识。
+> - **题 5**：若字符串包含标点，可先使用 `str.isalpha()` 过滤；延伸挑战是统计最常出现的音节，借助 `collections.Counter`。
 
 #### 灵识初开 · 输入输出
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
 | --- | --- | --- | --- | --- |
-| 1 | 🌱 入门 | 使用 `input` 获取名字并打印欢迎语 | 字符串拼接 | `name = input("道友名号：")` 后输出格式化句 |
-| 2 | 🌿 进阶 | 读取多个数字并求平均 | `split` 与 `map` | `nums = list(map(float, input().split()))`，再求和除以长度 |
-| 3 | 🔥 突破 | 将结果写入文件 `blessing.txt` | `with open` | `with open("blessing.txt", "w", encoding="utf-8") as f:` |
-| 4 | 🌟 圆满 | 从文件读取并输出到终端 | `readlines` | `for line in f: print(line.strip())`，注意编码 |
-| 5 | 🛡️ 化神 | 使用 `print(..., file=sys.stderr)` | `sys` 模块 | 了解错误输出通道，需先 `import sys` |
+| 1 | 🌱 入门 | 使用 `input` 获取名字并打印欢迎语<br>提示将输入内容首字母大写 | 字符串拼接<br>强化 `strip()` | `name = input("道友名号：").strip().title()` 后输出格式化句，说明 `strip` 作用 |
+| 2 | 🌿 进阶 | 读取多个数字并求平均<br>要求处理空输入与异常 | `split` 与 `map`<br>异常处理入门 | `nums = [float(x) for x in values.split()]`，若为空列表则提示重新输入；使用 `try/except` 捕获转换异常 |
+| 3 | 🔥 突破 | 将结果写入文件 `blessing.txt`<br>追加模式并换行 | `with open`<br>掌握 `mode` | `with open("blessing.txt", "a", encoding="utf-8") as f:` 写入 `f"{name},{realm}\n"`，强调 `a` 与 `w` 差异 |
+| 4 | 🌟 圆满 | 从文件读取并输出到终端<br>过滤空行并编号 | `readlines`<br>字符串处理 | 使用 `enumerate(f, 1)` 输出行号，`line.strip()` 去除换行，若为空跳过 |
+| 5 | 🛡️ 化神 | 使用 `print(..., file=sys.stderr)`<br>将错误与日志分流 | `sys` 模块<br>理解输出流 | `print("输入格式错误", file=sys.stderr)` 并结合 `logging` 模块；在命令行重定向 `python script.py 1>out.log 2>err.log`|
+
+> 📘 **题解详述**
+> - **题 1**：强调 `.strip()` 可以去除前后空格， `.title()` 可让名称更整洁；并提示在中文环境 `.title()` 对多字词效果有限。
+> - **题 2**：鼓励使用 `while True` 循环持续询问直至获取有效输入，并通过 `len(nums)` 判断是否可计算平均值。
+> - **题 3**：对比 `w` 模式覆盖旧内容与 `a` 模式追加；提醒 Windows 用户注意换行符 `\r\n`。
+> - **题 4**：将文件内容加载到列表后排序或倒序输出，帮助理解列表与文件的关系；扩展任务是读取 CSV 并拆分列。
+> - **题 5**：展示如何使用 `python script.py > out.log` 捕获标准输出，同时保持错误在终端可见，理解日志与错误分离的重要性。
 
 #### 气脉调息 · 调试与笔记
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
 | --- | --- | --- | --- | --- |
-| 1 | 🌱 入门 | 在脚本加入 `__name__ == "__main__"` 判断 | 程序入口 | 确保脚本被导入时不执行主流程 |
-| 2 | 🌿 进阶 | 使用 `dir()` 探索模块提供的成员 | 交互式探索 | `dir(math)` 返回可用属性，配合 `help()` 查文档 |
-| 3 | 🔥 突破 | 在 REPL 中使用 `_` 变量复用上次结果 | 交互技巧 | CPython 默认 `_` 保存上一次表达式值 |
-| 4 | 🌟 圆满 | 使用 `logging` 输出调试信息 | `basicConfig` | 设置 `logging.basicConfig(level=logging.INFO)`，替换 print |
-| 5 | 🛡️ 化神 | 记录学习日志模板 | Markdown | 包含“遇到的问题 / 解决方案 / 下一步计划”三段 |
+| 1 | 🌱 入门 | 在脚本加入 `if __name__ == "__main__":` 判断<br>封装为 `main()` 函数并调用 | 程序入口<br>模块化入门 | 确保脚本被导入时不执行主流程；鼓励创建 `def main():` 并在条件内调用 |
+| 2 | 🌿 进阶 | 使用 `dir()` 探索模块提供的成员<br>结合 `help()` 查看函数文档 | 交互式探索<br>学会查文档 | 在 REPL 执行 `dir(math)`、`help(math.sqrt)`，记录两个函数说明差异 |
+| 3 | 🔥 突破 | 在 REPL 中使用 `_` 变量复用上次结果<br>演示 `_` 与赋值的区别 | 交互技巧<br>理解解释器行为 | CPython 默认 `_` 保存上一次表达式值；建议在执行赋值语句后再观察 `_`，理解其不会更新 |
+| 4 | 🌟 圆满 | 使用 `logging` 输出调试信息<br>自定义格式与日志级别 | `basicConfig`<br>替换 `print` | 设置 `logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")` 并在代码中使用 `logger = logging.getLogger(__name__)` |
+| 5 | 🛡️ 化神 | 记录学习日志模板<br>拆分为“问题-尝试-成果”三段并存档 | Markdown<br>形成知识库 | 使用 `### 今日问题` 等标题整理，建议同步到 GitHub Wiki 或 Notion，方便回顾 |
+
+> 📘 **题解详述**
+> - **题 1**：展示将脚本导入到 Python 交互式环境时若无 `__main__` 判断会立即执行的区别，加深理解。
+> - **题 2**：鼓励截图或记录 `help()` 输出，学会搜关键词；提示 `pydoc` 命令行用法。
+> - **题 3**：说明 `_` 只在交互式环境有效，并提醒 IPython 将 `_`、`__`、`___` 分别保存最近三次输出。
+> - **题 4**：教会学员使用 `logging.debug`、`logging.warning` 等级别切换，并在 `.ini` 文件配置日志。
+> - **题 5**：建议每周归档日志形成“修炼手札”，可以使用模板：背景 → 操作步骤 → 遇到困难 → 解决方案 → 反思。
 
 ---
 
@@ -191,6 +242,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 6. 模拟团队协作：在新分支实现功能、制造并解决一次合并冲突，记录完整操作流程。
 
 ### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《筑基境题库详解》](docs/drills/realm-foundation.md)。
 
 #### 阵法初成 · 控制流与推导式
 
@@ -309,6 +362,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 ### 练气题库
 
+> 🧭 **完整题解传送阵**：逐题拆解见 [《结丹境题库详解》](docs/drills/realm-core.md)。
+
 #### 灵石阵列 · NumPy 基础
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
@@ -386,6 +441,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 ### 练气题库
 
+> 🧭 **完整题解传送阵**：逐题拆解见 [《元婴境题库详解》](docs/drills/realm-spirit.md)。
+
 #### 玄阵布局 · 数据预处理
 
 | # | 难度 | 练习题 | 点拨 | 解析 |
@@ -462,6 +519,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 5. 撰写《化神笔记》，总结训练技巧、部署经验与下一步方向。
 
 ### 练气题库
+
+> 🧭 **完整题解传送阵**：逐题拆解见 [《化神境题库详解》](docs/drills/realm-apotheosis.md)。
 
 #### 元神凝练 · PyTorch 入门
 
